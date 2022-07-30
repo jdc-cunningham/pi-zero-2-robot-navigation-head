@@ -24,6 +24,8 @@ Because making 3D printed servo horn splines is not a great idea in my experienc
 
 I'm glad to be working in Python, it's easier than C++
 
+2:06 PM
 
+Damn... slow going, test printing gears to make sure they work well
 
 
