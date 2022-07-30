@@ -6,6 +6,6 @@ A set of sensors:
 * TFmini-s lidar long range small FOV
 * MPU 6050
 
-On a pan-tilt platform, using Pi Zero W 2 mostly for Open CV image crunching.
+On a two servo pan-tilt platform, using Pi Zero W 2 mostly for Open CV image crunching.
 
 Then this sensor set controls a robot via websocket API based on navigation decision.
