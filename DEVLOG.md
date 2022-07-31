@@ -36,6 +36,10 @@ I have actual chargers to use but I can't just pop the cell out.
 
 Screwing around with bearing fit, went inwards then outwards (undo) like for real
 
+2:12 PM
+
+Starting to print the big stuff, still designing sensor bed
+
 
 
 Saturday 07/30/2022

@@ -1,4 +1,7 @@
 ### About
+
+<img src="./repo-image.JPG" width="500"/>
+
 A set of sensors:
 
 * camera
