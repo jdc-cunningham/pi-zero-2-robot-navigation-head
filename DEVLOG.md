@@ -26,6 +26,15 @@ Drown myself in music to get through it
 
 bearing press fit print test, too loose
 
+11:45 AM
+
+Once assembled, this thing will not be easy to charge. I just realized I will have to change the switch for a JST and then I'll disconect it to recharge it through the BMS.
+
+I have actual chargers to use but I can't just pop the cell out.
+
+12:05 PM
+
+Screwing around with bearing fit, went inwards then outwards (undo) like for real
 
 
 
