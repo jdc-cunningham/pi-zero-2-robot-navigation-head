@@ -28,4 +28,40 @@ I'm glad to be working in Python, it's easier than C++
 
 Damn... slow going, test printing gears to make sure they work well
 
+2:13 PM
 
+Losing steam... but will keep going.
+
+3:53 PM
+
+I'm kind of flailing right now.
+
+I'm printing gears... realizing having one side it attaches to makes it tip that way hmm...
+
+I'm going to mess around with the Pi Zero/test the servo motion.
+
+4:29 PM
+
+Not sure why I didn't decide to use the two-servo arm with two screws.
+
+Using just one makes the gear dip one way/not be level. Also the screw heads are too close to the body sadly. So they have to come in from the other side, not much contact will use glue.
+
+6:44 PM
+
+Still stuck on the chaise longue (not showing up on wifi)
+
+7:26 PM ahh man...
+
+So I had to connect to an external monitor... I did some updates
+
+I confirmed that the ip address was the one I thought it would be, it doesn't identify itself as a pi
+
+Now I have SSH'd into it by my ASUS C100P Chromebook
+
+Where I will write some servo test code.
+
+8:04 PM
+
+ran servo with Python using ASUS
+
+problem with git though, concerned about degrees not going that far
