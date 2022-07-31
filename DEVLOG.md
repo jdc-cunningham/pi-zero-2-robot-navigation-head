@@ -1,3 +1,17 @@
+Sunday 07/31/2022
+
+8:45 AM back at it
+
+I've got my gears figured out. I need to finish designing the pan/tilt assembly, make it, fix some measurement issues then fully assemble the body.
+
+Then add the basic electronics to the buggy that it will drive.
+
+10:21 AM
+
+Man this is slow. I did some cleaning earlier but that was only like 20 mins
+
+
+
 Saturday 07/30/2022
 
 9:39 AM
