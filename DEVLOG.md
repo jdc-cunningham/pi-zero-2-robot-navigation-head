@@ -54,8 +54,9 @@ Ugh... this peg support thing broke off and it's just dragging non supported pla
 
 Thankfully I can save most of the print/still use it. It looks flimsy though.
 
+Nope in the end it failed at 80% dang... just because of that one overhang/support that failed.
 
-
+Anyway the base is too flimsy, need to redesign it.
 
 Saturday 07/30/2022
 
