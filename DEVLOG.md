@@ -40,6 +40,21 @@ Screwing around with bearing fit, went inwards then outwards (undo) like for rea
 
 Starting to print the big stuff, still designing sensor bed
 
+4:26 PM
+
+Damn... a 7hr print lol oof
+
+Ahh man the sensor bed model is so bad... so many broken surfaces.
+
+I think I'm going to have to dissect it and rebuild each sub part.
+
+<img src="./problems.JPG" width="800"/>
+
+Ugh... this peg support thing broke off and it's just dragging non supported plastic threads around hmm...
+
+Thankfully I can save most of the print/still use it. It looks flimsy though.
+
+
 
 
 Saturday 07/30/2022
