@@ -1,6 +1,6 @@
 ### About
 
-<img src="./repo-image.JPG" width="500"/>
+<img src="./sensor-assembly.JPG" width="800"/>
 
 A set of sensors:
 
