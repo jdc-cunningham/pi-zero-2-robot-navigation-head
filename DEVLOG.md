@@ -10,6 +10,23 @@ Then add the basic electronics to the buggy that it will drive.
 
 Man this is slow. I did some cleaning earlier but that was only like 20 mins
 
+Damn I'm losing steam, realizing how much time it will take to print stuff
+
+11:05 AM
+
+I need the power of the poompa (my playlist and headphones)
+
+Drown myself in music to get through it
+
+# YEAAAH YEAAAH YEAHHHH AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+
+(Scorpions Blackout)
+
+11:29 AM
+
+bearing press fit print test, too loose
+
+
 
 
 Saturday 07/30/2022
