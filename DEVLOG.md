@@ -20,6 +20,17 @@ I'm struggling... not really getting anywhere
 
 I'm concerned about the gear rotation not working, printed out a basic shaft to check
 
+11:05 PM
+Need to extend/add end caps just to make sure pegs stay in.
+
+Needs inner bushings/stoppings as well
+
+11:23 PM
+
+The motion is not smooth with this servo driver, will have to look into others
+
+Also the max range is capped to the 90 degrees but Arduino has it more than that eg. full 180 degrees
+
 Sunday 07/31/2022
 
 8:45 AM back at it
