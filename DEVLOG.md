@@ -1,3 +1,25 @@
+Monday 08/01/2022
+
+Trying to do some work on this.
+
+Printing the pan-tilt cross bracket thing
+
+I'm trying to simplify the pan/tilt setup, and also print it in parts/assemble it
+
+Should use less material/be faster to print and can be changed
+
+6:42 PM
+
+I feel so spent, trying to get motivated to do this
+
+7:27 PM
+
+I'm struggling... not really getting anywhere
+
+9:12 PM
+
+I'm concerned about the gear rotation not working, printed out a basic shaft to check
+
 Sunday 07/31/2022
 
 8:45 AM back at it
