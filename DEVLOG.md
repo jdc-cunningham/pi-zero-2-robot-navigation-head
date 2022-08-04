@@ -1,3 +1,11 @@
+Thursday 08/04/2022
+
+Half ass sucks
+
+Printed the entire thing, was hard to get the supports out, broke stuff.
+
+Had to update design and reprint in parts, up the infil too.
+
 Wednesday 08/03/2022
 
 Back on it. Feeling like I have left over energy.
