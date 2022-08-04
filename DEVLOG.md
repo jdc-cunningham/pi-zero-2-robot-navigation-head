@@ -4,6 +4,13 @@ Back on it. Feeling like I have left over energy.
 
 I'm trying out hardware pwm as described [here](https://abyz.me.uk/rpi/pigpio/python.html#hardware_PWM)
 
+5:35 PM
+I have this strong urge/feeling of not wanting to do this... just so much work.
+
+But the end result will be cool.
+
+
+
 Monday 08/01/2022
 
 Trying to do some work on this.
