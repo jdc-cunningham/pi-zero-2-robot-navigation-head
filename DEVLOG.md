@@ -6,6 +6,17 @@ Printed the entire thing, was hard to get the supports out, broke stuff.
 
 Had to update design and reprint in parts, up the infil too.
 
+Doing IMU first
+
+This looks good
+https://github.com/m-rtijn/mpu6050
+
+Hmm gravity is not accurate it's below 9.8
+
+It should be enough to do NED though
+
+
+
 Wednesday 08/03/2022
 
 Back on it. Feeling like I have left over energy.
