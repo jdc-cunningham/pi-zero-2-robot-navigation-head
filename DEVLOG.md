@@ -9,7 +9,11 @@ I have this strong urge/feeling of not wanting to do this... just so much work.
 
 But the end result will be cool.
 
+8:23 PM
 
+Damn that's gonna take about 6 hrs to print oof
+
+I'll interface with electronics in the meantime
 
 Monday 08/01/2022
 
