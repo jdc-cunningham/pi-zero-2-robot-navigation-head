@@ -15,6 +15,22 @@ Hmm gravity is not accurate it's below 9.8
 
 It should be enough to do NED though
 
+tof
+
+using smbus2
+
+modifying VL53L0X file
+
+nvm same issue module not found ugh
+
+7:17 PM
+Got this working but there's an issue with the whole library imports... can only get my code to run in the folder of the library...
+
+Not a huge deal I can probably just start that file as a thread/looping function and call into it as needed but yeah
+
+ehh
+
+
 
 
 Wednesday 08/03/2022
