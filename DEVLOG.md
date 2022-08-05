@@ -30,6 +30,30 @@ Not a huge deal I can probably just start that file as a thread/looping function
 
 ehh
 
+Oh damn I got lucky, looks like Pi only has one uart port, or at least immediately available
+
+also the concern mixing python2 and 3
+
+I'll get this all sorted after I make all the methods callable
+
+I still have to wire everything up
+
+So far it seems things prefer to work with python3
+
+lol no there's more than one serial `dtoverlay -a`
+
+7:51 PM
+having troubles interfacing with Lidar... script I usually use doesn't work
+
+Holy crap this [tfmini-s library](https://github.com/budryerson/TFMini-Plus_python) is good
+
+It makes the TFmini-s accurate as hell, like below 30cm
+
+Wow
+
+Oh crap this thing is for tfmini plus but somehow it works on the s
+
+Well it does say in the readme it's compatible, that's great
 
 
 
