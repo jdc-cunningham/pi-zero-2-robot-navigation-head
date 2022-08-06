@@ -89,7 +89,16 @@ Oh crap this thing is for tfmini plus but somehow it works on the s
 
 Well it does say in the readme it's compatible, that's great
 
+11:54 PM
+wow this thing is awesome... it's a unit... stands on its own
 
+I can just program it wireless by SSH ha (not great, would actually git clone down)
+
+<img src="./standing.JPG" width="500"/>
+
+So tomorrow I'll build the tail dragger robot which is pretty straight forward.
+
+Then I'll program the first navigation attempts... I still have an issue to deal with the MPU6050 i2c not being reliable... I tried another new MPU6050 and same issue... think it's related to the library or how I have two i2c devices... the tof one is rock solid though... that's interesting. Lidar is using serial so not affected.
 
 Wednesday 08/03/2022
 
