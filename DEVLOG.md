@@ -1,3 +1,24 @@
+Saturday 08/06/2022
+
+Ahh fresh day although it's already 5 PM now been working on it since 8 the wifi buggy
+
+I forgot how this process works that I came up with for blob finding based on HSV
+
+Referring to my [notes/old code](https://github.com/jdc-cunningham/slam-crappy/tree/master/vision)
+
+- unable to localte libjasper-dev, libpng12-dev
+
+Will proceed without
+
+I think this is the sequence of steps:
+
+- 1D
+- 2D
+- apply mask
+- find contours
+
+python3-opencv install seems to work... I forgot for SSH the matploglib gui won't show up so I was developing this on a Ubuntu VM back then.
+
 Friday 08/05/2022
 
 7:36 PM
