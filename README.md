@@ -1,6 +1,10 @@
 ### About
 
-<img src="./sensor-assembly.JPG" width="800"/>
+### Actual
+<img src="./stand.JPG" width="500"/>
+
+### Design
+<img src="./design.JPG" width="500"/>
 
 A set of sensors:
 
