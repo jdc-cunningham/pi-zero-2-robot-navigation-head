@@ -1,7 +1,7 @@
 ### About
 
 ### Actual
-<img src="./stand.JPG" width="500"/>
+<img src="./nav-unit-on-2d-robot.JPG" width="500"/>
 
 ### Design
 <img src="./design.JPG" width="500"/>
