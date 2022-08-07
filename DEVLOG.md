@@ -200,6 +200,29 @@ They're talking about error rates [here](https://forums.raspberrypi.com/viewtopi
 
 ahh man... dang I'm spent now, need to do nothing for the rest of the day
 
+still at it, I have a little under 3 hours left
+
+https://github.com/ramiss/SeeeduinoXIAO_SPISlave
+
+Ooh it compiles
+
+ahh man... it is using the pins that the IMU is using hmm....
+
+Ahh... it's unfortunate this was written for a specific use
+
+nice looking link
+https://arduino.stackexchange.com/questions/16348/how-do-you-use-spi-on-an-arduino
+
+So... this is overkill but I'm going to use a Nano to be the SPI slave
+
+5:10 PM
+
+Damn I might have killed this MPU6050, since Arduino Nano has 5V rails ahh well... that's why you have more than 1
+
+I'm back to where I was before though... I need to figure out how to get SPI to work on the Seeeduino
+
+I'm spent now... damn feel sad
+
 ### Saturday 08/06/2022
 
 Ahh fresh day although it's already 5 PM now been working on it since 8 the wifi buggy
