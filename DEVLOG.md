@@ -131,6 +131,22 @@ Crap... I don't think I have this right, I did not factor in the speed of the ro
 
 It's not bad
 
+1:24 PM
+
+I just had a neat idea for the UI, I can import a glTf export of the sensor assembly and represent its state in 3D on a little window. Also show camera feed (possibly live) and decisions performed in steps below as a history will include drawing.
+
+it moves 1 and 11/16" forward with 1 command
+
+1.6875" at 250ms let me see if I do it longer does that matter, think it's just delay
+
+Oh my god it goes farther, like twice as far hmm
+
+at 150ms looks like it moves about 1.25"
+
+Hmm dropped it to 1 degree apart and it doesn't move interesting
+
+turning is good here
+
 ### Saturday 08/06/2022
 
 Ahh fresh day although it's already 5 PM now been working on it since 8 the wifi buggy
