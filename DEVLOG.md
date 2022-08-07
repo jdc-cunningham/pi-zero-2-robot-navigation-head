@@ -147,6 +147,26 @@ Hmm dropped it to 1 degree apart and it doesn't move interesting
 
 turning is good here
 
+2:31 PM
+
+ahhh.... so the IMU is still having problems.
+
+If I unplug everything the connection is more stable but it still dies eventually
+
+I'll try the other bus set one more time but yeah... I'll probably have to use SPI to connect to the Seeeduino that then connects to the IMU... ahhh man just more work
+
+Damn... yeah it's gonna have to be done... I just have not used SPI before so I'll have to take time to figure out how to do that.
+
+This looks like a nice [guide](https://roboticsbackend.com/raspberry-pi-master-arduino-uno-slave-spi-communication-with-wiringpi/)
+
+I want to get to a good spot so I'm going to try this, it looks short.
+
+I need to have bidirectional data messaging between them.
+
+What will happen is the IMU will run on a fast loop that can dump data when requested by the Pi
+
+
+
 ### Saturday 08/06/2022
 
 Ahh fresh day although it's already 5 PM now been working on it since 8 the wifi buggy
