@@ -1,4 +1,4 @@
-Sunday 08/07/2022
+### Sunday 08/07/2022
 
 Figure [this out](https://raspberrypi.stackexchange.com/questions/97995/rpi-python-i2c-ioerror-errno-121-remote-i-o-error-problem-how-to-fix-it
 )
@@ -95,7 +95,43 @@ Soon I'll start putting together the system design though.
 
 Sidetracked from charging
 
-Saturday 08/06/2022
+I'm going to work out the distance traveled by the wheels per command/come up with a command string sequence
+
+5.17" absolute diameter (stubs)
+
+5" pad diameter
+
+circumference 2pir is 15.7"
+
+it's more accurate than that but also this wheel is not a good circle, it has a lot of flat edges.
+
+So each degree is 0.04"
+
+Probably do mf_12 (degrees) ... ehhh
+
+I'll use the inches and rotate degrees
+
+12:09 PM
+
+Kind of chilling, messing around
+
+I'm working on the motion stuff
+
+Trying to figure out if the wheels rotate in opposite directions at some degree, how many degrees did the robot turn?
+
+Roughly 3.6" inner radius, using SketchUp to figure out the degrees turned
+
+So 1" forward is 15.5 degrees
+
+This is where self testing works well... the reality expectation vs. IMU in case of slippage and visual checking of known landmarks.
+
+1:05 PM
+
+Crap... I don't think I have this right, I did not factor in the speed of the rotation and time it runs for
+
+It's not bad
+
+### Saturday 08/06/2022
 
 Ahh fresh day although it's already 5 PM now been working on it since 8 the wifi buggy
 
@@ -130,7 +166,7 @@ It's a little better but still broken
 
 Yeah this is a problem, I have to figure out why it keeps doing this IO error
 
-Friday 08/05/2022
+### Friday 08/05/2022
 
 7:36 PM
 
@@ -164,7 +200,7 @@ I'll touch it up one more time, but if nothing else I'll use the parallel wire m
 
 Yeah I'm gonna have to try and paralell bus wire hmm
 
-Thursday 08/04/2022
+### Thursday 08/04/2022
 
 Half ass sucks
 
@@ -232,7 +268,7 @@ So tomorrow I'll build the tail dragger robot which is pretty straight forward.
 
 Then I'll program the first navigation attempts... I still have an issue to deal with the MPU6050 i2c not being reliable... I tried another new MPU6050 and same issue... think it's related to the library or how I have two i2c devices... the tof one is rock solid though... that's interesting. Lidar is using serial so not affected.
 
-Wednesday 08/03/2022
+### Wednesday 08/03/2022
 
 Back on it. Feeling like I have left over energy.
 
@@ -249,7 +285,7 @@ Damn that's gonna take about 6 hrs to print oof
 
 I'll interface with electronics in the meantime
 
-Monday 08/01/2022
+### Monday 08/01/2022
 
 Trying to do some work on this.
 
@@ -342,7 +378,7 @@ Nope in the end it failed at 80% dang... just because of that one overhang/suppo
 
 Anyway the base is too flimsy, need to redesign it.
 
-Saturday 07/30/2022
+### Saturday 07/30/2022
 
 9:39 AM
 
