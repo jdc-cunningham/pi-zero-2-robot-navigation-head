@@ -147,6 +147,12 @@ Hmm dropped it to 1 degree apart and it doesn't move interesting
 
 turning is good here
 
+will need to spend more time on this to really understand what's happening
+
+not just physically measure it, figure out some ratio and use it as a function
+
+
+
 ### Saturday 08/06/2022
 
 Ahh fresh day although it's already 5 PM now been working on it since 8 the wifi buggy
