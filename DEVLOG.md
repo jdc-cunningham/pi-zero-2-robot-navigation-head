@@ -19,6 +19,20 @@ I think this is the sequence of steps:
 
 python3-opencv install seems to work... I forgot for SSH the matploglib gui won't show up so I was developing this on a Ubuntu VM back then.
 
+10:23 PM
+
+I'm just poking around... idk what happened to this IMU
+
+It worked fine on its own, after it's in parallel with the ToF ranging it's not working anymore or very rarely.
+
+I've seen some mentions it should use 3.3V...
+
+So both the MPU6050 and VL53L0X can operate at 3.3V so I'll power it with that.
+
+It's a little better but still broken
+
+Yeah this is a problem, I have to figure out why it keeps doing this IO error
+
 Friday 08/05/2022
 
 7:36 PM
