@@ -1,3 +1,100 @@
+Sunday 08/07/2022
+
+Figure [this out](https://raspberrypi.stackexchange.com/questions/97995/rpi-python-i2c-ioerror-errno-121-remote-i-o-error-problem-how-to-fix-it
+)
+
+Do something hard with fresh brain
+
+Maybe design how the robot deals with state
+
+Also figure out the commands based on degrees turned on wheeled robot and desired distance (circumference) confirm with reality
+
+8:55 AM
+Ahh fresh brain, what will I do today mmm.
+
+So... this is interesting, the imu started working after I pulled out the ToF set.
+
+Well actually I also have to unplug the LED and servos hmmm
+
+I can get more lines but it's still unstable dang
+
+```
+{'x': -0.4165910888671875, 'y': -0.4381389038085937, 'z': 9.193734375}
+{'x': -0.4572925170898437, 'y': -0.38786066894531246, 'z': 9.169792358398437}
+{'x': -0.43574470214843747, 'y': -0.3902548706054687, 'z': 9.313444458007812}
+{'x': -0.43574470214843747, 'y': -0.40940848388671874, 'z': 9.205705383300781}
+{'x': -0.430956298828125, 'y': -0.3495534423828125, 'z': 9.212887988281249}
+{'x': -0.43574470214843747, 'y': -0.430956298828125, 'z': 9.210493786621093}
+{'x': -0.4644751220703125, 'y': -0.5195417602539062, 'z': 9.320627062988281}
+{'x': -0.42377369384765623, 'y': -0.5003881469726562, 'z': 9.229647399902344}
+{'x': -0.4572925170898437, 'y': -0.3902548706054687, 'z': 9.327809667968749}
+{'x': -0.6105214233398437, 'y': -0.316034619140625, 'z': 9.239224206542968}
+{'x': -0.47165772705078124, 'y': -0.41419688720703124, 'z': 9.222464794921875}
+{'x': -0.47644613037109373, 'y': -0.41419688720703124, 'z': 9.208099584960937}
+{'x': -0.5003881469726562, 'y': -0.469263525390625, 'z': 9.294290844726563}
+{'x': -0.430956298828125, 'y': -0.373495458984375, 'z': 9.212887988281249}
+{'x': -0.46208092041015625, 'y': -0.4285620971679687, 'z': 9.248801013183593}
+{'x': -0.4525041137695312, 'y': -0.39743747558593745, 'z': 9.153032946777342}
+{'x': -0.47884033203125, 'y': -0.43574470214843747, 'z': 9.169792358398437}
+{'x': -0.32082302246093747, 'y': -0.4644751220703125, 'z': 9.334992272949219}
+{'x': -0.43574470214843747, 'y': -0.603338818359375, 'z': 9.277531433105468}
+{'x': -0.4213794921875, 'y': -0.40222587890625, 'z': 9.196128576660156}
+{'x': -0.46686932373046874, 'y': -0.47884033203125, 'z': 9.239224206542968}
+{'x': -0.44053310546874996, 'y': -0.6057330200195312, 'z': 9.220070593261719}
+{'x': -0.5913678100585937, 'y': -0.5674257934570313, 'z': 9.220070593261719}
+{'x': -0.5506663818359374, 'y': -0.38307226562499996, 'z': 9.062053283691405}
+{'x': -0.4525041137695312, 'y': -0.45489831542968745, 'z': 9.167398156738281}
+{'x': -0.46208092041015625, 'y': -0.4165910888671875, 'z': 9.165003955078124}
+Traceback (most recent call last):
+  File "/home/pi/test/imu.py", line 7, in <module>
+    accelerometer_data = sensor.get_accel_data()
+  File "/home/pi/.local/lib/python3.9/site-packages/mpu6050/mpu6050.py", line 153, in get_accel_data
+    z = self.read_i2c_word(self.ACCEL_ZOUT0)
+  File "/home/pi/.local/lib/python3.9/site-packages/mpu6050/mpu6050.py", line 84, in read_i2c_word
+    low = self.bus.read_byte_data(self.address, register + 1)
+OSError: [Errno 121] Remote I/O error
+```
+
+ugh... man this sucks
+
+might be inevitable in the future to have a separate microcontroller controlling the hardware and attach it to the Pi
+
+Anyway I can work with this, I tried this other code [here](https://www.electronicwings.com/raspberry-pi/mpu6050-accelerometergyroscope-interfacing-with-raspberry-pi)
+
+It does a little better, I had to do the [delay trick](https://stackoverflow.com/questions/52735862/getting-ioerror-errno-121-remote-i-o-error-with-smbus-on-python-raspberry-w) to improve it but eventually it still stops and fails.
+
+I mean it would be nice to have a thread running that's constantly reading the MPU6050 but I can't keep it alive it seems... can restart it I suppose when it dies.
+
+To the forums!
+
+yeah it does better when nothing else is plugged in.
+
+So the problem with the IMU not being able to run on its own continuously is I can't use it to estimate velocity/how far the robot actually moved.
+
+I need to run that while it talks to the other half of the robot then compare the difference from stopped, moving, stopped to check if it moved as far as expected.
+
+I'm having a bad... desperate idea... I'm thinking I will use a Seeeduino (small form factor) and use that to read the MPU6050 and then send it to the RPi which doesn't seem to make sense due to the i2c problem to begin with. But I could use serial to talk from Pi to Seeeduino.
+
+10:12 AM
+
+trying to have Seeeduino read IMU
+
+Well I got it working... the issue is there is only one tx/rx port on the Pi it seems. So I would need to use SPI or if I2C cooperates, that.
+
+I'm going to test the i2c reliability with the Pi to Seeeduino
+
+BMS kicked in nice battery is at 3V though hmm
+
+I got code running on the Seeeduino to read from MPU6050 but damn it'll suck if I have to do this route... have to do an i2c or SPI bridge between Pi/Seeeduino
+
+I'm kind of blocked mentally until I figure out if this MPU problem is fixed or not...
+
+Soon I'll start putting together the system design though.
+
+11:38 AM
+
+Sidetracked from charging
+
 Saturday 08/06/2022
 
 Ahh fresh day although it's already 5 PM now been working on it since 8 the wifi buggy
