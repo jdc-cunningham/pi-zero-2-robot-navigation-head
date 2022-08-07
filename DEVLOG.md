@@ -168,7 +168,37 @@ I need to have bidirectional data messaging between them.
 
 What will happen is the IMU will run on a fast loop that can dump data when requested by the Pi
 
+Well this is cool the MOSI/MISO (soup)
 
+I'm just gonna go for it...
+
+3:39 PM
+
+Not sure if I'm going to get this to work, I'm already burnt
+
+Already having problems the SPI code won't compile hmm
+
+Oh okay that code is for AVR not SAMD
+
+https://forum.arduino.cc/t/error-expected-constructor-destructor-or-type-conversion-before/653777/2s
+
+Ugh... I'm just gonna enable another serial set and use that
+
+https://raspberrypi.stackexchange.com/questions/127265/multiple-uarts-on-the-40-pin
+
+Ahh only thing that sucks is the serial buffer build up concern on the Seeeduino hmm
+
+I will make this work even if it's ugly
+
+ahh damn it's for pi4 not pi zero 2 w
+
+hmm............. I could try software serial they said "error free" but idk
+
+Alright this is not happening right now, I have to go with the SPI route because I've used software serial before and it was not good.
+
+They're talking about error rates [here](https://forums.raspberrypi.com/viewtopic.php?t=35544).
+
+ahh man... dang I'm spent now, need to do nothing for the rest of the day
 
 ### Saturday 08/06/2022
 
