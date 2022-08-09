@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WiFi buggy web controller</title>
+  <link rel="stylesheet" href="./styles/css-reset.css">
+  <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+  <div class="col-container">
+    <div id="socket-status" class="scoket-status">Connecting...</div>
+    <div class="dpad">
+      <div class="dpad-top">
+        <div id="forward" class="dpad-btn"></div>
+      </div>
+      <div class="dpad-middle">
+        <div id="left" class="dpad-btn"></div>
+        <div id="right" class="dpad-btn"></div>
+      </div>
+      <div class="dpad-bottom">
+        <div id="backward" class="dpad-btn"></div>
+      </div>
+    </div>
+    <div class="input-set">
+      <label>Forward motion distance (inches):</label> 
+      <input type="number" id="forward-backward-distance" value="1"/>
+    </div>
+    <div class="input-set">
+      <label>Angle to rotate (degrees):</label> 
+      <input type="number" id="rotate-angle" value="45"/>
+    </div>
+  </div>
+  <div id="messages"></div>
+  <script src="./scripts/socket.js"></script>
+  <script src="./scripts/controls.js"></script>
+</body>
+</html>

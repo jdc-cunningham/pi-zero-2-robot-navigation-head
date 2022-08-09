@@ -1,0 +1,77 @@
+body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+body * {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+#socket-status {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+#messages {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 25vh;
+  width: 100vw;
+  overflow-y: auto;
+  border-top: 1px solid black;
+  padding: 0.5rem;
+}
+
+.col-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 70%;
+  margin-bottom: 30%;
+}
+
+.dpad {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50vw;
+  max-width: 250px;
+  max-height: 25px;
+}
+
+.dpad-top, .dpad-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dpad-middle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
+
+.dpad-btn {
+  width: 15vw;
+  height: 15vw;
+  border: 2px solid #282828;
+  border-radius: 5px;
+  cursor: pointer;
+  max-width: 70px;
+  max-height: 70px;
+}
+
+.dpad-btn:hover, .dpad-btn.active {
+  background-color: #282828;
+}
