@@ -1,2 +1,3 @@
 #!/bin/sh
-python3 /home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/methods/boot.py
+sudo pigpiod # servo daemon
+/usr/bin/python3 /home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/boot/boot.py

@@ -4,5 +4,7 @@ import sys
 sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/methods') # stupidly long paths
 
 from led import led_off
+from servo import boot_center
 
 led_off()
+boot_center()
