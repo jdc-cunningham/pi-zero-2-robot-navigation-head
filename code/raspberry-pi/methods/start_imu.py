@@ -16,10 +16,10 @@ def imu_on_bus():
   return len(bus_1_scan.stderr) == 0 and bus_1_scan.stdout.find("68") > -1
 
 def sample_imu():
-  imu_sample = ""
-
   try:
-    return len(subprocess.check_output(["python3", "mpu9250_single.py"]).decode('utf-8').rstrip()) > 10 # 10 is a random number but long enough
+    # 10 is a random number but long enough, it's based on the standard IMU output eg.
+    # [-0.033203125, -0.0224609375, 1.05322265625] (x,y,z accel)
+    return len(subprocess.check_output(["python3", "mpu9250_single.py"]).decode('utf-8').rstrip()) > 10
   except subprocess.CalledProcessError as e:
     return False # not good
 
@@ -48,5 +48,3 @@ def wake_imu():
         return False
       else:
         return True
-
-print(wake_imu())
