@@ -1,0 +1,11 @@
+body {
+  position: relative;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+body * {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
