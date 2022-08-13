@@ -1,21 +1,20 @@
-# https://websockets.readthedocs.io/en/9.0.1/intro.html
+# https://websockets.readthedocs.io/en/stable/intro/quickstart.html
 #!/usr/bin/env python
 
-# WS server example
-
 import asyncio
+import datetime
+import random
 import websockets
 
-async def hello(websocket, path):
-    name = await websocket.recv()
-    print(f"< {name}")
+async def show_time(websocket):
+    while True:
+        message = datetime.datetime.utcnow().isoformat() + "Z"
+        await websocket.send(message)
+        await asyncio.sleep(random.random() * 2 + 1)
 
-    greeting = f"Hello {name}!"
+async def main():
+    async with websockets.serve(show_time, "192.168.1.155", 5678):
+        await asyncio.Future()  # run forever
 
-    await websocket.send(greeting)
-    print(f"> {greeting}")
-
-start_server = websockets.serve(hello, "localhost", 8765)
-
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
+if __name__ == "__main__":
+    asyncio.run(main())
