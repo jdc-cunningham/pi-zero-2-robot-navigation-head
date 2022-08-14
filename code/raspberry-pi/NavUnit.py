@@ -20,6 +20,12 @@ class NavUnit:
     self.imu_awake = False
     self.positions = [] # {coord, time, etc...}
 
+    self.dimensions = {
+      "height": 9,
+      "width": 7.75,
+      "length": 11.5 # tailwheel extended out
+    }
+
     # pull down camera LED, center pan-tilt servos, start IMU
     self.boot()
 
