@@ -15,7 +15,7 @@ from sensors import Sensors
 class NavUnit:
   def __init__(self):
     self.name = "UwU Navu"
-    self.units = "Inches and Degrees"
+    self.units = "inches and degrees"
     self.coordinate_system = "x,y,z where z is vertical"
     self.imu_awake = False
     self.positions = [] # {coord, time, etc...}
