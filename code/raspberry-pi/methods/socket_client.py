@@ -4,10 +4,13 @@
 import asyncio
 import websockets
 
-# this sucks that each call has to get a connection
-async def move_forward():
+socket_conn = None
+
+async def connect():
     async with websockets.connect("ws://192.168.1.195:80") as websocket:
-        await websocket.send("_mfs_5_mfe_")
+        socket_conn = websocket
+        print("connected")
+        # await websocket.send("_mfs_5_mfe_")
         # await websocket.recv()
 
-asyncio.run(hello())
+asyncio.run(connect())
