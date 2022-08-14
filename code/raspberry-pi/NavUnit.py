@@ -27,7 +27,8 @@ class NavUnit:
 
   def take_photo(self):
     filename = str(int(time.time())) + ".jpg"
-    subprocess.run(["libcamera-still", "-o", filename])
+    # rotate 180deg since camera mounted upside down
+    subprocess.run(["libcamera-still", "-vf", "-vh", "-o", filename])
     return exists(filename)
 
 NavUnit()
