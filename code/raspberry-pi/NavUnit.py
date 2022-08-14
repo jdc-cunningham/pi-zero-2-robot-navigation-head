@@ -9,6 +9,8 @@ from os.path import exists
 from led import led_off
 from servo import boot_center
 from start_imu import wake_imu
+from motion import Motion
+from sensors import Sensors
 
 class NavUnit:
   def __init__(self):
@@ -28,51 +30,5 @@ class NavUnit:
     # self.take_photo()
     self.motion = self.Motion()
     self.sensors = self.Sensors()
-
-  class Motion:
-    def __init__(self):
-      self.name = "UwU Navu"
-
-    class PanTilt():
-      def __init__(self):
-        self.pan_servo
-        self.tilt_servo
-    class Wheels():
-      def __init__(self):
-        self.left
-        self.right
-        self.move_forward
-        self.move_left
-        self.move_right
-        self.move_backward
-
-  class Sensors:
-    def __init__(self):
-      self.camera = self.Camera()
-      self.tof = self.Tof()
-      self.lidar = self.Lidar()
-      self.imu = self.Imu()
-
-    class Camera():
-      def __init__(self):
-        self.name = "Raspberry Pi Camera Module V2 8MP"
-
-      def take_photo(self):
-        filename = str(int(time.time())) + ".jpg"
-        # rotate 180deg since camera mounted upside down
-        subprocess.run(["libcamera-jpeg", "--rotation", "180", "-o", filename])
-        return exists(filename)
-
-    class Tof():
-      def __init__(self):
-        self.name ="Pololu VL53L0X"
-
-    class Lidar():
-      def __init__(self):
-        self.name = "TFmini-s"
-
-    class Imu():
-      def __init__(self):
-        self.name = "MPU9250"
 
 NavUnit()
