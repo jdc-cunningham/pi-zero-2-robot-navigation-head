@@ -1,7 +1,7 @@
 # https://stackoverflow.com/questions/4383571/importing-files-from-different-folder
 import sys
 
-sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/methods') # stupidly long paths
+sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/methods/') # stupidly long paths
 
 import subprocess
 
@@ -28,7 +28,7 @@ class NavUnit:
   def take_photo(self):
     filename = str(int(time.time())) + ".jpg"
     # rotate 180deg since camera mounted upside down
-    subprocess.run(["libcamera-still", "-vf", "-vh", "-o", filename])
+    subprocess.run(["libcamera-jpeg", "--rotation", "180", "-o", filename])
     return exists(filename)
 
 NavUnit()
