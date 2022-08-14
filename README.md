@@ -1,5 +1,7 @@
 ### About
 
+Also known as **UwU NavU** (navigation unit)
+
 ### Actual
 <img src="./nav-unit-on-2d-robot.JPG" width="500"/>
 
