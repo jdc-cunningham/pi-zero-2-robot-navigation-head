@@ -6,7 +6,6 @@
 # https://stackoverflow.com/questions/24849998/how-to-catch-exception-output-from-python-subprocess-check-output
 
 import subprocess
-from subprocess import Popen, PIPE
 
 imu_found = False
 imu_awake = False
