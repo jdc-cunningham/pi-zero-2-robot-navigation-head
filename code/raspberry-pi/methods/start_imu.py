@@ -18,8 +18,8 @@ def sample_imu():
   try:
     # 10 is a random number but long enough, it's based on the standard IMU output eg.
     # [-0.033203125, -0.0224609375, 1.05322265625] (x,y,z accel)
-    path = '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/methods/'
-    return len(subprocess.check_output(["python3", "-P", path, "mpu9250_single.py"]).decode('utf-8').rstrip()) > 10
+    script_path = "/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/methods/mpu9250_single.py"
+    return len(subprocess.check_output(["python3", script_path]).decode('utf-8').rstrip()) > 10
   except subprocess.CalledProcessError as e:
     return False # not good
 
