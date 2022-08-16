@@ -1,8 +1,11 @@
+import sys
+
+sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/sensors/VL53L0X_rasp_python/python')
+
 import VL53L0X
 import RPi.GPIO as GPIO
 import time
 import subprocess
-import sys
 import tfmplus as tfmP   # Import the `tfmplus` module v0.1.0
 from tfmplus import *    # and command and paramter defintions
 
