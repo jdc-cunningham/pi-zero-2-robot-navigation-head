@@ -9,4 +9,4 @@ from start_imu import wake_imu
 
 led_off()
 boot_center()
-wake_imu() # this has to go somewhere
+# wake_imu() # this has to go somewhere

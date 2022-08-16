@@ -10,15 +10,15 @@ import tfmplus as tfmP # Import the `tfmplus` module v0.1.0
 from tfmplus import *    # and command and paramter defintions
 
 from os.path import exists
-from mpu9250_jmdev.registers import *
-from mpu9250_jmdev.mpu_9250 import MPU9250
+# from mpu9250_jmdev.registers import *
+# from mpu9250_jmdev.mpu_9250 import MPU9250
 
 class Sensors:
   def __init__(self):
     self.camera = self.Camera()
     self.tof = self.Tof()
     self.lidar = self.Lidar()
-    self.imu = self.Imu()
+    # self.imu = self.Imu()
 
   class Camera():
     def __init__(self):
@@ -44,10 +44,11 @@ class Sensors:
   class Tof():
     def __init__(self):
       self.name ="Pololu VL53L0X"
-      self.tof = VL53L0X.VL53L0X()
+      # self.tof = VL53L0X.VL53L0X()
+      self.tof = tof
 
-    def get_distance():
-      return tof.get_distance()
+    def get_distance(self):
+      return self.tof.get_distance()
 
   class Lidar():
     def __init__(self):
@@ -55,10 +56,20 @@ class Sensors:
       self.serial_port = "/dev/serial0" # Raspberry Pi normal serial port
       self.serial_rate = 115200 # TFMini-Plus default baud
       self.lidar = tfmP
-      
-    def get_distanec(self):
-      lidar_data = self.lidar.getData()
-      return lidar_data.dist * 0.39
+
+      self.setup_lidar()
+
+    # this is from tfmp_test.py
+    def setup_lidar(self):
+      self.lidar.begin(self.serial_port, self.serial_rate)
+      self.lidar.sendCommand( SOFT_RESET, 0)
+      time.sleep(0.5)
+      self.lidar.sendCommand(SET_FRAME_RATE,FRAME_20)
+      time.sleep(0.5) # 1 second lag per scan
+
+    def get_distance(self):
+      self.lidar.getData()
+      return self.lidar.dist * 0.39
 
   # I think this will always be running as a thread
   # if not store data in memory I guess during a motion
@@ -66,18 +77,20 @@ class Sensors:
     def __init__(self):
       self.name = "MPU9250"
       self.measurements = []
-      self.mpu = MPU9250(
-        address_ak=AK8963_ADDRESS,
-        address_mpu_master=MPU9050_ADDRESS_68, # In 0x68 Address
-        address_mpu_slave=None,
-        bus=1,
-        gfs=GFS_1000,
-        afs=AFS_8G,
-        mfs=AK8963_BIT_16,
-        mode=AK8963_MODE_C100HZ
-      )
+      # self.imu_awake = imu_awake()
 
-      self.mpu.configure() # Apply the settings to the registers.
+      # self.mpu = MPU9250(
+        # address_ak=AK8963_ADDRESS,
+        # address_mpu_master=MPU9050_ADDRESS_68, # In 0x68 Address
+        # address_mpu_slave=None,
+        # bus=1,
+        # gfs=GFS_1000,
+        # afs=AFS_8G,
+        # mfs=AK8963_BIT_16,
+        # mode=AK8963_MODE_C100HZ
+      # )
+
+      # self.mpu.configure() # Apply the settings to the registers.
 
     def get_all(self):
       return [
