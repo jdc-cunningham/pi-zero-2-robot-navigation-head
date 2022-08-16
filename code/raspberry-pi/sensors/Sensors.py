@@ -1,6 +1,6 @@
 import sys
 
-sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/sensors/VL53L0X_rasp_python/python')
+sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/sensors/VL53L0X_rasp_python')
 
 import VL53L0X
 import RPi.GPIO as GPIO
