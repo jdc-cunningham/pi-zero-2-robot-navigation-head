@@ -32,9 +32,19 @@ class NavUnit:
   def boot(self):
     led_off()
     boot_center()
-    self.imu_awake = wake_imu
+    self.imu_awake = wake_imu()
     # self.take_photo()
-    self.motion = Motion
-    self.sensors = Sensors
+    self.motion = Motion.Motion()
+    self.sensors = Sensors.Sensors()
+    
+    self.sensor_check()
+
+  def sensor_check():
+    print("imu check")
+    print(self.imu_awake)
+    print("tof check")
+    print(self.sensors.tof.get_distance())
+    print("lidar check")
+    print(self.sensors.lidar.get_distance())
 
 NavUnit()
