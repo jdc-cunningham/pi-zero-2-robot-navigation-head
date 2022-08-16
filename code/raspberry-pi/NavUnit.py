@@ -3,12 +3,12 @@ import sys
 import time
 import subprocess
 
-sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/methods/') # stupidly long paths
+sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi') # stupidly long paths
 
 from os.path import exists
-from led import led_off
-from servo import boot_center
-from start_imu import wake_imu
+from methods.led import led_off # dumb
+from methods.servo import boot_center
+from methods.start_imu import wake_imu
 from motion import Motion
 from sensors import Sensors
 
@@ -32,9 +32,9 @@ class NavUnit:
   def boot(self):
     led_off()
     boot_center()
-    self.imu_awake = wake_imu()
+    self.imu_awake = wake_imu
     # self.take_photo()
-    self.motion = self.Motion()
-    self.sensors = self.Sensors()
+    self.motion = Motion
+    self.sensors = Sensors
 
 NavUnit()

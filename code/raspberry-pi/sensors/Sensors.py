@@ -1,12 +1,12 @@
 import sys
 
-sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/sensors/VL53L0X_rasp_python')
+sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/sensors')
 
-import VL53L0X
+from . import tof
 import RPi.GPIO as GPIO
 import time
 import subprocess
-import tfmplus as tfmP   # Import the `tfmplus` module v0.1.0
+import tfmplus as tfmP # Import the `tfmplus` module v0.1.0
 from tfmplus import *    # and command and paramter defintions
 
 from os.path import exists
@@ -46,11 +46,8 @@ class Sensors:
       self.name ="Pololu VL53L0X"
       self.tof = VL53L0X.VL53L0X()
 
-    def get_distance(self):
-      self.tof.start_ranging(VL53L0X.VL53L0X_BETTER_ACCURACY_MODE)
-      distance = self.tof.get_distance()
-      self.tof.stop_ranging()
-      return (distance / 10) * 0.39 # cm to in (1 -> 0.393701)
+    def get_distance():
+      return tof.get_distance()
 
   class Lidar():
     def __init__(self):
