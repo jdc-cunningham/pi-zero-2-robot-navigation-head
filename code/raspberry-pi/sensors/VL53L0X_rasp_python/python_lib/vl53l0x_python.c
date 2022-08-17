@@ -55,7 +55,7 @@ void print_pal_error(VL53L0X_Error Status)
 {
     char buf[VL53L0X_MAX_STRING_LENGTH];
     VL53L0X_GetPalErrorString(Status, buf);
-    printf("API Status: %i : %s\n", Status, buf);
+    // printf("API Status: %i : %s\n", Status, buf);
 }
 
 VL53L0X_Error WaitMeasurementDataReady(VL53L0X_DEV Dev)
@@ -165,7 +165,7 @@ void startRanging(int object_number, int mode, uint8_t i2c_address, uint8_t TCA9
     }
     else
     {
-        printf ("VL53L0X Start Ranging Object %d Address 0x%02X\n\n", object_number, i2c_address);
+        // printf ("VL53L0X Start Ranging Object %d Address 0x%02X\n\n", object_number, i2c_address);
     }
 
     if (mode >= VL53L0X_GOOD_ACCURACY_MODE &&
@@ -348,7 +348,7 @@ void startRanging(int object_number, int mode, uint8_t i2c_address, uint8_t TCA9
                                                     break;
 
                                                 case VL53L0X_BETTER_ACCURACY_MODE:
-                                                    printf("VL53L0X_BETTER_ACCURACY_MODE\n");
+                                                    // printf("VL53L0X_BETTER_ACCURACY_MODE\n");
                                                     if (Status == VL53L0X_ERROR_NONE)
                                                     {
                                                         Status = 
@@ -378,7 +378,7 @@ void startRanging(int object_number, int mode, uint8_t i2c_address, uint8_t TCA9
                                         }
                                         else
                                         {
-                                            printf ("Call of VL53L0X_SetDeviceMode\n");
+                                            // printf ("Call of VL53L0X_SetDeviceMode\n");
                                         }
                                     }
                                     else
@@ -497,7 +497,7 @@ void stopRanging(int object_number)
 
             if(Status == VL53L0X_ERROR_NONE)
             {
-                printf ("Wait Stop to be competed\n");
+                // printf ("Wait Stop to be competed\n");
                 Status = WaitStopCompleted(pMyDevice[object_number]);
             }
 
