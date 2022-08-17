@@ -227,12 +227,12 @@ void startRanging(int object_number, int mode, uint8_t i2c_address, uint8_t TCA9
                         Status = VL53L0X_GetDeviceInfo(pMyDevice[object_number], &DeviceInfo);
                         if(Status == VL53L0X_ERROR_NONE)
                         {
-                            printf("VL53L0X_GetDeviceInfo:\n");
-                            printf("Device Name : %s\n", DeviceInfo.Name);
-                            printf("Device Type : %s\n", DeviceInfo.Type);
-                            printf("Device ID : %s\n", DeviceInfo.ProductId);
-                            printf("ProductRevisionMajor : %d\n", DeviceInfo.ProductRevisionMajor);
-                            printf("ProductRevisionMinor : %d\n", DeviceInfo.ProductRevisionMinor);
+                            // printf("VL53L0X_GetDeviceInfo:\n");
+                            // printf("Device Name : %s\n", DeviceInfo.Name);
+                            // printf("Device Type : %s\n", DeviceInfo.Type);
+                            // printf("Device ID : %s\n", DeviceInfo.ProductId);
+                            // printf("ProductRevisionMajor : %d\n", DeviceInfo.ProductRevisionMajor);
+                            // printf("ProductRevisionMinor : %d\n", DeviceInfo.ProductRevisionMinor);
 
                             if ((DeviceInfo.ProductRevisionMajor != 1) && (DeviceInfo.ProductRevisionMinor != 1)) {
                                 printf("Error expected cut 1.1 but found cut %d.%d\n",
