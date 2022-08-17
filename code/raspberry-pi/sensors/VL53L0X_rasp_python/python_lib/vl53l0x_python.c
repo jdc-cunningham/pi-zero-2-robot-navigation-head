@@ -487,7 +487,7 @@ void stopRanging(int object_number)
 {
     VL53L0X_Error Status = VL53L0X_ERROR_NONE;
 
-    printf ("Call of VL53L0X_StopMeasurement\n");
+    // printf ("Call of VL53L0X_StopMeasurement\n");
     
     if (object_number < MAX_DEVICES)
     {
