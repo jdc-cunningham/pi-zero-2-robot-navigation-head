@@ -12,7 +12,7 @@ tilt_servo = 13
 # 2500 is max
 
 def boot_center():
-  pi.set_servo_pulsewidth(pan_servo, 1440) # > 1500, left
+  pi.set_servo_pulsewidth(pan_servo, 1460) # > 1500, left
   pi.set_servo_pulsewidth(tilt_servo, 1090) # < 1500 up
 
 def tmp_look_around():
