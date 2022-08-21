@@ -42,8 +42,17 @@ def tmp_look_around():
     time.sleep(0.02)
 
 def battery_skit():
-  # look up
-  print('yo')
-
   # nod
+  for run in range(0, 2, 1):
+    for pw in range(1390,1090,-10):
+      pi.set_servo_pulsewidth(tilt_servo, pw)
+      # print(pw)
+      time.sleep(0.01)
+
+    for pw in range(1090, 1390, 10):
+      pi.set_servo_pulsewidth(tilt_servo, pw)
+      time.sleep(0.01)
+
   # turn around
+
+battery_skit()
