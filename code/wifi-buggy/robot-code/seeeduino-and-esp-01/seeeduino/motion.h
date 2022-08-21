@@ -97,3 +97,11 @@ void stopMoving()
   servoRight.write(seRiStPos);
   motionVal = 0;
 }
+
+void rotate360()
+{
+  servoLeft.write(seLeFoPos);
+  servoRight.write(seRiBaPos);
+  delay(motionDelay);
+  motionIncrementer += 1;
+}

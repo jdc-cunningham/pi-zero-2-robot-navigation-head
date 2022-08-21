@@ -109,6 +109,13 @@ void checkMessages()
       activeDirection = "";
     }
 
+    if (espMsg.indexOf("m_r360") > -1)
+    {
+      activeDirection = "r360";
+      motionVal = 19;
+      maxMotionVal = 22;
+    }
+
     clearEspSerial();
   }
 

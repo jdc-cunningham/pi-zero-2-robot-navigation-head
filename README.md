@@ -8,7 +8,17 @@ Also known as **UwU NavU** (navigation unit)
 ### Design
 <img src="./design.JPG" width="500"/>
 
-A set of sensors:
+### Two different beam FOVs
+<img src="./different-beams.png" width="800"/>
+
+### Navigation method
+<img src="./image-processing.png" width="800"/>
+
+Then onboard IMU estimates distance traveled/keeps 3D representation of world [0] in memory (future, show in web browser)
+
+[0] world represented as cubes based on blob/probe
+
+### Sensors:
 
 * camera
 * VL530X ToF close range wide FOV
