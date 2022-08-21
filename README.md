@@ -22,6 +22,6 @@ Active development is being done in the dev branch until a full system is built 
 * camera
 * VL530X ToF close range wide FOV
 * TFmini-s lidar long range small FOV
-* MPU 6050
+* MPU 6050 (replaced with 9250)
 
 This is using the IMU for the pan/tilt angles.
