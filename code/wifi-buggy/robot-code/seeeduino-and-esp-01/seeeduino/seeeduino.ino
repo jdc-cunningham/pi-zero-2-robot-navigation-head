@@ -50,4 +50,9 @@ void loop()
     delay(motionDelay);
     motionIncrementer += 1;
   }
+
+  if (activeDirection == "r360")
+  {
+    rotate360();
+  }
 }
