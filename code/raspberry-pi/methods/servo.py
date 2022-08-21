@@ -13,7 +13,8 @@ tilt_servo = 13
 
 def boot_center():
   pi.set_servo_pulsewidth(pan_servo, 1460) # > 1500, left
-  pi.set_servo_pulsewidth(tilt_servo, 1090) # < 1500 up
+  # pi.set_servo_pulsewidth(tilt_servo, 1090) # < 1500 up max 1490
+  pi.set_servo_pulsewidth(tilt_servo, 1390)
 
 def tmp_look_around():
   # look left
@@ -39,3 +40,10 @@ def tmp_look_around():
     pi.set_servo_pulsewidth(pan_servo, pw)
     # print(pw)
     time.sleep(0.02)
+
+def battery_skit():
+  # look up
+  print('yo')
+
+  # nod
+  # turn around
