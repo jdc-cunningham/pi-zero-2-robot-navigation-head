@@ -15,8 +15,7 @@ tilt_servo = 13
 
 def boot_center():
   pi.set_servo_pulsewidth(pan_servo, 1460) # > 1500, left
-  # pi.set_servo_pulsewidth(tilt_servo, 1090) # < 1500 up max 1490
-  pi.set_servo_pulsewidth(tilt_servo, 1390)
+  pi.set_servo_pulsewidth(tilt_servo, 1090) # < 1500 up max 1490
 
 def tmp_look_around():
   # look left
@@ -43,6 +42,15 @@ def tmp_look_around():
     # print(pw)
     time.sleep(0.02)
 
+def rotate():
+  for pw in range(1460,1670,10):
+    pi.set_servo_pulsewidth(pan_servo, pw)
+    time.sleep(0.01)
+
+boot_center()
+# time.sleep(1)
+# rotate()
+
 async def connect():
   async with websockets.connect("ws://192.168.1.195:80") as websocket:
     socket_conn = websocket
@@ -67,3 +75,4 @@ def battery_skit():
 # boot_center()
 # time.sleep(1.5)
 # battery_skit()
+
