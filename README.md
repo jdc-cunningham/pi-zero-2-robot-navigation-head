@@ -16,13 +16,12 @@ Active development is being done in the dev branch until a full system is built 
 ### Beam FOVs
 <img src="./different-beams.png" width="800"/>
 
-A set of sensors:
+
+### Sensor set
 
 * camera
 * VL530X ToF close range wide FOV
 * TFmini-s lidar long range small FOV
 * MPU 6050
 
-On a two servo pan-tilt platform, using Pi Zero W 2 mostly for Open CV image crunching.
-
-Then this sensor set controls a robot via websocket API based on navigation decision.
+This is using the IMU for the pan/tilt angles.
