@@ -2,9 +2,11 @@
 
 import pigpio
 import time
+import asyncio
+import websockets
 
+socket_conn = None
 pi = pigpio.pi()
-
 pan_servo = 12
 tilt_servo = 13
 
@@ -41,6 +43,12 @@ def tmp_look_around():
     # print(pw)
     time.sleep(0.02)
 
+async def connect():
+  async with websockets.connect("ws://192.168.1.195:80") as websocket:
+    socket_conn = websocket
+    await socket_conn.send("m_r360")
+    # await websocket.recv()
+
 def battery_skit():
   # nod
   for run in range(0, 2, 1):
@@ -53,6 +61,6 @@ def battery_skit():
       pi.set_servo_pulsewidth(tilt_servo, pw)
       time.sleep(0.01)
 
-  # turn around
+  asyncio.run(connect())
 
 battery_skit()
