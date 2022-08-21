@@ -44,3 +44,16 @@ dpadBtns.forEach(dpadBtn => dpadBtn.addEventListener('click', (e) => {
   socket.send(msgToSend);
   appendMessage('ui', msgToSend);
 }));
+
+// custom messaging
+const customStrInput = document.getElementById('custom-message-str');
+const customStrBtn = document.getElementById('custom-message-str-btn');
+
+customStrBtn.addEventListener('click', () => {
+  const str = customStrInput.value;
+
+  if (str.length) {
+    socket.send(str);
+    appendMessage('ui', str);
+  }
+});

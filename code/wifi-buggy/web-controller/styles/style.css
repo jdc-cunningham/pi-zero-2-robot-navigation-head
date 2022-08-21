@@ -18,6 +18,30 @@ body * {
   font-size: 1.5rem;
 }
 
+#custom-message {
+  position: absolute;
+  top: calc(75vh - 40px);
+  left: 0;
+  height: 40px;
+  width: 100vw;
+  border-top: 1px solid black;
+  padding: 0.5rem;
+  z-index: 2;
+}
+
+.custom-message-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+}
+
+.custom-message-container input {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
 #messages {
   position: absolute;
   bottom: 0;
@@ -27,6 +51,7 @@ body * {
   overflow-y: auto;
   border-top: 1px solid black;
   padding: 0.5rem;
+  z-index: 1;
 }
 
 .col-container {

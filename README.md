@@ -42,4 +42,6 @@ Estimated current draws: (the word is quiescent)
 - 5mA MPU9250
 - 20-40mA idle servos MG90D
 
-Something like 400mA so... says 8.5 hrs I imagine I get something like 5-6 hrs+ in reality
+Something like 400mA so... says 8.5 hrs I imagine
+
+In reality I get just over 6 hrs, tested by 5 min interval written to log by CRON until it died from just sitting idle.
