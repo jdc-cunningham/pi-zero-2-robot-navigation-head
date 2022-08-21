@@ -61,6 +61,9 @@ def battery_skit():
       pi.set_servo_pulsewidth(tilt_servo, pw)
       time.sleep(0.01)
 
+  time.sleep(3)
   asyncio.run(connect())
 
-battery_skit()
+# boot_center()
+# time.sleep(1.5)
+# battery_skit()
