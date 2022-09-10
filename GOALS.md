@@ -1,11 +1,11 @@
 ### Basic
-- assembled
-- bridge to basic 2D car platform
-- basic blob finding/distance/navigation
+- [x] assembled
+- [x] bridge to basic 2D car platform
+- [ ] basic blob finding/distance/navigation
 
 ### Corrective navigation
-- shows a photo it took, direction it decided
-- I say if it was correct or not, update future decisions
+- [ ] shows a photo it took, direction it decided
+  - I say if it was correct or not, update future decisions
 
 ### Insane
 - place the sensor assembly on a desk looking down at the floor
