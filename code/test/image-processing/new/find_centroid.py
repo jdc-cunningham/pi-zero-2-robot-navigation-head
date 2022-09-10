@@ -5,7 +5,7 @@ import math
 from operator import itemgetter
 
 # img_path = './crop.jpg'
-img_path = './quad1.jpg'
+img_path = './quad2.jpg'
 
 # def find_centroid():
 
