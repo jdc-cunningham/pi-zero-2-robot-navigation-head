@@ -10,6 +10,9 @@ Active development is being done in the dev branch until a full system is built 
 ### Actual
 <img src="./nav-unit-on-2d-robot.JPG" width="500"/>
 
+### Guts
+<img src="./guts.JPG" width="500"/>
+
 ### Design
 <img src="./design.JPG" width="500"/>
 
