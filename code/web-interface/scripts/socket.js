@@ -5,7 +5,7 @@ let wasConnected = false;
 const socketStatus = document.getElementById('socket-status');
 
 const connectToNavigationDevice = () => {
-  socket = new WebSocket('ws://192.168.1.228:5678'); // esp01 on robot
+  socket = new WebSocket('ws://192.168.1.156:5678'); // esp01 on robot
 
   // connection opened, send messages to robot
   socket.addEventListener('open', function (event) {
