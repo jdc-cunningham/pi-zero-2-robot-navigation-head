@@ -22,7 +22,7 @@ async def show_time(websocket):
     print(mpu_sample)
     await websocket.send(mpu_sample) # should already be a json
     # await websocket.send(mpu_sample)
-    await asyncio.sleep(0.1)
+    await asyncio.sleep(sensors.imu.sample_rate) # 0.005 normal sampling rate
 
 async def main():
   async with websockets.serve(show_time, "192.168.1.156", 5678):

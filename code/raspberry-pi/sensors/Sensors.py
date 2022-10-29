@@ -77,6 +77,7 @@ class Sensors:
   # if not store data in memory I guess during a motion
   class Imu():
     def __init__(self):
+      self.sample_rate = 0.05 # 20hz
       self.mpu_sample = None
       self.mpu = imu_setup()
       self.name = "MPU9250"

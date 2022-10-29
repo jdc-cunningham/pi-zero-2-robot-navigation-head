@@ -30,14 +30,14 @@ def continuous_imu_sample(imu):
     sample = [
       mpu.readAccelerometerMaster(),
       mpu.readGyroscopeMaster(),
-      mpu.readMagnetometerMaster()
+      # mpu.readMagnetometerMaster() # not used indoors
     ]
 
     imu.mpu_sample = json.dumps(sample)
 
     # print(mpu_sample)
 
-    time.sleep(0.1)
+    time.sleep(imu.sample_rate)
 
 def start_sampling_imu(imu):
   Thread(target=continuous_imu_sample, args=(imu,)).start() # does this thread die when parent dies?
