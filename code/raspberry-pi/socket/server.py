@@ -16,10 +16,14 @@ from sensors.Sensors import *
 
 sensors = Sensors()
 
+print(sensors.dump())
+
 async def show_time(websocket):
   while True:
-    message = json.dumps(sensors.imu.get_all())
-    await websocket.send(message)
+    mpu_sample = sensors.Imu.mpu_sample
+    # print(mpu_sample)
+    await websocket.send('yo')
+    # await websocket.send(mpu_sample)
     await asyncio.sleep(0.1)
 
 async def main():

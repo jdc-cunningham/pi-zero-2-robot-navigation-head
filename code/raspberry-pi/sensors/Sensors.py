@@ -13,7 +13,7 @@ import tfmplus as tfmP # Import the `tfmplus` module v0.1.0
 from tfmplus import *    # and command and paramter defintions
 
 from os.path import exists
-from methods.start_imu import * 
+from methods.imu import * 
 
 class Sensors:
   def __init__(self):
@@ -77,24 +77,13 @@ class Sensors:
   # if not store data in memory I guess during a motion
   class Imu():
     def __init__(self):
+      self.mpu_sample = None
+      self.mpu = imu_setup()
       self.name = "MPU9250"
-      self.measurements = []
-      self.imu_awake = imu_awake
+      # self.measurements = []
 
-      self.mpu = MPU9250(
-        address_ak=AK8963_ADDRESS,
-        address_mpu_master=MPU9050_ADDRESS_68, # In 0x68 Address
-        address_mpu_slave=None,
-        bus=1,
-        gfs=GFS_1000,
-        afs=AFS_8G,
-        mfs=AK8963_BIT_16,
-        mode=AK8963_MODE_C100HZ
-      )
-
-      self.mpu.configure() # Apply the settings to the registers.
-
-      wake_imu()
+      # start sampling imu continuously, send to socket as well
+      start_sampling_imu(self.mpu_sample)
 
     def get_all(self):
       return [
@@ -103,8 +92,7 @@ class Sensors:
         self.mpu.readMagnetometerMaster()
       ]
 
-    
-    def get_single(self, type = 0): # 0, 1, 2, 3 accel, gyro, mag
+    def get_single(self, type = 0): # 0, 1, 2 :  accel, gyro, mag
       if (type == 0):
         return self.mpu.readAccelerometerMaster()
       elif (type == 1):
@@ -112,5 +100,5 @@ class Sensors:
       else:
         return self.mpu.readMagnetometerMaster()
 
-    def start_sampling(self):
-      self.measurements.append() # have to think about this
+    # def start_sampling(self):
+      # self.measurements.append() # have to think about this
