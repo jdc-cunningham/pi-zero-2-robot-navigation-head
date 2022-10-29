@@ -1,5 +1,8 @@
 import sys
 
+from mpu9250_jmdev.registers import *
+from mpu9250_jmdev.mpu_9250 import MPU9250
+
 sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/sensors')
 
 from . import tof
@@ -10,15 +13,14 @@ import tfmplus as tfmP # Import the `tfmplus` module v0.1.0
 from tfmplus import *    # and command and paramter defintions
 
 from os.path import exists
-# from mpu9250_jmdev.registers import *
-# from mpu9250_jmdev.mpu_9250 import MPU9250
+from methods.start_imu import * 
 
 class Sensors:
   def __init__(self):
     self.camera = self.Camera()
     self.tof = self.Tof()
     self.lidar = self.Lidar()
-    # self.imu = self.Imu()
+    self.imu = self.Imu()
 
   class Camera():
     def __init__(self):
@@ -77,20 +79,22 @@ class Sensors:
     def __init__(self):
       self.name = "MPU9250"
       self.measurements = []
-      # self.imu_awake = imu_awake()
+      self.imu_awake = imu_awake
 
-      # self.mpu = MPU9250(
-        # address_ak=AK8963_ADDRESS,
-        # address_mpu_master=MPU9050_ADDRESS_68, # In 0x68 Address
-        # address_mpu_slave=None,
-        # bus=1,
-        # gfs=GFS_1000,
-        # afs=AFS_8G,
-        # mfs=AK8963_BIT_16,
-        # mode=AK8963_MODE_C100HZ
-      # )
+      self.mpu = MPU9250(
+        address_ak=AK8963_ADDRESS,
+        address_mpu_master=MPU9050_ADDRESS_68, # In 0x68 Address
+        address_mpu_slave=None,
+        bus=1,
+        gfs=GFS_1000,
+        afs=AFS_8G,
+        mfs=AK8963_BIT_16,
+        mode=AK8963_MODE_C100HZ
+      )
 
-      # self.mpu.configure() # Apply the settings to the registers.
+      self.mpu.configure() # Apply the settings to the registers.
+
+      wake_imu()
 
     def get_all(self):
       return [
