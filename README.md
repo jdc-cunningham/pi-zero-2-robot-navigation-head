@@ -1,5 +1,7 @@
 ### About
 
+Previously called: Floating Navigation Sensor Assembly (FNSA)
+
 This is a crude SLAM navigation unit that can get attached to another robot. In the case below a basic 2 servo buggy with a websocket for control.
 
 It's using a combination of OpenCV/depth probing and IMU for localization.
