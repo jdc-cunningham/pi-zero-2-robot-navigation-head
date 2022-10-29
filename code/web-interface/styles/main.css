@@ -6,6 +6,9 @@ body * {
 body {
   position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: calc(100vw - 2em);
   height: calc(100vh - 2em);
   padding: 1em;
