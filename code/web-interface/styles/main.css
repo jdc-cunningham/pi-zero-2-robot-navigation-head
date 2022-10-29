@@ -1,11 +1,12 @@
-body {
-  position: relative;
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-}
-
 body * {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+}
+
+body {
+  position: relative;
+  display: flex;
+  width: calc(100vw - 2em);
+  height: calc(100vh - 2em);
+  padding: 1em;
 }
