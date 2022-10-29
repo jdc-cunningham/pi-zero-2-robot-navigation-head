@@ -25,7 +25,7 @@ def imu_setup():
 
   return mpu
 
-def continuous_imu_sample(mpu_sample):
+def continuous_imu_sample(imu):
   while True:
     sample = [
       mpu.readAccelerometerMaster(),
@@ -33,11 +33,11 @@ def continuous_imu_sample(mpu_sample):
       mpu.readMagnetometerMaster()
     ]
 
-    mpu_sample = json.dumps(sample)
+    imu.mpu_sample = json.dumps(sample)
 
-    print(mpu_sample)
+    # print(mpu_sample)
 
     time.sleep(0.1)
 
-def start_sampling_imu(mpu_sample):
-  Thread(target=continuous_imu_sample, args=[mpu_sample]).start() # does this thread die when parent dies?
+def start_sampling_imu(imu):
+  Thread(target=continuous_imu_sample, args=(imu,)).start() # does this thread die when parent dies?
