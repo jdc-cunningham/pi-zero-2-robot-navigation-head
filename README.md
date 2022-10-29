@@ -7,7 +7,7 @@ This is a crude SLAM navigation unit that can get attached to another robot. In 
 It's using a combination of OpenCV/depth probing and IMU for localization.
 
 #### Note
-Active development is being done in the dev branch until a full system is built out and subsequent iterations.
+Active development is being done in the `dev branch` until a full system is built out and subsequent iterations.
 
 ### Actual
 <img src="./nav-unit-on-2d-robot.JPG" width="500"/>
