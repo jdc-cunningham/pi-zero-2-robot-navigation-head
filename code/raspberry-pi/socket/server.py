@@ -11,19 +11,37 @@ import json
 
 sys.path.append('/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi')
 
-# from methods.start_imu import *
 from sensors.Sensors import *
+from methods.servo import *
 
 sensors = Sensors()
 
+async def check_command(msg, socket):
+  # no switch case? megamind, I don't have 3.10
+
+  if (msg == "left"):
+    remote_left()
+  elif (msg == "right"):
+    remote_right()
+  elif (msg == "up"):
+    remote_up()
+  elif (msg == "down"):
+    remote_down()
+  elif (msg == "center"):
+    remote_center()
+  elif (msg == "tof"):
+    await socket.send(str(sensors.tof.get_distance()))
+  elif (msg == "lidar"):
+    await socket.send(str(sensors.lidar.get_distance()))
+  else:
+    # do nothing
+    print(msg)
+
 async def show_time(websocket):
   while True:
-    # mpu_sample = sensors.imu.mpu_sample
-    # print(mpu_sample)
-    # await websocket.send(mpu_sample) # should already be a json
-    # await websocket.send(mpu_sample)
-    # await asyncio.sleep(sensors.imu.sample_rate) # 0.005 normal sampling rate
-    await asyncio.sleep('ping')
+    msg = await websocket.recv()
+    await check_command(msg, websocket)
+    await asyncio.sleep(0.1)
 
 async def main():
   async with websockets.serve(show_time, "192.168.1.156", 5678):
