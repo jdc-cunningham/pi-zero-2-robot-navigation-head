@@ -25,7 +25,15 @@ buttons.forEach(button => {
     if (id === "camera-up") piSocket.send('up');
     if (id === "camera-down") piSocket.send('down');
     if (id === "camera-center") piSocket.send('center');
-    if (id === "probe-tof") piSocket.send('tof');
-    if (id === "probe-lidar") piSocket.send('lidar');
+
+    if (id === "probe-tof") {
+      activeSensor = 'tof';
+      piSocket.send('tof');
+    }
+
+    if (id === "probe-lidar") {
+      activeSensor = 'lidar';
+      piSocket.send('lidar');
+    }
   });
 });

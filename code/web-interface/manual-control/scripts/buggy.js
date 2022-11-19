@@ -34,7 +34,7 @@ dpadBtns.forEach(dpadBtn => dpadBtn.addEventListener('click', (e) => {
 
   let msgToSend = "";
 
-  if (whichDir === 'forward' || whichDir === 'backward') {
+  if (whichDir === 'buggy-forward' || whichDir === 'buggy-backward') {
     msgToSend = getMessage(whichDir, forwardBackwardMotionUnit.value);
   } else {
     msgToSend = getMessage(whichDir, turnMotionUnit.value);

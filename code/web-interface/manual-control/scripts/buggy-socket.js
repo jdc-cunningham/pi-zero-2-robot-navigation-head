@@ -40,6 +40,7 @@ const connectToRobot = () => {
   socket.addEventListener('close', function (event) {
     socketStatus.innerText = 'buggy connection lost';
     clearInterval(socketInterval);
+    connectToRobot();
  });
 }
 
