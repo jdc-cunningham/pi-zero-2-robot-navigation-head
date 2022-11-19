@@ -47,7 +47,7 @@ def rotate():
     pi.set_servo_pulsewidth(pan_servo, pw)
     time.sleep(0.01)
 
-boot_center()
+# boot_center()
 # time.sleep(1)
 # rotate()
 
@@ -72,7 +72,69 @@ def battery_skit():
   time.sleep(3)
   asyncio.run(connect())
 
+def remote_center():
+  boot_center()
+
+# track init pos
+hPos = 1460
+vPos = 1090
+
+def remote_left():
+  global hPos
+
+  newPos = hPos + 10
+
+  if (newPos > 2500):
+    return
+
+  for pw in range(hPos, newPos, 1):
+    pi.set_servo_pulsewidth(pan_servo, pw)
+    time.sleep(0.01)
+
+  hPos = newPos
+
+def remote_right():
+  global hPos
+
+  newPos = hPos - 10
+
+  if (newPos < 0):
+    return
+
+  for pw in range(hPos, newPos, -1):
+    pi.set_servo_pulsewidth(pan_servo, pw)
+    time.sleep(0.01)
+
+  hPos = newPos
+
+def remote_up():
+  global vPos
+
+  newPos = vPos + 10
+
+  if (newPos < 0):
+    return
+
+  for pw in range(vPos, newPos, 1):
+    pi.set_servo_pulsewidth(tilt_servo, pw)
+    time.sleep(0.01)
+
+  vPos = newPos
+
+def remote_down():
+  global vPos
+
+  newPos = vPos - 10
+
+  if (newPos > 1490):
+    return
+
+  for pw in range(vPos, newPos, -1):
+    pi.set_servo_pulsewidth(tilt_servo, pw)
+    time.sleep(0.01)
+
+  vPos = newPos
+
 # boot_center()
 # time.sleep(1.5)
 # battery_skit()
-
