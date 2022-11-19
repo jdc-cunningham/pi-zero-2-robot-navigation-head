@@ -19,21 +19,21 @@
         <h2 id="buggy-socket-status">Buggy connecting...</h2>
         <div class="container__top-controls-camera">
           <h2>Camera controls</h2>
-          <button type="button">up</button>
+          <button id="camera-up" type="button">up</button>
           <span>
-            <button type="button">left</button>
-            <button type="button">center</button>
-            <button type="button">right</button>
+            <button id="camera-left" type="button">left</button>
+            <button id="camera-center" type="button">center</button>
+            <button id="camera-right" type="button">right</button>
           </span>
-          <button type="button">down</button>
+          <button id="camera-down" type="button">down</button>
         </div>
         <div class="container__top-controls-sensors">
           <h2>Distance Sensors</h2>
           <span>
-            <p>0 in</p><button type="button">ToF Probe</button>
+            <p>0 in</p><button id="probe-tof" type="button">ToF Probe</button>
           </span>
           <span>
-            <p>0 in</p><button type="button">Lidar Probe</button>
+            <p>0 in</p><button id="probe-lidar" type="button">Lidar Probe</button>
           </span>
         </div>
       </div>
@@ -65,6 +65,7 @@
   </div>
   <script src="./scripts/buggy-socket.js"></script>
   <script src="./scripts/pi-z2-socket.js"></script>
-  <script src="./scripts/main.js"></script>
+  <script src="./scripts/buggy.js"></script>
+  <script src="./scripts/pi.js"></script>
 </body>
 </html>
