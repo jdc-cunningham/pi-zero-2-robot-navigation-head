@@ -20,7 +20,6 @@ PAGE = """\
 <title>picamera2 MJPEG streaming demo</title>
 </head>
 <body>
-<h1>Picamera2 MJPEG Streaming Demo</h1>
 <img src="stream.mjpg" width="640" height="480" />
 </body>
 </html>

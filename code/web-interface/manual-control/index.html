@@ -11,7 +11,9 @@
 <body>
   <div class="container">
     <div class="container__top">
-      <div class="container__top-video"></div>
+      <div class="container__top-video">
+        <iframe src="http://192.168.1.156:8000/index.html"></iframe>
+      </div>
       <div class="container__top-controls">
         <div class="container__top-controls-camera">
           <h2>Camera controls</h2>
@@ -35,17 +37,30 @@
       </div>
     </div>
     <div class="container__bottom">
-      <h2>Buggy controls</h2>
+      <span class="group">
+        <h2>Buggy controls</h2>
+        <div class="container__bottom-buggy-controls-value">
+          <span>
+            <p>Motion distance</p>
+            <input type="number" placeholder="distance inches" value="1"/>
+          </span>
+          <br />
+          <span>
+            <p>turn angle</p>
+            <input type="number" placeholde="turn degress" value="45"/>
+          </span>
+        </div>
+      </span>
       <div class="container__bottom-buggy-controls">
-        <button type="button">up</button>
+        <button id="buggy-forward" type="button">up</button>
         <span>
-          <button type="button">left</button>
-          <button type="button">center</button>
-          <button type="button">right</button>
+          <button id="buggy-left" type="button">left</button>
+          <button id="buggy-right" type="button">right</button>
         </span>
-        <button type="button">down</button>
+        <button id="buggy-reverse" type="button">down</button>
       </div>
     </div>
   </div>
+  <script src="./scripts/main.js"></script>
 </body>
 </html>
