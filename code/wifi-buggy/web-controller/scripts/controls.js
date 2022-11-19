@@ -21,7 +21,7 @@ const getMessage = (direction, unit) => {
   } else if (direction === 'left') {
     return `_mls_${unit}_mle_`;
   } else if (direction === 'right') {
-    return `_mls_${unit}_mle_`;
+    return `_mrs_${unit}_mre_`;
   }
 }
 

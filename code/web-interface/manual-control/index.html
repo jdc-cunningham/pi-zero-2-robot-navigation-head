@@ -15,6 +15,8 @@
         <iframe src="http://192.168.1.156:8000/index.html"></iframe>
       </div>
       <div class="container__top-controls">
+        <h2 id="pi-socket-status">Pi Zero connecting...</h2>
+        <h2 id="buggy-socket-status">Buggy connecting...</h2>
         <div class="container__top-controls-camera">
           <h2>Camera controls</h2>
           <button type="button">up</button>
@@ -42,25 +44,27 @@
         <div class="container__bottom-buggy-controls-value">
           <span>
             <p>Motion distance</p>
-            <input type="number" placeholder="distance inches" value="1"/>
+            <input id="motion-distance" type="number" placeholder="distance inches" value="1"/>
           </span>
           <br />
           <span>
             <p>turn angle</p>
-            <input type="number" placeholde="turn degress" value="45"/>
+            <input id="rotate-angle" type="number" placeholde="turn degress" value="45"/>
           </span>
         </div>
       </span>
       <div class="container__bottom-buggy-controls">
-        <button id="buggy-forward" type="button">up</button>
+        <button id="buggy-forward" type="button">forward</button>
         <span>
           <button id="buggy-left" type="button">left</button>
           <button id="buggy-right" type="button">right</button>
         </span>
-        <button id="buggy-reverse" type="button">down</button>
+        <button id="buggy-reverse" type="button">reverse</button>
       </div>
     </div>
   </div>
+  <script src="./scripts/buggy-socket.js"></script>
+  <script src="./scripts/pi-z2-socket.js"></script>
   <script src="./scripts/main.js"></script>
 </body>
 </html>

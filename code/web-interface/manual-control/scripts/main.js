@@ -14,14 +14,14 @@ const commLookup = {
 
 const getMessage = (direction, unit) => {
   // ehh
-  if (direction === 'forward') {
+  if (direction === 'buggy-forward') {
     return `_mfs_${unit}_mfe_`;
-  } else if (direction === 'backward') {
+  } else if (direction === 'buggy-reverse') {
     return `_mbs_${unit}_mbe_`;
-  } else if (direction === 'left') {
+  } else if (direction === 'buggy-left') {
     return `_mls_${unit}_mle_`;
-  } else if (direction === 'right') {
-    return `_mls_${unit}_mle_`;
+  } else if (direction === 'buggy-right') {
+    return `_mrs_${unit}_mre_`;
   }
 }
 
@@ -29,7 +29,7 @@ let activeDirection = '';
 
 dpadBtns.forEach(dpadBtn => dpadBtn.addEventListener('click', (e) => {
   const whichDir = e.target.getAttribute('id');
-  const forwardBackwardMotionUnit = document.getElementById('forward-backward-distance');
+  const forwardBackwardMotionUnit = document.getElementById('motion-distance');
   const turnMotionUnit = document.getElementById('rotate-angle');
 
   let msgToSend = "";
@@ -42,5 +42,5 @@ dpadBtns.forEach(dpadBtn => dpadBtn.addEventListener('click', (e) => {
 
   activeDirection = whichDir;
   socket.send(msgToSend);
-  appendMessage('ui', msgToSend);
+  // appendMessage('ui', msgToSend);
 }));
