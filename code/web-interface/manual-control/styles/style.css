@@ -1,0 +1,114 @@
+body {
+  display: block;
+}
+
+body * {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+  height: 70%;
+  border-bottom: 1px solid #282828;
+}
+
+.container__top-video {
+  width: 65%;
+  height: 100%;
+  border-right: 1px solid #282828;
+}
+
+.container__top-controls {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 35%;
+  height: 100%;
+}
+
+.container__top-controls button,
+.container__bottom-buggy-controls button {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.container__top-controls span,
+.container__bottom-buggy-controls span {
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  display: flex;
+}
+
+.container__top-controls span button:not(:first-of-type),
+.container__bottom-buggy-controls span button:not(:first-of-type) {
+  margin-left: 1rem;
+}
+
+.container__top-controls-camera,
+.container__bottom-buggy-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 60%;
+  border-bottom: 1px solid #282828;
+}
+
+.container__top-controls-camera h2 {
+  margin-bottom: 1rem;
+}
+
+.container__top-controls-sensors {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.container__top-controls-sensors span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 60%;
+}
+
+.container__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 30%;
+}
+
+.container__bottom-buggy-controls {
+  border-bottom: 0;
+}

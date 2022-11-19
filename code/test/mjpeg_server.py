@@ -1,42 +1,42 @@
-# Web streaming example
-# Source code from the official PiCamera package
-# http://picamera.readthedocs.io/en/latest/recipes2.html#web-streaming
+#!/usr/bin/python3
+
+# Mostly copied from https://picamera.readthedocs.io/en/release-1.13/recipes2.html
+# Run this script, then point a web browser at http:<this-ip-address>:8000
+# Note: needs simplejpeg to be installed (pip3 install simplejpeg).
 
 import io
-import picamera
 import logging
 import socketserver
-from threading import Condition
 from http import server
+from threading import Condition, Thread
 
-PAGE="""\
+from picamera2 import Picamera2
+from picamera2.encoders import JpegEncoder
+from picamera2.outputs import FileOutput
+
+PAGE = """\
 <html>
 <head>
-<title>Raspberry Pi - Surveillance Camera</title>
+<title>picamera2 MJPEG streaming demo</title>
 </head>
 <body>
-<center><h1>Raspberry Pi - Surveillance Camera</h1></center>
-<center><img src="stream.mjpg" width="640" height="480"></center>
+<h1>Picamera2 MJPEG Streaming Demo</h1>
+<img src="stream.mjpg" width="640" height="480" />
 </body>
 </html>
 """
 
-class StreamingOutput(object):
+
+class StreamingOutput(io.BufferedIOBase):
     def __init__(self):
         self.frame = None
-        self.buffer = io.BytesIO()
         self.condition = Condition()
 
     def write(self, buf):
-        if buf.startswith(b'\xff\xd8'):
-            # New frame, copy the existing buffer's content and notify all
-            # clients it's available
-            self.buffer.truncate()
-            with self.condition:
-                self.frame = self.buffer.getvalue()
-                self.condition.notify_all()
-            self.buffer.seek(0)
-        return self.buffer.write(buf)
+        with self.condition:
+            self.frame = buf
+            self.condition.notify_all()
+
 
 class StreamingHandler(server.BaseHTTPRequestHandler):
     def do_GET(self):
@@ -77,18 +77,20 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             self.send_error(404)
             self.end_headers()
 
+
 class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     allow_reuse_address = True
     daemon_threads = True
 
-with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
-    output = StreamingOutput()
-    #Uncomment the next line to change your Pi's Camera rotation (in degrees)
-    #camera.rotation = 90
-    camera.start_recording(output, format='mjpeg')
-    try:
-        address = ('', 8000)
-        server = StreamingServer(address, StreamingHandler)
-        server.serve_forever()
-    finally:
-        camera.stop_recording()
+
+picam2 = Picamera2()
+picam2.configure(picam2.create_video_configuration(main={"size": (1024, 720)}))
+output = StreamingOutput()
+picam2.start_recording(JpegEncoder(), FileOutput(output))
+
+try:
+    address = ('', 8000)
+    server = StreamingServer(address, StreamingHandler)
+    server.serve_forever()
+finally:
+    picam2.stop_recording()
