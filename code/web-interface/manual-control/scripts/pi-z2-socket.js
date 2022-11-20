@@ -31,9 +31,9 @@ const connectToPiZero2 = () => {
 
     if (activeSensor && robotMsg.indexOf('.') !== -1) {
       if (activeSensor === 'tof') {
-        tofVal.innerText = `${maxDigit(robotMsg)} + 'in'`;
+        tofVal.innerText = `${maxDigit(robotMsg)} in`;
       } else {
-        lidarVal.innerText = `${maxDigit(robotMsg)} + 'in'`;
+        lidarVal.innerText = `${maxDigit(robotMsg)} in`;
       }
     }
   });
