@@ -21,7 +21,7 @@ tilt_servo = 13
 # sweep 1460 center
 # right 1160
 def boot_center():
-  pi.set_servo_pulsewidth(pan_servo, 1160) # > 1500, left -- 1460 center
+  pi.set_servo_pulsewidth(pan_servo, 1460) # > 1500, left -- 1460 center
   pi.set_servo_pulsewidth(tilt_servo, 1290) # < 1500 down max 1490 -- 1290 center
 
 boot_center()
