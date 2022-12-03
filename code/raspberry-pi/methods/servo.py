@@ -17,9 +17,12 @@ tilt_servo = 13
 # 1290 vertically centered on wifi-buggy
 # 950 mb
 # 650 bottom camera pos
+# left 1760
+# sweep 1460 center
+# right 1160
 def boot_center():
-  pi.set_servo_pulsewidth(pan_servo, 1460) # > 1500, left
-  pi.set_servo_pulsewidth(tilt_servo, 950) # < 1500 down max 1490
+  pi.set_servo_pulsewidth(pan_servo, 1160) # > 1500, left -- 1460 center
+  pi.set_servo_pulsewidth(tilt_servo, 1290) # < 1500 down max 1490 -- 1290 center
 
 boot_center()
 
@@ -83,7 +86,7 @@ def remote_center():
 
 # track init pos
 hPos = 1460
-vPos = 1090
+vPos = 1290
 
 def remote_left():
   global hPos
