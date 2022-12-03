@@ -13,9 +13,15 @@ tilt_servo = 13
 # 1500 is midpoint
 # 2500 is max
 
+# vertical camera positions
+# 1290 vertically centered on wifi-buggy
+# 950 mb
+# 650 bottom camera pos
 def boot_center():
   pi.set_servo_pulsewidth(pan_servo, 1460) # > 1500, left
-  pi.set_servo_pulsewidth(tilt_servo, 1090) # < 1500 up max 1490
+  pi.set_servo_pulsewidth(tilt_servo, 950) # < 1500 down max 1490
+
+boot_center()
 
 def tmp_look_around():
   # look left
