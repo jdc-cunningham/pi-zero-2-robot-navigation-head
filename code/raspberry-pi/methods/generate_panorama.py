@@ -120,5 +120,5 @@ def generate_panorama():
   h_img = cv2.hconcat([bl_img, bm_img, bb_img])
   cv2.imwrite('panorama/bot.jpg', h_img)
 
-# take_photos()
-generate_panorama()
+take_photos()
+# generate_panorama()

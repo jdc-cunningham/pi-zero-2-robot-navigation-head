@@ -1,5 +1,6 @@
 # files
 .pyc
+.swp
 
 # folders
 code/raspberry-pi/methods/panorama/*.jpg
