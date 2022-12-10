@@ -24,6 +24,12 @@ def boot_center():
   pi.set_servo_pulsewidth(pan_servo, 1460) # > 1500, left -- 1460 center
   pi.set_servo_pulsewidth(tilt_servo, 1290) # < 1500 down max 1490 -- 1290 center
 
+def move_servo(which, ms):
+  if (which == "pan"):
+    pi.set_servo_pulsewidth(pan_servo, ms)
+  else:
+    pi.set_servo_pulsewidth(tilt_servo, ms)
+
 def tmp_look_around():
   # look left
   for pw in range(1440,1640,5):
