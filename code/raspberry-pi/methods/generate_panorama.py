@@ -25,42 +25,25 @@ def take_photo(name):
 
 def take_photos():
   center_servos()
-  
-  # look left
-  pi.set_servo_pulsewidth(pan_servo, 1760)
-  
-  # do vertical slice set of shots
-  time.sleep(1)
+  time.sleep(2)
+
+  # the tilt does not look up beyond center
+  # tilt: 650, 950, 1290
+  # pan: 1960, 1460, 960
+
+  # take top/level photos
+  pi.set_servo_pulsewidth(pan_servo, 1960) # look left
+  time.sleep(2)
   take_photo('left_top')
-  pi.set_servo_pulsewidth(tilt_servo, 950)
-  time.sleep(1)
-  take_photo('left_middle')
-  pi.set_servo_pulsewidth(tilt_servo, 650)
-  time.sleep(1)
-  take_photo('left_bottom')
-
-  # look middle
   pi.set_servo_pulsewidth(pan_servo, 1460)
-  time.sleep(1)
-  take_photo('center_bottom')
-  pi.set_servo_pulsewidth(tilt_servo, 950)
-  time.sleep(1)
-  take_photo('center_middle')
-  time.sleep(1)
-  pi.set_servo_pulsewidth(tilt_servo, 1290)
-  time.sleep(1)
+  time.sleep(2)
   take_photo('center_top')
-
-  # look right
-  pi.set_servo_pulsewidth(pan_servo, 1160)
-  time.sleep(1)
+  pi.set_servo_pulsewidth(pan_servo, 960)
+  time.sleep(2)
   take_photo('right_top')
-  pi.set_servo_pulsewidth(tilt_servo, 950)
-  time.sleep(1)
-  take_photo('right_middle')
-  pi.set_servo_pulsewidth(tilt_servo, 650)
-  time.sleep(1)
-  take_photo('right_bottom')
+  time.sleep(2)
+
+
 
   # recenter
   pi.set_servo_pulsewidth(tilt_servo, 1290)
