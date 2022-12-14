@@ -8,7 +8,10 @@ import websockets
 socket_conn = None
 pi = pigpio.pi()
 pan_servo = 12
+pan_center = 1460
+
 tilt_servo = 13
+tilt_center = 1340
 
 # 1500 is midpoint
 # 2500 is max
@@ -21,8 +24,8 @@ tilt_servo = 13
 # sweep 1460 center
 # right 1160
 def boot_center():
-  pi.set_servo_pulsewidth(pan_servo, 1460) # > 1500, left -- 1460 center
-  pi.set_servo_pulsewidth(tilt_servo, 1290) # < 1500 down max 1490 -- 1290 center
+  pi.set_servo_pulsewidth(pan_servo, pan_center) # > 1500, left -- 1460 center
+  pi.set_servo_pulsewidth(tilt_servo, tilt_center) # < 1500 down max 1490 -- 1290 center
 
 def move_servo(which, ms):
   if (which == "pan"):
@@ -89,8 +92,8 @@ def remote_center():
   boot_center()
 
 # track init pos
-hPos = 1460
-vPos = 1290
+hPos = pan_center
+vPos = tilt_center
 
 def remote_left():
   global hPos
