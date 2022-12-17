@@ -89,8 +89,6 @@ def take_photos():
   pi.set_servo_pulsewidth(tilt_servo, 1340)
   pi.set_servo_pulsewidth(pan_servo, 1460)
 
-take_photos()
-
 # modify images due to camera moving
 def mod_img(which_img, img):
   if (which_img == 'lt'):
@@ -178,6 +176,12 @@ def build_panorama(img_paths, out_path):
     cv2.imwrite(out_path, cv2.rotate(output, cv2.ROTATE_90_COUNTERCLOCKWISE))
     return True
 
+def scale_pan_slices(img_paths):
+  for i in range(len(img_paths)):
+    og_img = cv2.imread(img_paths[i])
+    resz_img = cv2.resize(og_img, (0, 0), fx=0.75, fy=0.75)
+    cv2.imwrite(img_paths[i], resz_img)
+
 def gen_panorama():
   base_path = os.getcwd()
 
@@ -217,6 +221,12 @@ def gen_panorama():
 
   print(build_panorama(bot_img_paths, bot_out_path))
 
+  scale_pan_slices([
+    top_out_path,
+    mid_out_path,
+    bot_out_path
+  ])
+
   pan_img_paths = [
     top_out_path,
     mid_out_path,
@@ -227,4 +237,8 @@ def gen_panorama():
 
   print(build_panorama(pan_img_paths, pan_out_path))
 
+  # rotate final output
+  cv2.rotate(pan_out_path, cv2.ROTATE_180_CLOCKWISE)
+
+take_photos()
 gen_panorama()
