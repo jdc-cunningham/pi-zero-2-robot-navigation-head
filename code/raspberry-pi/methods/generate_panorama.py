@@ -21,7 +21,7 @@ def move_servo(which_servo, start_ms, end_ms):
     time.sleep(0.02)
 
 def take_photo(name):
-  os.system(f"libcamera-still --rotation 180 -o panorama/{name}.jpg")
+  os.system(f"libcamera-still --rotation 180 -o panorama/{name}.jpg --width 1640 --height 1232 --mode 1640:1232")
 
 def take_photos():
   center_servos()
@@ -57,8 +57,6 @@ def take_photos():
   # recenter
   pi.set_servo_pulsewidth(tilt_servo, 1340)
   pi.set_servo_pulsewidth(pan_servo, 1460)
-
-take_photos()
 
 # modify images due to camera moving
 def mod_img(which_img, img):
@@ -130,5 +128,4 @@ def generate_panorama():
   h_img = cv2.hconcat([bl_img, bm_img, bb_img])
   cv2.imwrite('panorama/bot.jpg', h_img)
 
-# take_photos()
-# generate_panorama()
+# def gen_panorama():
