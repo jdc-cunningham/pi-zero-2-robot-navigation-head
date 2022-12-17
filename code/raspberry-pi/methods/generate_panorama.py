@@ -33,7 +33,7 @@ def take_photos():
   # tilt: 650, 950, 1290
   # pan: 1960, 1460, 960
 
-  # take top/level photos
+  # take top photos
   pi.set_servo_pulsewidth(pan_servo, 1860) # look left + 450
   time.sleep(3)
   take_photo('left_outer_top')
@@ -51,22 +51,39 @@ def take_photos():
   take_photo('right_outer_top')
   time.sleep(3)
 
-  # take bottom/level photos
-  pi.set_servo_pulsewidth(tilt_servo, 950)
+  # take middle photos
+  pi.set_servo_pulsewidth(tilt_servo, 1120)
   time.sleep(3)
-  take_photo('right_outer_bottom')
+  take_photo('right_outer_middle')
   pi.set_servo_pulsewidth(pan_servo, 1260)
   time.sleep(3)
-  take_photo('right_inner_bottom')
+  take_photo('right_inner_middle')
   pi.set_servo_pulsewidth(pan_servo, 1460)
   time.sleep(3)
-  take_photo('center_bottom')
+  take_photo('center_middle')
+  pi.set_servo_pulsewidth(pan_servo, 1660)
+  time.sleep(3)
+  take_photo('left_inner_middle')
+  pi.set_servo_pulsewidth(pan_servo, 1860)
+  time.sleep(3)
+  take_photo('left_outer_middle')
+
+  # take bottom photos
+  pi.set_servo_pulsewidth(tilt_servo, 950)
+  time.sleep(3)
+  take_photo('left_outer_bottom')
   pi.set_servo_pulsewidth(pan_servo, 1660)
   time.sleep(3)
   take_photo('left_inner_bottom')
-  pi.set_servo_pulsewidth(pan_servo, 1860)
+  pi.set_servo_pulsewidth(pan_servo, 1460)
   time.sleep(3)
-  take_photo('left_outer_bottom')
+  take_photo('center_bottom')
+  pi.set_servo_pulsewidth(pan_servo, 1260)
+  time.sleep(3)
+  take_photo('right_inner_bottom')
+  pi.set_servo_pulsewidth(pan_servo, 1060)
+  time.sleep(3)
+  take_photo('right_outer_bottom')
 
   # recenter
   pi.set_servo_pulsewidth(tilt_servo, 1340)
@@ -174,7 +191,7 @@ def gen_panorama():
 
   top_out_path = base_path + '/panorama/top_output.jpg'
 
-  print(build_panorama(top_img_paths, top_out_path))
+  # print(build_panorama(top_img_paths, top_out_path))
 
   bot_img_paths = [
     base_path + '/panorama/left_outer_bottom.jpg',
@@ -186,15 +203,15 @@ def gen_panorama():
 
   bot_out_path = base_path + '/panorama/bot_output.jpg'
 
-  print(build_panorama(bot_img_paths, bot_out_path))
+  # print(build_panorama(bot_img_paths, bot_out_path))
 
-  # pan_img_paths = [
-  #   top_out_path,
-  #   bot_out_path
-  # ]
+  pan_img_paths = [
+    top_out_path,
+    bot_out_path
+  ]
 
-  # pan_out_path = base_path + '/panorama/pan_output.jpg'
+  pan_out_path = base_path + '/panorama/pan_output.jpg'
 
-  # print(build_panorama(pan_img_paths, pan_out_path))
+  print(build_panorama(pan_img_paths, pan_out_path))
 
 # gen_panorama()
