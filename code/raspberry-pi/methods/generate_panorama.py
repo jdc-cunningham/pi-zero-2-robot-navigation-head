@@ -128,4 +128,40 @@ def generate_panorama():
   h_img = cv2.hconcat([bl_img, bm_img, bb_img])
   cv2.imwrite('panorama/bot.jpg', h_img)
 
-# def gen_panorama():
+def build_panorama(img_paths, out_path):
+  imgs = []
+
+  # generate top panorama set
+  for i in range(len(img_paths)):
+    imgs.append(cv2.imread(img_paths[i]))
+
+  stitchy = cv2.Stitcher.create()
+  (dummy,output)=stitchy.stitch(imgs)
+
+  if dummy != cv2.STITCHER_OK:
+    # handle this error somehow
+    return False
+  else:
+    cv2.imwrite(out_path, output)
+    return True
+
+def gen_panorama():
+  base_path = os.getcwd()
+
+  top_img_paths = [
+    base_path + '/panorama/left_top.jpg',
+    base_path + '/panorama/center_top.jpg',
+    base_path + '/panorama/right_top.jpg'
+  ]
+
+  print(build_panorama(top_img_paths, base_path + '/panorama/top_output.jpg'))
+
+  bot_img_paths = [
+    base_path + '/panorama/left_bottom.jpg',
+    base_path + '/panorama/center_bottom.jpg',
+    base_path + '/panorama/right_bottom.jpg'
+  ]
+
+  print(build_panorama(bot_img_paths, base_path + '/panorama/bot_output.jpg'))
+
+# gen_panorama()
