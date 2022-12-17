@@ -32,13 +32,13 @@ def take_photos():
   # pan: 1960, 1460, 960
 
   # take top/level photos
-  pi.set_servo_pulsewidth(pan_servo, 1960) # look left
+  pi.set_servo_pulsewidth(pan_servo, 1860) # look left
   time.sleep(2)
   take_photo('left_top')
   pi.set_servo_pulsewidth(pan_servo, 1460)
   time.sleep(2)
   take_photo('center_top')
-  pi.set_servo_pulsewidth(pan_servo, 960)
+  pi.set_servo_pulsewidth(pan_servo, 1060)
   time.sleep(2)
   take_photo('right_top')
   time.sleep(2)
@@ -50,7 +50,7 @@ def take_photos():
   pi.set_servo_pulsewidth(pan_servo, 1460)
   time.sleep(2)
   take_photo('center_bottom')
-  pi.set_servo_pulsewidth(pan_servo, 1960)
+  pi.set_servo_pulsewidth(pan_servo, 1860)
   time.sleep(2)
   take_photo('left_bottom')
 
