@@ -238,7 +238,7 @@ def gen_panorama():
   print(build_panorama(pan_img_paths, pan_out_path))
 
   # rotate final output
-  cv2.rotate(pan_out_path, cv2.ROTATE_180_CLOCKWISE)
+  cv2.rotate(pan_out_path, cv2.ROTATE_180)
 
 take_photos()
 gen_panorama()
