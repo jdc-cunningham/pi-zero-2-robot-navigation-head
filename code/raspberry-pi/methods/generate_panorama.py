@@ -7,7 +7,9 @@ import cv2
 
 pi = pigpio.pi()
 pan_servo = 12
-tilt_servo = 13 
+tilt_servo = 13
+
+camera_fov = "62.2x48.8"
 
 def center_servos():
   pi.set_servo_pulsewidth(pan_servo, 1460)
@@ -51,19 +53,19 @@ def take_photos():
 
   # take bottom/level photos
   pi.set_servo_pulsewidth(tilt_servo, 950)
-  time.sleep(2)
+  time.sleep(3)
   take_photo('right_outer_bottom')
-  pi.set_servo_pulsewidth(tilt_servo, 1260)
-  time.sleep(2)
+  pi.set_servo_pulsewidth(pan_servo, 1260)
+  time.sleep(3)
   take_photo('right_inner_bottom')
   pi.set_servo_pulsewidth(pan_servo, 1460)
-  time.sleep(2)
+  time.sleep(3)
   take_photo('center_bottom')
   pi.set_servo_pulsewidth(pan_servo, 1660)
-  time.sleep(2)
+  time.sleep(3)
   take_photo('left_inner_bottom')
   pi.set_servo_pulsewidth(pan_servo, 1860)
-  time.sleep(2)
+  time.sleep(3)
   take_photo('left_outer_bottom')
 
   # recenter
