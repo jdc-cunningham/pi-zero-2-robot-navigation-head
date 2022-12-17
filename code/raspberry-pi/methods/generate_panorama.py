@@ -52,21 +52,21 @@ def take_photos():
   time.sleep(3)
 
   # take middle photos
-  pi.set_servo_pulsewidth(tilt_servo, 1120)
-  time.sleep(3)
-  take_photo('right_outer_middle')
-  pi.set_servo_pulsewidth(pan_servo, 1260)
-  time.sleep(3)
-  take_photo('right_inner_middle')
-  pi.set_servo_pulsewidth(pan_servo, 1460)
-  time.sleep(3)
-  take_photo('center_middle')
-  pi.set_servo_pulsewidth(pan_servo, 1660)
-  time.sleep(3)
-  take_photo('left_inner_middle')
-  pi.set_servo_pulsewidth(pan_servo, 1860)
-  time.sleep(3)
-  take_photo('left_outer_middle')
+  # pi.set_servo_pulsewidth(tilt_servo, 1120)
+  # time.sleep(3)
+  # take_photo('right_outer_middle')
+  # pi.set_servo_pulsewidth(pan_servo, 1260)
+  # time.sleep(3)
+  # take_photo('right_inner_middle')
+  # pi.set_servo_pulsewidth(pan_servo, 1460)
+  # time.sleep(3)
+  # take_photo('center_middle')
+  # pi.set_servo_pulsewidth(pan_servo, 1660)
+  # time.sleep(3)
+  # take_photo('left_inner_middle')
+  # pi.set_servo_pulsewidth(pan_servo, 1860)
+  # time.sleep(3)
+  # take_photo('left_outer_middle')
 
   # take bottom photos
   pi.set_servo_pulsewidth(tilt_servo, 950)
@@ -175,7 +175,7 @@ def build_panorama(img_paths, out_path):
     # handle this error somehow
     return False
   else:
-    cv2.imwrite(out_path, output)
+    cv2.imwrite(out_path, cv2.rotate(output, cv2.cv2.ROTATE_90_COUNTERCLOCKWISE))
     return True
 
 def gen_panorama():
@@ -191,7 +191,19 @@ def gen_panorama():
 
   top_out_path = base_path + '/panorama/top_output.jpg'
 
-  # print(build_panorama(top_img_paths, top_out_path))
+  print(build_panorama(top_img_paths, top_out_path))
+
+  # mid_img_paths = [
+  #   base_path + '/panorama/left_outer_middle.jpg',
+  #   base_path + '/panorama/left_inner_middle.jpg',
+  #   base_path + '/panorama/center_middle.jpg',
+  #   base_path + '/panorama/right_inner_middle.jpg',
+  #   base_path + '/panorama/right_outer_middle.jpg'
+  # ]
+
+  # mid_out_path = base_path + '/panorama/mid_output.jpg'
+
+  # print(build_panorama(mid_img_paths, mid_out_path))
 
   bot_img_paths = [
     base_path + '/panorama/left_outer_bottom.jpg',
@@ -203,7 +215,7 @@ def gen_panorama():
 
   bot_out_path = base_path + '/panorama/bot_output.jpg'
 
-  # print(build_panorama(bot_img_paths, bot_out_path))
+  print(build_panorama(bot_img_paths, bot_out_path))
 
   pan_img_paths = [
     top_out_path,
