@@ -50,15 +50,21 @@ def take_photos():
   time.sleep(3)
 
   # take bottom/level photos
-  # pi.set_servo_pulsewidth(tilt_servo, 950)
-  # time.sleep(2)
-  # take_photo('right_bottom')
-  # pi.set_servo_pulsewidth(pan_servo, 1460)
-  # time.sleep(2)
-  # take_photo('center_bottom')
-  # pi.set_servo_pulsewidth(pan_servo, 1910)
-  # time.sleep(2)
-  # take_photo('left_bottom')
+  pi.set_servo_pulsewidth(tilt_servo, 950)
+  time.sleep(2)
+  take_photo('right_outer_bottom')
+  pi.set_servo_pulsewidth(tilt_servo, 1260)
+  time.sleep(2)
+  take_photo('right_inner_bottom')
+  pi.set_servo_pulsewidth(pan_servo, 1460)
+  time.sleep(2)
+  take_photo('center_bottom')
+  pi.set_servo_pulsewidth(pan_servo, 1660)
+  time.sleep(2)
+  take_photo('left_inner_bottom')
+  pi.set_servo_pulsewidth(pan_servo, 1860)
+  time.sleep(2)
+  take_photo('left_outer_bottom')
 
   # recenter
   pi.set_servo_pulsewidth(tilt_servo, 1340)
@@ -144,7 +150,6 @@ def build_panorama(img_paths, out_path):
     imgs.append(cv2.imread(img_paths[i]))
 
   stitchy = cv2.Stitcher.create()
-  stitchy.setPanoConfidence(0.3)
   (dummy,output)=stitchy.stitch(imgs)
 
   if dummy != cv2.STITCHER_OK:
@@ -158,9 +163,11 @@ def gen_panorama():
   base_path = os.getcwd()
 
   top_img_paths = [
-    base_path + '/panorama/left_top.jpg',
+    base_path + '/panorama/left_outer_top.jpg',
+    base_path + '/panorama/left_inner_top.jpg',
     base_path + '/panorama/center_top.jpg',
-    base_path + '/panorama/right_top.jpg'
+    base_path + '/panorama/right_inner_top.jpg',
+    base_path + '/panorama/right_outer_top.jpg'
   ]
 
   top_out_path = base_path + '/panorama/top_output.jpg'
@@ -168,9 +175,11 @@ def gen_panorama():
   print(build_panorama(top_img_paths, top_out_path))
 
   bot_img_paths = [
-    base_path + '/panorama/left_bottom.jpg',
+    base_path + '/panorama/left_outer_bottom.jpg',
+    base_path + '/panorama/left_inner_bottom.jpg',
     base_path + '/panorama/center_bottom.jpg',
-    base_path + '/panorama/right_bottom.jpg'
+    base_path + '/panorama/right_inner_bottom.jpg',
+    base_path + '/panorama/right_outer_bottom.jpg'
   ]
 
   bot_out_path = base_path + '/panorama/bot_output.jpg'
