@@ -32,13 +32,13 @@ def take_photos():
   # pan: 1960, 1460, 960
 
   # take top/level photos
-  pi.set_servo_pulsewidth(pan_servo, 1860) # look left
+  pi.set_servo_pulsewidth(pan_servo, 1910) # look left + 450
   time.sleep(2)
   take_photo('left_top')
   pi.set_servo_pulsewidth(pan_servo, 1460)
   time.sleep(2)
   take_photo('center_top')
-  pi.set_servo_pulsewidth(pan_servo, 1060)
+  pi.set_servo_pulsewidth(pan_servo, 1010)
   time.sleep(2)
   take_photo('right_top')
   time.sleep(2)
@@ -50,13 +50,15 @@ def take_photos():
   pi.set_servo_pulsewidth(pan_servo, 1460)
   time.sleep(2)
   take_photo('center_bottom')
-  pi.set_servo_pulsewidth(pan_servo, 1860)
+  pi.set_servo_pulsewidth(pan_servo, 1910)
   time.sleep(2)
   take_photo('left_bottom')
 
   # recenter
   pi.set_servo_pulsewidth(tilt_servo, 1340)
   pi.set_servo_pulsewidth(pan_servo, 1460)
+
+take_photos()
 
 # modify images due to camera moving
 def mod_img(which_img, img):
@@ -154,7 +156,9 @@ def gen_panorama():
     base_path + '/panorama/right_top.jpg'
   ]
 
-  print(build_panorama(top_img_paths, base_path + '/panorama/top_output.jpg'))
+  top_out_path = base_path + '/panorama/top_output.jpg'
+
+  print(build_panorama(top_img_paths, top_out_path))
 
   bot_img_paths = [
     base_path + '/panorama/left_bottom.jpg',
@@ -162,6 +166,17 @@ def gen_panorama():
     base_path + '/panorama/right_bottom.jpg'
   ]
 
-  print(build_panorama(bot_img_paths, base_path + '/panorama/bot_output.jpg'))
+  bot_out_path = base_path + '/panorama/bot_output.jpg'
+
+  print(build_panorama(bot_img_paths, bot_out_path))
+
+  # pan_img_paths = [
+  #   top_out_path,
+  #   bot_out_path
+  # ]
+
+  # pan_out_path = base_path + '/panorama/pan_output.jpg'
+
+  # print(build_panorama(pan_img_paths, pan_out_path))
 
 # gen_panorama()
