@@ -43,11 +43,22 @@ def take_photos():
   take_photo('right_top')
   time.sleep(2)
 
-
+  # take bottom/level photos
+  pi.set_servo_pulsewidth(tilt_servo, 950)
+  time.sleep(2)
+  take_photo('right_bottom')
+  pi.set_servo_pulsewidth(pan_servo, 1460)
+  time.sleep(2)
+  take_photo('center_bottom')
+  pi.set_servo_pulsewidth(pan_servo, 1960)
+  time.sleep(2)
+  take_photo('left_bottom')
 
   # recenter
   pi.set_servo_pulsewidth(tilt_servo, 1340)
   pi.set_servo_pulsewidth(pan_servo, 1460)
+
+take_photos()
 
 # modify images due to camera moving
 def mod_img(which_img, img):
@@ -65,8 +76,7 @@ def mod_img(which_img, img):
     return cut_top_img
   else:
     return img
-  
-  
+
 
 def generate_panorama():
   top_imgs = ['panorama/left_top.jpg', 'panorama/center_top.jpg', 'panorama/right_top.jpg']
@@ -120,5 +130,5 @@ def generate_panorama():
   h_img = cv2.hconcat([bl_img, bm_img, bb_img])
   cv2.imwrite('panorama/bot.jpg', h_img)
 
-take_photos()
+# take_photos()
 # generate_panorama()
