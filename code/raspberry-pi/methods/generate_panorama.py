@@ -175,7 +175,7 @@ def build_panorama(img_paths, out_path):
     # handle this error somehow
     return False
   else:
-    cv2.imwrite(out_path, cv2.rotate(output, cv2.cv2.ROTATE_90_COUNTERCLOCKWISE))
+    cv2.imwrite(out_path, cv2.rotate(output, cv2.ROTATE_90_COUNTERCLOCKWISE))
     return True
 
 def gen_panorama():
