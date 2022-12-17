@@ -32,27 +32,33 @@ def take_photos():
   # pan: 1960, 1460, 960
 
   # take top/level photos
-  pi.set_servo_pulsewidth(pan_servo, 1910) # look left + 450
-  time.sleep(2)
-  take_photo('left_top')
+  pi.set_servo_pulsewidth(pan_servo, 1860) # look left + 450
+  time.sleep(3)
+  take_photo('left_outer_top')
+  pi.set_servo_pulsewidth(pan_servo, 1660) # look left + 450
+  time.sleep(3)
+  take_photo('left_inner_top')
   pi.set_servo_pulsewidth(pan_servo, 1460)
-  time.sleep(2)
+  time.sleep(3)
   take_photo('center_top')
-  pi.set_servo_pulsewidth(pan_servo, 1010)
-  time.sleep(2)
-  take_photo('right_top')
-  time.sleep(2)
+  pi.set_servo_pulsewidth(pan_servo, 1260)
+  time.sleep(3)
+  take_photo('right_inner_top')
+  pi.set_servo_pulsewidth(pan_servo, 1060)
+  time.sleep(3)
+  take_photo('right_outer_top')
+  time.sleep(3)
 
   # take bottom/level photos
-  pi.set_servo_pulsewidth(tilt_servo, 950)
-  time.sleep(2)
-  take_photo('right_bottom')
-  pi.set_servo_pulsewidth(pan_servo, 1460)
-  time.sleep(2)
-  take_photo('center_bottom')
-  pi.set_servo_pulsewidth(pan_servo, 1910)
-  time.sleep(2)
-  take_photo('left_bottom')
+  # pi.set_servo_pulsewidth(tilt_servo, 950)
+  # time.sleep(2)
+  # take_photo('right_bottom')
+  # pi.set_servo_pulsewidth(pan_servo, 1460)
+  # time.sleep(2)
+  # take_photo('center_bottom')
+  # pi.set_servo_pulsewidth(pan_servo, 1910)
+  # time.sleep(2)
+  # take_photo('left_bottom')
 
   # recenter
   pi.set_servo_pulsewidth(tilt_servo, 1340)
@@ -138,6 +144,7 @@ def build_panorama(img_paths, out_path):
     imgs.append(cv2.imread(img_paths[i]))
 
   stitchy = cv2.Stitcher.create()
+  stitchy.setPanoConfidence(0.3)
   (dummy,output)=stitchy.stitch(imgs)
 
   if dummy != cv2.STITCHER_OK:
