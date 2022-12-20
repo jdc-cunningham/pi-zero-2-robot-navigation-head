@@ -29,7 +29,7 @@ def take_photo(name):
 def draw_center_dot(imgPath):
   og_img = cv2.imread(imgPath)
   height, width, channels = og_img.shape
-  img = cv2.circle(og_img, (width/2 - 5, height/2 - 5), radius=5, color=(0, 255, 255), thickness=-1)
+  img = cv2.circle(og_img, ((width/2) - 5, (height/2) - 5), radius=5, color=(0, 255, 255), thickness=-1)
   cv2.imwrite(imgPath, img)
 
 def take_photos():
