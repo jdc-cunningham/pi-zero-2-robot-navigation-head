@@ -262,5 +262,5 @@ def gen_panorama():
 
   crop_panorama_m()
 
-# take_photos()
-# gen_panorama()
+take_photos()
+gen_panorama()
