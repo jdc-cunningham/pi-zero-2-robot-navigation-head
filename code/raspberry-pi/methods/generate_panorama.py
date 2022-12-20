@@ -29,7 +29,10 @@ def take_photo(name):
 def draw_center_dot(imgPath):
   og_img = cv2.imread(imgPath)
   height, width, channels = og_img.shape
-  img = cv2.circle(og_img, ((width/2) - 5, (height/2) - 5), radius=5, color=(0, 255, 255), thickness=-1)
+  circle_radius = 10
+  x = int((width/2) - circle_radius)
+  y = int((height/2) - circle_radius)
+  img = cv2.circle(og_img, (x,y), radius=circle_radius, color=(0, 0, 255), thickness=-1)
   cv2.imwrite(imgPath, img)
 
 def take_photos():
@@ -259,5 +262,5 @@ def gen_panorama():
 
   crop_panorama_m()
 
-take_photos()
-gen_panorama()
+# take_photos()
+# gen_panorama()
