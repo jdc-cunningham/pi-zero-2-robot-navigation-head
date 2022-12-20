@@ -25,6 +25,13 @@ def move_servo(which_servo, start_ms, end_ms):
 def take_photo(name):
   os.system(f"libcamera-still --rotation 180 -o panorama/{name}.jpg --width 1640 --height 1232 --mode 1640:1232")
 
+# https://stackoverflow.com/a/60546030/2710227
+def draw_center_dot(imgPath):
+  og_img = cv2.imread(imgPath)
+  height, width, channels = og_img.shape
+  img = cv2.circle(og_img, (width/2 - 5, height/2 - 5), radius=5, color=(0, 255, 255), thickness=-1)
+  cv2.imwrite(imgPath, img)
+
 def take_photos():
   center_servos()
   time.sleep(2)
@@ -61,6 +68,9 @@ def take_photos():
   pi.set_servo_pulsewidth(pan_servo, 1460)
   time.sleep(3)
   take_photo('center_middle')
+
+  draw_center_dot('panorama/center_middle.jpg')
+
   pi.set_servo_pulsewidth(pan_servo, 1660)
   time.sleep(3)
   take_photo('left_inner_middle')
@@ -105,7 +115,6 @@ def mod_img(which_img, img):
     return cut_top_img
   else:
     return img
-
 
 def generate_panorama():
   top_imgs = ['panorama/left_top.jpg', 'panorama/center_top.jpg', 'panorama/right_top.jpg']
@@ -182,6 +191,14 @@ def scale_pan_slices(img_paths):
     resz_img = cv2.resize(og_img, (0, 0), fx=0.75, fy=0.75)
     cv2.imwrite(img_paths[i], resz_img)
 
+def crop_panorama_m(): # m means manual
+  base_path = os.getcwd()
+  pan_out_path = base_path + '/panorama/pan_output.jpg'
+  pan_out_crop_path = base_path + '/panorama/pan_crop_output.jpg'
+  img = cv2.imread(pan_out_path)
+  crop_img = img[133:1010, 98:2138] # 98:133,2322:1010 y1:y2, x1:x2
+  cv2.imwrite(pan_out_crop_path, crop_img)
+
 def gen_panorama():
   base_path = os.getcwd()
 
@@ -239,6 +256,8 @@ def gen_panorama():
 
   # rotate final output
   cv2.imwrite(pan_out_path, cv2.rotate(cv2.imread(pan_out_path), cv2.ROTATE_180))
+
+  crop_panorama_m()
 
 take_photos()
 gen_panorama()
