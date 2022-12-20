@@ -52,6 +52,9 @@ def take_photos():
   take_photo('center_top')
   pi.set_servo_pulsewidth(pan_servo, 1260)
   time.sleep(3)
+
+  draw_center_dot('panorama/center_middle.jpg')
+
   take_photo('right_inner_top')
   pi.set_servo_pulsewidth(pan_servo, 1060)
   time.sleep(3)
@@ -68,9 +71,6 @@ def take_photos():
   pi.set_servo_pulsewidth(pan_servo, 1460)
   time.sleep(3)
   take_photo('center_middle')
-
-  draw_center_dot('panorama/center_middle.jpg')
-
   pi.set_servo_pulsewidth(pan_servo, 1660)
   time.sleep(3)
   take_photo('left_inner_middle')
