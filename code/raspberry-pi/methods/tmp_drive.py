@@ -5,7 +5,7 @@
 
 import sys
 
-sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/methods') # stupidly long paths
+sys.path.insert(1, '/home/pi/chisel-bot-2/code/raspberry-pi/methods') # stupidly long paths
 
 from servo import tmp_look_around
 

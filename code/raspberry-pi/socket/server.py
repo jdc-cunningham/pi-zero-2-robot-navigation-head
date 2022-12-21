@@ -9,7 +9,7 @@ import random
 import websockets
 import json
 
-sys.path.append('/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi')
+sys.path.append('/home/pi/chisel-bot-2/code/raspberry-pi')
 
 from sensors.Sensors import *
 from methods.servo import *

@@ -3,7 +3,7 @@ import sys
 from mpu9250_jmdev.registers import *
 from mpu9250_jmdev.mpu_9250 import MPU9250
 
-sys.path.insert(1, '/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/sensors')
+sys.path.insert(1, '/home/pi/chisel-bot-2/code/raspberry-pi/sensors')
 
 from . import tof
 import RPi.GPIO as GPIO

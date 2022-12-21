@@ -2,7 +2,7 @@
 import time
 import sys
 
-sys.path.append('/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi/sensors/VL53L0X_rasp_python')
+sys.path.append('/home/pi/chisel-bot-2/code/raspberry-pi/sensors/VL53L0X_rasp_python')
 
 from python import VL53L0X
 

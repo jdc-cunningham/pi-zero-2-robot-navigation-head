@@ -3,7 +3,7 @@ import sys
 import time
 import subprocess
 
-sys.path.append('/home/pi/floating-navigation-sensor-assembly/code/raspberry-pi') # stupidly long paths
+sys.path.append('/home/pi/chisel-bot-2/code/raspberry-pi') # stupidly long paths
 
 from os.path import exists
 from methods.led import led_off # dumb
