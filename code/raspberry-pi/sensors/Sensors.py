@@ -84,7 +84,7 @@ class Sensors:
       # self.measurements = []
 
       # start sampling imu continuously, send to socket as well
-      start_sampling_imu(self)
+      # start_sampling_imu(self)
 
     def get_all(self):
       return [
