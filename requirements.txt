@@ -1,17 +1,18 @@
-certifi==2020.6.20      
+certifi==2020.6.20
 chardet==4.0.0
 colorzero==1.1
 cycler==0.11.0
 distro==1.5.0
-fonttools==4.34.4       
+fonttools==4.34.4
 gevent==21.12.0
 gpiozero==1.6.2
 greenlet==1.1.2
 idna==2.10
-kiwisolver==1.4.4       
-matplotlib==3.5.2       
+kiwisolver==1.4.4
+matplotlib==3.5.2
 mpu6050-raspberrypi==1.2
--e git+https://github.com/Intelligent-Vehicle-Perception/MPU-9250-Sensors-Data-Collect.git@3622c215d32d9d1c81ccfb611ca041dd79354779#egg=mpu9250_jmdev
+# Editable install with no version control (mpu9250-jmdev==1.0.12)
+-e /home/pi/.local/lib/python3.9/site-packages
 numpy==1.19.5
 olefile==0.46
 opencv-python==4.6.0.66
