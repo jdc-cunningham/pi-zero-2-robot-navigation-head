@@ -278,13 +278,34 @@ def scale_pan_slices(img_paths):
     resz_img = cv2.resize(og_img, (0, 0), fx=0.75, fy=0.75)
     cv2.imwrite(img_paths[i], resz_img)
 
-def crop_panorama_m(): # m means manual
+# manual
+def crop_panorama_m():
   base_path = os.getcwd()
   pan_out_path = base_path + '/panorama/pan_output.jpg'
   pan_out_crop_path = base_path + '/panorama/pan_crop_output.jpg'
   img = cv2.imread(pan_out_path)
   crop_img = img[133:1010, 98:2138] # 98:133,2322:1010 y1:y2, x1:x2
   cv2.imwrite(pan_out_crop_path, crop_img)
+
+# auto
+def crop_panorama_a():
+  base_path = os.getcwd()
+  pan_out_path = base_path + '/panorama/pan_output.jpg'
+  pan_out_crop_path = base_path + '/panorama/pan_crop_output.jpg'
+  img = cv2.imread(pan_out_path)
+
+  height, width, depth = img.shape
+  count = 0
+
+  for xpixel in range(0, width, 1):
+    for ypixel in range(0, height, 1):
+      count += 1
+      print(count)
+
+  # crop_img = img[133:1010, 98:2138] # 98:133,2322:1010 y1:y2, x1:x2
+  # cv2.imwrite(pan_out_crop_path, crop_img)
+
+crop_panorama_a()
 
 def gen_panorama():
   base_path = os.getcwd()
@@ -346,5 +367,5 @@ def gen_panorama():
 
   crop_panorama_m()
 
-take_photos()
-gen_panorama()
+# take_photos()
+# gen_panorama()
