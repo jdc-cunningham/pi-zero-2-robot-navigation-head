@@ -88,6 +88,21 @@ def draw_crosshair(imgPath):
 
   cv2.imwrite(imgPath, img)
 
+# https://stackoverflow.com/a/18633964/2710227
+def draw_crosshair_line(imgPath):
+  og_img = cv2.imread(imgPath)
+  height, width, channels = og_img.shape
+  circle_radius = 10
+
+  x1 = int((width/2) - circle_radius)
+  x2 = x1
+  y1 = 0
+  y2 = height
+
+  line_thickness = 2
+  img = cv2.line(og_img, (x1, y1), (x2, y2), (0, 0, 255), thickness=line_thickness)
+  cv2.imwrite(imgPath, img)
+
 # https://stackoverflow.com/a/60546030/2710227
 def draw_center_dot(imgPath):
   og_img = cv2.imread(imgPath)
@@ -119,7 +134,7 @@ def take_photos():
   pi.set_servo_pulsewidth(pan_servo, 1260)
   time.sleep(3)
 
-  draw_crosshair('panorama/center_top.jpg')
+  draw_crosshair_line('panorama/center_top.jpg')
 
   take_photo('right_inner_top')
   pi.set_servo_pulsewidth(pan_servo, 1060)
