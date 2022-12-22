@@ -33,7 +33,7 @@ def draw_crosshair(imgPath):
   center_y = int((height/2) - circle_radius)
   img = cv2.circle(og_img, (center_x, center_y), radius=circle_radius, color=(0, 0, 255), thickness=-1)
 
-  dot_offset = 300
+  dot_offset = 500
 
   top_dot_x = center_x
   top_dot_y = center_y - dot_offset
