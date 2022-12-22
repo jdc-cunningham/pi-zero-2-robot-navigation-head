@@ -4,6 +4,7 @@ import os
 import pigpio
 import time
 import cv2
+import numpy as np
 
 pi = pigpio.pi()
 pan_servo = 12
@@ -288,22 +289,49 @@ def crop_panorama_m():
   cv2.imwrite(pan_out_crop_path, crop_img)
 
 # auto
+# using https://stackoverflow.com/a/10647177/2710227
 def crop_panorama_a():
   base_path = os.getcwd()
   pan_out_path = base_path + '/panorama/pan_output.jpg'
   pan_out_crop_path = base_path + '/panorama/pan_crop_output.jpg'
   img = cv2.imread(pan_out_path)
 
-  height, width, depth = img.shape
-  count = 0
+  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+  gray = cv2.medianBlur(gray, 3)
 
-  for xpixel in range(0, width, 1):
-    for ypixel in range(0, height, 1):
-      count += 1
-      print(count)
+  ret, thresh = cv2.threshold(gray, 1, 255, 0)
+  contours, hierarchy = cv2.findContours(thresh, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+
+  max_area = -1
+  best_cnt = None
+
+  for cnt in contours:
+      area = cv2.contourArea(cnt)
+
+      if area > max_area:
+          max_area = area
+          best_cnt = cnt
+
+  approx = cv2.approxPolyDP(best_cnt, 0.01*cv2.arcLength(best_cnt, True), True)
+  far = approx[np.product(approx, 2).argmax()][0]
+
+  # lol https://stackoverflow.com/a/22903196/2710227
+  try:
+    ymax = approx[approx[:, :, 0]==1].max()
+  except ValueError:
+    pass
+
+  try:
+    xmax = approx[approx[:, :, 1]==1].max()
+  except ValueError:
+    pass
+
+  x = min(far[0], xmax)
+  y = min(far[1], ymax)
+  crop_img = img[:y, :x].copy()
 
   # crop_img = img[133:1010, 98:2138] # 98:133,2322:1010 y1:y2, x1:x2
-  # cv2.imwrite(pan_out_crop_path, crop_img)
+  cv2.imwrite(pan_out_crop_path, crop_img)
 
 crop_panorama_a()
 
