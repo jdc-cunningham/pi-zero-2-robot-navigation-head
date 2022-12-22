@@ -25,7 +25,7 @@ def move_servo(which_servo, start_ms, end_ms):
 def take_photo(name):
   os.system(f"libcamera-still --rotation 180 -o panorama/{name}.jpg --width 1640 --height 1232 --mode 1640:1232")
 
-def draw_crosshair(imgPath, img):
+def draw_crosshair(imgPath):
   og_img = cv2.imread(imgPath)
   height, width, channels = og_img.shape
   circle_radius = 10
