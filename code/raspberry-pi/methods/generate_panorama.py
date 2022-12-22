@@ -96,9 +96,9 @@ def draw_crosshair_line(imgPath):
   line_thickness = 2
 
   hx1 = 0
-  hx2 = int((width/2))
-  hy1 = 0
-  hy2 = width
+  hx2 = width
+  hy1 = int((height/2))
+  hy2 = hy1
 
   vx1 = int((width/2))
   vx2 = vx1
