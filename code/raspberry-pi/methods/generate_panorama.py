@@ -4,6 +4,7 @@ import os
 import pigpio
 import time
 import cv2
+import numpy as np
 
 # run only on pi
 if (os.name != 'nt'):
@@ -301,74 +302,10 @@ def crop_panorama_a():
   img = cv2.imread(pan_out_path)
   height, width, channels = img.shape
 
-  black = [0, 0, 0]
+  
 
-  tl = [0, 0] # 88, 87 (manual check ex image)
-  tr = [0, 0] # 2367, 121
-  bl = [0, 0] # 0, 210
-  br = [0, 0] # width, 140
-
-  # find top-left corner (found bl)
-  for tl_x in range(0, width - 1, 1):
-    for tl_y in range(0, height - 1, 1):
-      if (img[tl_y, tl_x] != black).all(): # note flipped axis from img
-        tl = [tl_x, tl_y]
-        break
-    else:
-      continue
-    break
-
-  # find top-right corner (found br)
-  for tr_x in range(width - 1, 0, -1):
-    for tr_y in range(0, height - 1, 1):
-      if (img[tr_y, tr_x] != black).all():
-        tr = [tr_x, tr_y]
-        break
-    else:
-      continue
-    break
-
-  # find bot-left
-  for bl_x in range(0, width - 1, 1):
-    for bl_y in range(height - 1, 0, -1):
-      if (img[bl_y, bl_x] != black).all():
-        bl = [bl_x, bl_y]
-        break
-    else:
-      continue
-    break
-
-  print(bl)
-  return
-
-  # find bot-right
-  for br_x in range(width - 1, 0, -1):
-    for br_y in range(height - 1, 0, -1):
-      if (img[br_y, br_x] != black).all():
-        br = [br_x, br_y]
-        break
-    else:
-      continue
-    break
-
-  # check which is lower (top to bottom)
-  # check which is lower (bottom to top)
-  # check which is more to the right (from left)
-  # check which is more to the left (from right)
-
-  ys = [tl[1], tr[1], bl[1], br[1]]
-  xs = [tl[0], tr[0], bl[0], br[0]]
-
-  ys.sort()
-  xs.sort()
-
-  y1 = ys[1]
-  y2 = ys[2]
-  x1 = xs[1]
-  x2 = xs[2]
-
-  crop_img = img[y1:y2, x1:x2] # 98:133,2322:1010 y1:y2, x1:x2
-  cv2.imwrite(pan_out_crop_path, crop_img)
+  # crop_img = img[y1:y2, x1:x2] # 98:133,2322:1010 y1:y2, x1:x2
+  # cv2.imwrite(pan_out_crop_path, crop_img)
 
 crop_panorama_a()
 
