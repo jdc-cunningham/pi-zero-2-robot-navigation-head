@@ -29,25 +29,43 @@ def draw_crosshair(imgPath):
   og_img = cv2.imread(imgPath)
   height, width, channels = og_img.shape
   circle_radius = 10
+
   center_x = int((width/2) - circle_radius)
   center_y = int((height/2) - circle_radius)
   img = cv2.circle(og_img, (center_x, center_y), radius=circle_radius, color=(0, 0, 255), thickness=-1)
 
-  dot_offset = 500
+  dot_offset1 = 600
+  dot_offset2 = 300
 
   top_dot_x = center_x
-  top_dot_y = center_y - dot_offset
+  top_dot_y = center_y - dot_offset1
   img = cv2.circle(og_img, (top_dot_x, top_dot_y), radius=circle_radius, color=(0, 0, 255), thickness=-1)
 
   bot_dot_x = center_x
-  bot_dot_y = center_y + dot_offset
+  bot_dot_y = center_y + dot_offset1
   img = cv2.circle(og_img, (bot_dot_x, bot_dot_y), radius=circle_radius, color=(0, 0, 255), thickness=-1)
 
-  left_dot_x = center_x - dot_offset
+  left_dot_x = center_x - dot_offset1
   left_dot_y = center_y
   img = cv2.circle(og_img, (left_dot_x, left_dot_y), radius=circle_radius, color=(0, 0, 255), thickness=-1)
 
-  right_dot_x = center_x + dot_offset
+  right_dot_x = center_x + dot_offset1
+  right_dot_y = center_y
+  img = cv2.circle(og_img, (right_dot_x, right_dot_y), radius=circle_radius, color=(0, 0, 255), thickness=-1)
+
+  top_dot_x = center_x
+  top_dot_y = center_y - dot_offset2
+  img = cv2.circle(og_img, (top_dot_x, top_dot_y), radius=circle_radius, color=(0, 0, 255), thickness=-1)
+
+  bot_dot_x = center_x
+  bot_dot_y = center_y + dot_offset2
+  img = cv2.circle(og_img, (bot_dot_x, bot_dot_y), radius=circle_radius, color=(0, 0, 255), thickness=-1)
+
+  left_dot_x = center_x - dot_offset2
+  left_dot_y = center_y
+  img = cv2.circle(og_img, (left_dot_x, left_dot_y), radius=circle_radius, color=(0, 0, 255), thickness=-1)
+
+  right_dot_x = center_x + dot_offset2
   right_dot_y = center_y
   img = cv2.circle(og_img, (right_dot_x, right_dot_y), radius=circle_radius, color=(0, 0, 255), thickness=-1)
 
