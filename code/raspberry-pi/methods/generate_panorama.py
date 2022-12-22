@@ -4,9 +4,11 @@ import os
 import pigpio
 import time
 import cv2
-import numpy as np
 
-pi = pigpio.pi()
+# run only on pi
+if (os.name != 'nt'):
+  pi = pigpio.pi()
+
 pan_servo = 12
 tilt_servo = 13
 
@@ -288,49 +290,84 @@ def crop_panorama_m():
   crop_img = img[133:1010, 98:2138] # 98:133,2322:1010 y1:y2, x1:x2
   cv2.imwrite(pan_out_crop_path, crop_img)
 
+# can clean this up, make a function returns corner
+# def find_corner(img, assign, which):
+
 # auto
-# using https://stackoverflow.com/a/10647177/2710227
 def crop_panorama_a():
   base_path = os.getcwd()
   pan_out_path = base_path + '/panorama/pan_output.jpg'
   pan_out_crop_path = base_path + '/panorama/pan_crop_output.jpg'
   img = cv2.imread(pan_out_path)
+  height, width, channels = img.shape
 
-  gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-  gray = cv2.medianBlur(gray, 3)
+  black = [0, 0, 0]
 
-  ret, thresh = cv2.threshold(gray, 1, 255, 0)
-  contours, hierarchy = cv2.findContours(thresh, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+  tl = [0, 0] # 88, 87 (manual check ex image)
+  tr = [0, 0] # 2367, 121
+  bl = [0, 0] # 0, 210
+  br = [0, 0] # width, 140
 
-  max_area = -1
-  best_cnt = None
+  # find top-left corner (found bl)
+  for tl_x in range(0, width - 1, 1):
+    for tl_y in range(0, height - 1, 1):
+      if (img[tl_y, tl_x] != black).all(): # note flipped axis from img
+        tl = [tl_x, tl_y]
+        break
+    else:
+      continue
+    break
 
-  for cnt in contours:
-      area = cv2.contourArea(cnt)
+  # find top-right corner (found br)
+  for tr_x in range(width - 1, 0, -1):
+    for tr_y in range(0, height - 1, 1):
+      if (img[tr_y, tr_x] != black).all():
+        tr = [tr_x, tr_y]
+        break
+    else:
+      continue
+    break
 
-      if area > max_area:
-          max_area = area
-          best_cnt = cnt
+  # find bot-left
+  for bl_x in range(0, width - 1, 1):
+    for bl_y in range(height - 1, 0, -1):
+      if (img[bl_y, bl_x] != black).all():
+        bl = [bl_x, bl_y]
+        break
+    else:
+      continue
+    break
 
-  approx = cv2.approxPolyDP(best_cnt, 0.01*cv2.arcLength(best_cnt, True), True)
-  far = approx[np.product(approx, 2).argmax()][0]
+  print(bl)
+  return
 
-  # lol https://stackoverflow.com/a/22903196/2710227
-  try:
-    ymax = approx[approx[:, :, 0]==1].max()
-  except ValueError:
-    pass
+  # find bot-right
+  for br_x in range(width - 1, 0, -1):
+    for br_y in range(height - 1, 0, -1):
+      if (img[br_y, br_x] != black).all():
+        br = [br_x, br_y]
+        break
+    else:
+      continue
+    break
 
-  try:
-    xmax = approx[approx[:, :, 1]==1].max()
-  except ValueError:
-    pass
+  # check which is lower (top to bottom)
+  # check which is lower (bottom to top)
+  # check which is more to the right (from left)
+  # check which is more to the left (from right)
 
-  x = min(far[0], xmax)
-  y = min(far[1], ymax)
-  crop_img = img[:y, :x].copy()
+  ys = [tl[1], tr[1], bl[1], br[1]]
+  xs = [tl[0], tr[0], bl[0], br[0]]
 
-  # crop_img = img[133:1010, 98:2138] # 98:133,2322:1010 y1:y2, x1:x2
+  ys.sort()
+  xs.sort()
+
+  y1 = ys[1]
+  y2 = ys[2]
+  x1 = xs[1]
+  x2 = xs[2]
+
+  crop_img = img[y1:y2, x1:x2] # 98:133,2322:1010 y1:y2, x1:x2
   cv2.imwrite(pan_out_crop_path, crop_img)
 
 crop_panorama_a()
