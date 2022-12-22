@@ -92,15 +92,21 @@ def draw_crosshair(imgPath):
 def draw_crosshair_line(imgPath):
   og_img = cv2.imread(imgPath)
   height, width, channels = og_img.shape
-  circle_radius = 10
-
-  x1 = int((width/2) - circle_radius)
-  x2 = x1
-  y1 = 0
-  y2 = height
 
   line_thickness = 2
-  img = cv2.line(og_img, (x1, y1), (x2, y2), (0, 0, 255), thickness=line_thickness)
+
+  hx1 = 0
+  hx2 = int((width/2))
+  hy1 = 0
+  hy2 = width
+
+  vx1 = int((width/2))
+  vx2 = vx1
+  vy1 = 0
+  vy2 = height
+
+  img = cv2.line(og_img, (hx1, hy1), (hx2, hy2), (0, 0, 255), thickness=line_thickness)
+  img = cv2.line(og_img, (vx1, vy1), (vx2, vy2), (0, 0, 255), thickness=line_thickness)
   cv2.imwrite(imgPath, img)
 
 # https://stackoverflow.com/a/60546030/2710227
