@@ -413,8 +413,6 @@ def crop_panorama_a():
   crop_img = img[y1:y2, x1:x2]
   cv2.imwrite(pan_out_crop_path, crop_img)
 
-crop_panorama_a()
-
 def gen_panorama():
   base_path = os.getcwd()
 
@@ -473,7 +471,7 @@ def gen_panorama():
   # rotate final output
   cv2.imwrite(pan_out_path, cv2.rotate(cv2.imread(pan_out_path), cv2.ROTATE_180))
 
-  crop_panorama_m()
+  crop_panorama_a()
 
-# take_photos()
-# gen_panorama()
+take_photos()
+gen_panorama()
