@@ -295,85 +295,105 @@ def crop_panorama_m():
   crop_img = img[133:1010, 98:2138] # 98:133,2322:1010 y1:y2, x1:x2
   cv2.imwrite(pan_out_crop_path, crop_img)
 
-# can clean this up, make a function returns corner
-# def find_corner(img, assign, which):
-
-# get left vertical crop line
-# start from middle work up or down, whichever goes in deeper (to middle of image)
-# direction you want till you hit deepest
-# fpxl = filler pixel color
-def get_left_x_crop(fpxl, img, width, height):
+def find_left_edge(fpxl, img, width, height):
   x_img_mid = int(width / 2)
-  y_img_mid = int(height / 2)
-  y_img_mid_half = int(y_img_mid / 2)
-  y_img_mid_quarter = int(y_img_mid / 4)
+  x_start = 50
+  x_final = 50
 
-  print(y_img_mid)
+  img_pixels = 0 # want this to be more than 50% of the dimension
+  stop_loop = False
 
-  # it is possible both values are the same, need to increase distance awy from middle
-  def get_vals(incr):
-    y_img_mid_up = y_img_mid - incr
-    y_img_mid_down = y_img_mid + incr # up/down means looking at the pan, upwards (0 y)
-
-    # check up
-    up_max_x = -1
-    down_max_x = -1
-
-    for x in range(0, width, 1):
-      if (up_max_x < 0 and (img[y_img_mid_up, x] != fpxl).all()):
-        up_max_x = x
-
-      if (down_max_x < 0 and (img[y_img_mid_down, x] != fpxl).all()):
-        down_max_x = x
-
-      if (up_max_x > -1 and down_max_x > -1):
+  for x in range(x_start, x_img_mid, 1):
+    for y in range(0, height, 1):
+      if ((img[y, x] != fpxl).all()):
+        img_pixels += 1
+  
+      if (img_pixels >= int(height * 0.76)):
+        stop_loop = True
+        x_final = x
         break
-    
-    return [up_max_x, down_max_x]
 
-  incr = 0
-  test_vals = [0, 0]
-  x_vals = []
+    if (stop_loop):
+      break
 
-  final_vals = [0, 0]
+    img_pixels = 0
 
-  # could be non-ending loop, although pixels will run out
-  # this determines slope direction, want to find convergence
+  return x_final
 
-  for y_incr in range(0, 500, 50):
-    incr = y_incr
-    while(test_vals[0] == test_vals[1]):
-      incr += 1
-      print(y_incr, incr)
-      test_vals = get_vals(incr)
-    
-    x_vals.append(test_vals)
-    test_vals = [0, 0]
-    incr = 0
+def find_right_edge(fpxl, img, width, height):
+  x_img_mid = int(width / 2)
+  x_start = width - 1
+  x_final = width - 1
 
-  # dumb code for average
-  up_dir = 0
-  down_dir = 0
+  img_pixels = 0
+  stop_loop = False
 
-  for val in range(0, len(x_vals), 1): # depth sample
-    if (x_vals[val][0] > x_vals[val][1]):
-      up_dir += 1
-    else:
-      down_dir += 1
+  for x in range(x_start, x_img_mid, -1):
+    for y in range(0, height, 1):
+      if ((img[y, x] != fpxl).all()):
+        img_pixels += 1
+  
+      if (img_pixels >= int(height * 0.76)):
+        stop_loop = True
+        x_final = x
+        break
 
-  # know direction at this point/what has more
-  largest_x = -1
+    if (stop_loop):
+      break
 
-  print(y_img_mid, y_img_mid - y_img_mid_quarter)
+    img_pixels = 0
 
-  for y_val in range(y_img_mid, y_img_mid - y_img_mid_quarter, -1):
-    for x_val in range(0, x_img_mid, 1):
-      if ((img[y_val, x_val] != fpxl).all() and x_val > largest_x):
-        largest_x = x_val
+  return x_final
 
-  print(largest_x)
+def find_top_edge(fpxl, img, width, height):
+  y_img_mid = int(height / 2)
+  y_start = 0
+  y_final = 0
 
-  return final_vals
+  img_pixels = 0
+  stop_loop = False
+
+  for y in range(y_start, y_img_mid, 1):
+    for x in range(0, width, 1):
+      if ((img[y, x] != fpxl).all()):
+        img_pixels += 1
+  
+      if (img_pixels >= int(width * 0.9)):
+        stop_loop = True
+        y_final = y
+        break
+
+    if (stop_loop):
+      break
+
+    img_pixels = 0
+
+  return y_final
+
+def find_bottom_edge(fpxl, img, width, height):
+  y_img_mid = int(height / 2)
+  y_start = height - 1
+  y_final = height - 1
+
+  img_pixels = 0
+  stop_loop = False
+
+  for y in range(y_start, y_img_mid, -1):
+    for x in range(0, width, 1):
+      if ((img[y, x] != fpxl).all()):
+        img_pixels += 1
+  
+      if (img_pixels >= int(width * 0.9)):
+        stop_loop = True
+        y_final = y
+        break
+
+    if (stop_loop):
+      break
+
+    img_pixels = 0
+
+  return y_final
 
 # auto
 def crop_panorama_a():
@@ -385,14 +405,13 @@ def crop_panorama_a():
 
   black = [0, 0, 0]
 
-  [up_max_x, down_max_x] = get_left_x_crop(black, img, width, height)
+  x1 = find_left_edge(black, img, width, height)
+  x2 = find_right_edge(black, img, width, height)
+  y1 = find_top_edge(black, img, width, height)
+  y2 = find_bottom_edge(black, img, width, height)
 
-  print(up_max_x, down_max_x)
-
-  # check down
-
-  # crop_img = img[y1:y2, x1:x2] # 98:133,2322:1010 y1:y2, x1:x2
-  # cv2.imwrite(pan_out_crop_path, crop_img)
+  crop_img = img[y1:y2, x1:x2]
+  cv2.imwrite(pan_out_crop_path, crop_img)
 
 crop_panorama_a()
 
