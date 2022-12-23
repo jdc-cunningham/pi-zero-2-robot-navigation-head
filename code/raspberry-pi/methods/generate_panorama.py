@@ -93,7 +93,7 @@ def draw_crosshair(imgPath):
   cv2.imwrite(imgPath, img)
 
 # https://stackoverflow.com/a/18633964/2710227
-def draw_crosshair_line(imgPath):
+def draw_crosshair_line(imgPath, isCopy = False):
   og_img = cv2.imread(imgPath)
   height, width, channels = og_img.shape
 
@@ -111,7 +111,11 @@ def draw_crosshair_line(imgPath):
 
   img = cv2.line(og_img, (hx1, hy1), (hx2, hy2), (0, 0, 255), thickness=line_thickness)
   img = cv2.line(og_img, (vx1, vy1), (vx2, vy2), (0, 0, 255), thickness=line_thickness)
-  cv2.imwrite(imgPath, img)
+
+  if (isCopy):
+    cv2.imwrite(os.getcwd() + '/panorama/crosshair-copy.jpg', img)
+  else:
+    cv2.imwrite(imgPath, img)
 
 # https://stackoverflow.com/a/60546030/2710227
 def draw_center_dot(imgPath):
@@ -294,6 +298,83 @@ def crop_panorama_m():
 # can clean this up, make a function returns corner
 # def find_corner(img, assign, which):
 
+# get left vertical crop line
+# start from middle work up or down, whichever goes in deeper (to middle of image)
+# direction you want till you hit deepest
+# fpxl = filler pixel color
+def get_left_x_crop(fpxl, img, width, height):
+  x_img_mid = int(width / 2)
+  y_img_mid = int(height / 2)
+  y_img_mid_half = int(y_img_mid / 2)
+  y_img_mid_quarter = int(y_img_mid / 4)
+
+  print(y_img_mid)
+
+  # it is possible both values are the same, need to increase distance awy from middle
+  def get_vals(incr):
+    y_img_mid_up = y_img_mid - incr
+    y_img_mid_down = y_img_mid + incr # up/down means looking at the pan, upwards (0 y)
+
+    # check up
+    up_max_x = -1
+    down_max_x = -1
+
+    for x in range(0, width, 1):
+      if (up_max_x < 0 and (img[y_img_mid_up, x] != fpxl).all()):
+        up_max_x = x
+
+      if (down_max_x < 0 and (img[y_img_mid_down, x] != fpxl).all()):
+        down_max_x = x
+
+      if (up_max_x > -1 and down_max_x > -1):
+        break
+    
+    return [up_max_x, down_max_x]
+
+  incr = 0
+  test_vals = [0, 0]
+  x_vals = []
+
+  final_vals = [0, 0]
+
+  # could be non-ending loop, although pixels will run out
+  # this determines slope direction, want to find convergence
+
+  for y_incr in range(0, 500, 50):
+    incr = y_incr
+    while(test_vals[0] == test_vals[1]):
+      incr += 1
+      print(y_incr, incr)
+      test_vals = get_vals(incr)
+    
+    x_vals.append(test_vals)
+    test_vals = [0, 0]
+    incr = 0
+
+  # dumb code for average
+  up_dir = 0
+  down_dir = 0
+
+  for val in range(0, len(x_vals), 1): # depth sample
+    if (x_vals[val][0] > x_vals[val][1]):
+      up_dir += 1
+    else:
+      down_dir += 1
+
+  # know direction at this point/what has more
+  largest_x = -1
+
+  print(y_img_mid, y_img_mid - y_img_mid_quarter)
+
+  for y_val in range(y_img_mid, y_img_mid - y_img_mid_quarter, -1):
+    for x_val in range(0, x_img_mid, 1):
+      if ((img[y_val, x_val] != fpxl).all() and x_val > largest_x):
+        largest_x = x_val
+
+  print(largest_x)
+
+  return final_vals
+
 # auto
 def crop_panorama_a():
   base_path = os.getcwd()
@@ -302,7 +383,13 @@ def crop_panorama_a():
   img = cv2.imread(pan_out_path)
   height, width, channels = img.shape
 
-  
+  black = [0, 0, 0]
+
+  [up_max_x, down_max_x] = get_left_x_crop(black, img, width, height)
+
+  print(up_max_x, down_max_x)
+
+  # check down
 
   # crop_img = img[y1:y2, x1:x2] # 98:133,2322:1010 y1:y2, x1:x2
   # cv2.imwrite(pan_out_crop_path, crop_img)

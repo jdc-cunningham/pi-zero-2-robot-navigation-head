@@ -15,5 +15,5 @@ hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 # these values are currently manually determined by looking at the graph
 # outputs between histogram 1D and 2D
 # hsv
-mask = cv2.inRange(hsv, (0, 0, 2), (255, 255, 255)) # apply mask to non-black pixels, 2 vs. 1 is a little better
+mask = cv2.inRange(hsv, (0, 0, 5), (255, 255, 255)) # apply mask to non-black pixels, 2 vs. 1 is a little better
 cv2.imwrite(base_path + '/panorama/pan_output_mask_applied.jpg', mask)
