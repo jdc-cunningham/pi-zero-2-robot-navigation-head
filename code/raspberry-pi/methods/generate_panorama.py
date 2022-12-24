@@ -129,7 +129,7 @@ def draw_center_dot(imgPath):
   cv2.imwrite(imgPath, img)
 
 def take_photos():
-  led_on()
+  # led_on()
   center_servos()
   time.sleep(2)
 
@@ -195,7 +195,7 @@ def take_photos():
   # recenter
   pi.set_servo_pulsewidth(tilt_servo, 1340)
   pi.set_servo_pulsewidth(pan_servo, 1460)
-  led_off()
+  # led_off()
 
 # modify images due to camera moving
 def mod_img(which_img, img):
