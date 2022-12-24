@@ -273,6 +273,8 @@ def build_panorama(img_paths, out_path):
   stitchy = cv2.Stitcher.create()
   (dummy,output)=stitchy.stitch(imgs)
 
+  print(dummy, output)
+
   if dummy != cv2.STITCHER_OK:
     # handle this error somehow
     return False
