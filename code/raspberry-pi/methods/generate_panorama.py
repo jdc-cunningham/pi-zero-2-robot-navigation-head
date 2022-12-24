@@ -276,7 +276,12 @@ def build_panorama(img_paths, out_path):
   stitchy = cv2.Stitcher.create()
   (dummy,output)=stitchy.stitch(imgs)
 
-  print(dummy, output)
+  # dummy, output
+  # 0, matrix if True
+  # 1, None if False
+
+  # error 1 means not enough commonality
+  # https://answers.opencv.org/question/121254/stitching-images-error-code-1/
 
   if dummy != cv2.STITCHER_OK:
     # handle this error somehow
