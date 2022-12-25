@@ -5,8 +5,13 @@
       currently accounted for in the pan servo case with long photo delays eg. 3 seconds per shot, up to 45 seconds of extra delay
 - [ ] vision stack
   - [ ] panorama
+    - [ ] add early fail check to stop other subsequent processes
+      - ex. too dark, don't do panorama (onboard LED sucks)
+      - ex. image is mostly uniform, use less photos (inner, farthest)
+      - ex. no center marker for top image (this would be bad)
     - [ ] determine mostly uniform or lots of small bits (more images to gen pan)
     - [ ] determine light or dark (dark pan not possible)
+    - [ ] add copies to not have red + and x in actual pan used for blob finding
     - [x] generate panorama
       - used OpenCV's stitcher
   - [x] find blobs

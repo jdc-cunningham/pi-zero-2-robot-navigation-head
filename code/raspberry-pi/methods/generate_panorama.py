@@ -116,7 +116,7 @@ def draw_crosshair_line(imgPath, isCopy = False):
 
   # draw x
   img = cv2.line(og_img, (0, 0), (width, height), (0, 0, 255), thickness=line_thickness)
-  img = cv2.line(og_img, (width, height), (0, 0), (0, 0, 255), thickness=line_thickness)
+  img = cv2.line(og_img, (0, height), (width, 0), (0, 0, 255), thickness=line_thickness)
 
   if (isCopy):
     cv2.imwrite(os.getcwd() + '/panorama/crosshair-copy.jpg', img)
