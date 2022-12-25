@@ -154,3 +154,9 @@ def remote_down():
 # boot_center()
 # time.sleep(1.5)
 # battery_skit()
+
+def pan_control(deg):
+  # do stuff
+
+def titl_control(deg):
+  # do stuff
