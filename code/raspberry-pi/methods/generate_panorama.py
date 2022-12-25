@@ -435,11 +435,8 @@ def find_bottom_edge(fpxl, img, width, height):
   return y_final
 
 # auto
-def crop_panorama_a():
-  base_path = os.getcwd()
-  pan_out_path = base_path + '/panorama/pan_output.jpg'
-  pan_out_crop_path = base_path + '/panorama/pan_crop_output.jpg'
-  img = cv2.imread(pan_out_path)
+def crop_panorama_a(target_path, output_path):
+  img = cv2.imread(target_path)
   height, width, channels = img.shape
 
   black = [0, 0, 0]
@@ -450,7 +447,7 @@ def crop_panorama_a():
   y2 = find_bottom_edge(black, img, width, height)
 
   crop_img = img[y1:y2, x1:x2]
-  cv2.imwrite(pan_out_crop_path, crop_img)
+  cv2.imwrite(output_path, crop_img)
 
 def gen_panorama():
   base_path = os.getcwd()
@@ -536,7 +533,12 @@ def gen_panorama():
   # rotate final output
   cv2.imwrite(pan_out_path, cv2.rotate(cv2.imread(pan_out_path), cv2.ROTATE_180))
 
-  crop_panorama_a()
+  base_path = os.getcwd()
+  pan_out_crosshair_crop_path = base_path + '/panorama/pan_output_crosshair.jpg'
+  pan_out_crop_path = base_path + '/panorama/pan_crop_output.jpg'
+
+  crop_panorama_a(pan_out_path, pan_out_crop_path)
+  crop_panorama_a(pan_out_crosshair_path, pan_out_crosshair_crop_path)
 
 take_photos()
 gen_panorama()
