@@ -11,7 +11,8 @@
       - ex. no center marker for top image (this would be bad)
     - [ ] determine mostly uniform or lots of small bits (more images to gen pan)
     - [ ] determine light or dark (dark pan not possible)
-    - [ ] add copies to not have red + and x in actual pan used for blob finding
+    - [x] add copies to not have red + and x in actual pan used for blob finding
+    - [ ] find red +/x center on pan crop output image
     - [x] generate panorama
       - used OpenCV's stitcher
   - [x] find blobs
