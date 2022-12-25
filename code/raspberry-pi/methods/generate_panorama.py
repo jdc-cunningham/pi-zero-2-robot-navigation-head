@@ -157,7 +157,7 @@ def take_photos():
 
   # make copy of this photo
   ct_img_copy = cv2.imread(os.getcwd() + '/panorama/center_top.jpg')
-  cv2.imwrite(ct_img_copy, os.getcwd() + '/panorama/center_top_crosshair.jpg')
+  cv2.imwrite(os.getcwd() + '/panorama/center_top_crosshair.jpg', ct_img_copy)
 
   draw_crosshair_line('panorama/center_top_crosshair.jpg')
 
