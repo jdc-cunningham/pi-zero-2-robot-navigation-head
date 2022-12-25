@@ -517,9 +517,11 @@ def gen_panorama():
     bot_out_path
   ]
 
-  pan_out_path = base_path + '/panorama/pan_output_crosshair.jpg'
+  pan_out_crosshair_path = base_path + '/panorama/pan_output_crosshair.jpg'
 
-  print(build_panorama(pan_img_crosshair_paths, pan_out_path))
+  print(build_panorama(pan_img_crosshair_paths, pan_out_crosshair_path))
+  
+  cv2.imwrite(pan_out_crosshair_path, cv2.rotate(cv2.imread(pan_out_crosshair_path), cv2.ROTATE_180))
 
   pan_img_paths = [
     top_out_path,
