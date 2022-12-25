@@ -534,7 +534,7 @@ def gen_panorama():
   cv2.imwrite(pan_out_path, cv2.rotate(cv2.imread(pan_out_path), cv2.ROTATE_180))
 
   base_path = os.getcwd()
-  pan_out_crosshair_crop_path = base_path + '/panorama/pan_output_crosshair.jpg'
+  pan_out_crosshair_crop_path = base_path + '/panorama/pan_crop_output_crosshair.jpg'
   pan_out_crop_path = base_path + '/panorama/pan_crop_output.jpg'
 
   crop_panorama_a(pan_out_path, pan_out_crop_path)
