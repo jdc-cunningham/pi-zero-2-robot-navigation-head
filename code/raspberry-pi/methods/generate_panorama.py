@@ -478,7 +478,7 @@ def gen_panorama():
 
   top_out_crosshair_path = base_path + '/panorama/top_output_crosshair.jpg'
 
-  print(build_panorama(top_img_paths, top_out_path))
+  print(build_panorama(top_img_paths, top_out_crosshair_path))
 
   mid_img_paths = [
     base_path + '/panorama/left_outer_middle.jpg',
