@@ -1,9 +1,9 @@
-- [ ] general
+- [ ] **general**
   - [ ] add braking
     - this thing is top heavy, hence it carries around this heavy 5/8" chisel tool for a counter mass
       the abrupt stopping makes the robot nearly tip over and generally nasty vibrations
       currently accounted for in the pan servo case with long photo delays eg. 3 seconds per shot, up to 45 seconds of extra delay
-- [ ] vision stack
+- [ ] **vision stack**
   - [ ] panorama
     - [ ] add early fail check to stop other subsequent processes
       - ex. too dark, don't do panorama (onboard LED sucks)
@@ -20,19 +20,19 @@
   - [ ] ranging
     - [ ] accurately point the beams at things and get their distances
           account for geometry offset issues
-- [ ] pan/tilt command
+- [ ] **pan/tilt command**
   - [ ] figure out some formulas to get deg in and pwm ms out
   - [ ] verify externally by camera that it's correct
-- [ ] accurately measure displacement (IMU)
+- [ ] **accurately measure displacement (IMU)**
   - [ ] factor in offset due to switching out MPU6050 with MPU9250
   - [x] measure rotation
     - did this with TLR project
   - [ ] measure pitch
     - have not been able to accurately do this
-- [ ] navigation
+- [ ] **navigation**
   - [ ] map surroundings and be able to accept a waypoint, should not need to rescan
         if sufficient data available
-- [ ] motion
+- [ ] **motion**
   - [ ] fix the possibilty of serial buffer overflow, robot loses control
         due to dumb websocket
 
