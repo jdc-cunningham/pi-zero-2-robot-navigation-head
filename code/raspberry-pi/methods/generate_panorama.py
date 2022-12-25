@@ -155,7 +155,11 @@ def take_photos():
   pi.set_servo_pulsewidth(pan_servo, 1260)
   time.sleep(3)
 
-  draw_crosshair_line('panorama/center_top.jpg')
+  # make copy of this photo
+  ct_img_copy = cv2.imread(os.getcwd() + '/panorama/center_top.jpg')
+  cv2.imwrite(ct_img_copy, os.getcwd() + '/panorama/center_top_crosshair.jpg')
+
+  draw_crosshair_line('panorama/center_top_crosshair.jpg')
 
   take_photo('right_inner_top')
   pi.set_servo_pulsewidth(pan_servo, 1060)
@@ -220,12 +224,32 @@ def mod_img(which_img, img):
     return img
 
 def generate_panorama():
-  top_imgs = ['panorama/left_top.jpg', 'panorama/center_top.jpg', 'panorama/right_top.jpg']
+  top_imgs = ['panorama/left_top.jpg', 'panorama/center_top_crosshair.jpg', 'panorama/right_top.jpg']
   mid_imgs = ['panorama/left_middle.jpg', 'panorama/center_middle.jpg', 'panorama/right_middle.jpg']
   bot_imgs = ['panorama/left_bottom.jpg', 'panorama/center_bottom.jpg', 'panorama/right_bottom.jpg']
 
   # resize to 50%
 
+  tl_img = cv2.imread(top_imgs[0])
+  tm_img = cv2.imread(top_imgs[1])
+  tr_img = cv2.imread(top_imgs[2])
+
+  # https://stackoverflow.com/a/18767569/2710227
+  tl_img = cv2.resize(tl_img, (0, 0), fx=0.5, fy=0.5)
+  tm_img = cv2.resize(tm_img, (0, 0), fx=0.5, fy=0.5)
+  tr_img = cv2.resize(tr_img, (0, 0), fx=0.5, fy=0.5)
+
+  h_img = cv2.hconcat([mod_img('lt', tl_img), tm_img, mod_img('rt', tr_img)])
+  cv2.imwrite('panorama/top_crosshair.jpg', h_img)
+
+  # free memory?
+  top_imgs = ['panorama/left_top.jpg', 'panorama/center_top.jpg', 'panorama/right_top.jpg']
+  tl_img = None
+  tm_img = None
+  tr_img = None
+  h_img = None
+
+  # generate again, no crosshair
   tl_img = cv2.imread(top_imgs[0])
   tm_img = cv2.imread(top_imgs[1])
   tr_img = cv2.imread(top_imgs[2])
@@ -274,7 +298,7 @@ def generate_panorama():
 def build_panorama(img_paths, out_path):
   imgs = []
 
-  # generate top panorama set
+  # generate panorama set
   for i in range(len(img_paths)):
     imgs.append(cv2.imread(img_paths[i]))
 
@@ -443,6 +467,19 @@ def gen_panorama():
 
   print(build_panorama(top_img_paths, top_out_path))
 
+  # build crosshair version
+  top_img_paths = [
+    base_path + '/panorama/left_outer_top.jpg',
+    base_path + '/panorama/left_inner_top.jpg',
+    base_path + '/panorama/center_top_crosshair.jpg',
+    base_path + '/panorama/right_inner_top.jpg',
+    base_path + '/panorama/right_outer_top.jpg'
+  ]
+
+  top_out_crosshair_path = base_path + '/panorama/top_output_crosshair.jpg'
+
+  print(build_panorama(top_img_paths, top_out_path))
+
   mid_img_paths = [
     base_path + '/panorama/left_outer_middle.jpg',
     base_path + '/panorama/left_inner_middle.jpg',
@@ -470,7 +507,8 @@ def gen_panorama():
   scale_pan_slices([
     top_out_path,
     mid_out_path,
-    bot_out_path
+    bot_out_path,
+    top_out_crosshair_path
   ])
 
   pan_img_paths = [
@@ -482,6 +520,16 @@ def gen_panorama():
   pan_out_path = base_path + '/panorama/pan_output.jpg'
 
   print(build_panorama(pan_img_paths, pan_out_path))
+
+  pan_img_crosshair_paths = [
+    top_out_crosshair_path,
+    mid_out_path,
+    bot_out_path
+  ]
+
+  pan_out_path = base_path + '/panorama/pan_output_crosshair.jpg'
+
+  print(build_panorama(pan_img_crosshair_paths, pan_out_path))
 
   # rotate final output
   cv2.imwrite(pan_out_path, cv2.rotate(cv2.imread(pan_out_path), cv2.ROTATE_180))
