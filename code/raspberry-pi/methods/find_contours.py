@@ -8,7 +8,7 @@ from operator import itemgetter
 import json
 
 base_path = os.getcwd()
-im = cv2.imread(base_path + '/panorama/pan_output_mask_applied.jpg')
+im = cv2.imread(base_path + '/panorama/pan_crop_output_mask_applied.jpg')
 imCopy = im.copy()
 imgray=cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
 ret,thresh = cv2.threshold(imgray,127,255,0)
@@ -37,7 +37,7 @@ for i in reversed(bounded_contours):
   loop_counter += 1
   if loop_counter == 0:
     continue
-  if i['area'] < 100000:
+  if i['area'] < 10000:
     continue
   # print i['area']
   r = cv2.boundingRect(contours[i['cindex']])
