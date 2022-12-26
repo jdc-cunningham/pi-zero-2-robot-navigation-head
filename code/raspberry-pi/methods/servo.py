@@ -157,7 +157,6 @@ def remote_down():
 
 def look_left(deg, delay = 0.001):
   ms = int(10.7 * deg) # visually determined by camera
-  print(ms)
   newPosCheck = hPos + ms
   newPos = newPosCheck if newPosCheck < 2500 else 2500
   
@@ -166,8 +165,7 @@ def look_left(deg, delay = 0.001):
     time.sleep(delay)
 
 def look_right(deg, delay = 0.001):
-  ms = int(11.77 * deg) # visually determined by camera
-  print(ms)
+  ms = int(11.77 * deg)
   newPosCheck = hPos - ms
   newPos = newPosCheck if newPosCheck > 0 else 0
   
@@ -175,13 +173,30 @@ def look_right(deg, delay = 0.001):
     pi.set_servo_pulsewidth(pan_servo, pw)
     time.sleep(delay)
 
-# tilt 220 ms
+def look_up(deg, delay = 0.001):
+  ms = int(11.17 * deg)
+  newPosCheck = vPos + ms
+  newPos = newPosCheck if newPosCheck < 2500 else 2500
+  
+  for pw in range(vPos, newPos, 1):
+    pi.set_servo_pulsewidth(tilt_servo, pw)
+    time.sleep(delay)
+
+def look_down(deg, delay = 0.001):
+  ms = int(15.28 * deg)
+  newPosCheck = vPos - ms
+  newPos = newPosCheck if newPosCheck > 0 else 0
+  
+  for pw in range(vPos, newPos, -1):
+    pi.set_servo_pulsewidth(tilt_servo, pw)
+    time.sleep(delay)
+
 boot_center()
 time.sleep(2)
-
-for pw in range(1340, 1560, 1):
-    pi.set_servo_pulsewidth(tilt_servo, pw)
-    time.sleep(0.001)
-
+look_up(10) # may not be able to look up too high due to wires
+time.sleep(2)
+boot_center()
+time.sleep(2)
+look_down(10)
 time.sleep(2)
 boot_center()
