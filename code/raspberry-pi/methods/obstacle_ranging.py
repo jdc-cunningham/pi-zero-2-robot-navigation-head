@@ -12,4 +12,4 @@ time.sleep(2)
 boot_center()
 look_right(21) # know it's 21 deg to the right
 
-print('distance to box: ' + sensors.tof.get_distance() + ', ' + sensors.lidar.get_distance())
+print('distance to box: ' + int(sensors.tof.get_distance()) + ', ' + int(sensors.lidar.get_distance()))
