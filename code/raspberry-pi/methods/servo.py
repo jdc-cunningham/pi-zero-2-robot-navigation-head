@@ -11,7 +11,7 @@ pan_servo = 12
 pan_center = 1460
 
 tilt_servo = 13
-tilt_center = 1340
+tilt_center = 1300
 
 # 1500 is midpoint
 # 2500 is max

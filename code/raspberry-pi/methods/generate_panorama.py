@@ -18,7 +18,7 @@ camera_fov = "62.2x48.8"
 
 def center_servos():
   pi.set_servo_pulsewidth(pan_servo, 1460)
-  pi.set_servo_pulsewidth(tilt_servo, 1340)
+  pi.set_servo_pulsewidth(tilt_servo, 1300)
 
 def move_servo(which_servo, start_ms, end_ms):
   iter_sign = -5 if (start_ms > end_ms) else 5
@@ -202,7 +202,7 @@ def take_photos():
   take_photo('right_outer_bottom')
 
   # recenter
-  pi.set_servo_pulsewidth(tilt_servo, 1340)
+  pi.set_servo_pulsewidth(tilt_servo, 1300)
   pi.set_servo_pulsewidth(pan_servo, 1460)
   # led_off()
 
