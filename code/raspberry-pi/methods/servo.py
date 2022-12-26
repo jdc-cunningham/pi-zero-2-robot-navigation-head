@@ -190,13 +190,3 @@ def look_down(deg, delay = 0.001):
   for pw in range(vPos, newPos, -1):
     pi.set_servo_pulsewidth(tilt_servo, pw)
     time.sleep(delay)
-
-boot_center()
-time.sleep(2)
-look_up(10) # may not be able to look up too high due to wires
-time.sleep(2)
-boot_center()
-time.sleep(2)
-look_down(10)
-time.sleep(2)
-boot_center()
