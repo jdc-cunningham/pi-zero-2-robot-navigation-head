@@ -158,5 +158,5 @@ def remote_down():
 def pan_control(deg):
   # do stuff
 
-def titl_control(deg):
+def tilt_control(deg):
   # do stuff
