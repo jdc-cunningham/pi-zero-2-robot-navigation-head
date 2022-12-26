@@ -155,8 +155,30 @@ def remote_down():
 # time.sleep(1.5)
 # battery_skit()
 
-def pan_control(deg):
-  # do stuff
+def look_left(deg, delay = 0.01):
+  ms = int(0.0935 * deg) # visually determined by camera
+  newPosCheck = hPos + ms
+  newPos = newPosCheck if newPosCheck < 2500 else 2500
+  
+  for pw in range(hPos, newPos, 1):
+    pi.set_servo_pulsewidth(pan_servo, pw)
+    time.sleep(delay)
 
-def tilt_control(deg):
-  # do stuff
+def look_right(deg, delay = 0.01):
+  ms = int(0.085 * deg) # visually determined by camera
+  newPosCheck = hPos - ms
+  newPos = newPosCheck if newPosCheck > 0 else 0
+  
+  for pw in range(hPos, newPos, -1):
+    pi.set_servo_pulsewidth(pan_servo, pw)
+    time.sleep(delay)
+
+boot_center()
+time.sleep(2)
+look_left(45)
+time.sleep(2)
+boot_center()
+time.sleep(2)
+look_right(45)
+time.sleep(2)
+boot_center()
