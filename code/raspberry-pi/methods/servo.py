@@ -155,8 +155,9 @@ def remote_down():
 # time.sleep(1.5)
 # battery_skit()
 
-def look_left(deg, delay = 0.01):
-  ms = int(0.0935 * deg) # visually determined by camera
+def look_left(deg, delay = 0.001):
+  ms = int(10.7 * deg) # visually determined by camera
+  print(ms)
   newPosCheck = hPos + ms
   newPos = newPosCheck if newPosCheck < 2500 else 2500
   
@@ -164,8 +165,9 @@ def look_left(deg, delay = 0.01):
     pi.set_servo_pulsewidth(pan_servo, pw)
     time.sleep(delay)
 
-def look_right(deg, delay = 0.01):
-  ms = int(0.085 * deg) # visually determined by camera
+def look_right(deg, delay = 0.001):
+  ms = int(11.77 * deg) # visually determined by camera
+  print(ms)
   newPosCheck = hPos - ms
   newPos = newPosCheck if newPosCheck > 0 else 0
   
