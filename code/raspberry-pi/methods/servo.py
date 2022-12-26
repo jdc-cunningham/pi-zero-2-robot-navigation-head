@@ -179,7 +179,7 @@ def look_right(deg, delay = 0.001):
 boot_center()
 time.sleep(2)
 
-for pw in range(1340, 1120, -1):
+for pw in range(1340, 1560, 1):
     pi.set_servo_pulsewidth(tilt_servo, pw)
     time.sleep(0.001)
 
