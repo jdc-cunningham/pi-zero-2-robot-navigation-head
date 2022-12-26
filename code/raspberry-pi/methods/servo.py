@@ -183,7 +183,7 @@ def look_up(deg, delay = 0.001):
     time.sleep(delay)
 
 def look_down(deg, delay = 0.001):
-  ms = int(15.28 * deg)
+  ms = int(36.6 * deg)
   newPosCheck = vPos - ms
   newPos = newPosCheck if newPosCheck > 0 else 0
   
