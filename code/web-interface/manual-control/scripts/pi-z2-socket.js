@@ -12,7 +12,7 @@ const maxDigit = (str) => {
 }
 
 const connectToPiZero2 = () => {
-  piSocket = new WebSocket('ws://192.168.1.156:5678'); // esp01 on robot
+  piSocket = new WebSocket('ws://192.168.1.155:5678'); // esp01 on robot
 
   // connection opened, send messages to robot
   piSocket.addEventListener('open', function (event) {
