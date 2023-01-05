@@ -25,7 +25,7 @@ async def show_time(websocket):
     await asyncio.sleep(sensors.imu.sample_rate) # 0.005 normal sampling rate
 
 async def main():
-  async with websockets.serve(show_time, "192.168.1.156", 5678):
+  async with websockets.serve(show_time, "192.168.1.155", 5678):
     await asyncio.Future()  # run forever
 
 if __name__ == "__main__":
