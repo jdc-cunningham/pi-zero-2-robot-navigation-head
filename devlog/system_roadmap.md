@@ -20,9 +20,10 @@
   - [ ] ranging
     - [ ] accurately point the beams at things and get their distances
           account for geometry offset issues
-- [ ] **pan/tilt command**
-  - [ ] figure out some formulas to get deg in and pwm ms out
-  - [ ] verify externally by camera that it's correct
+- [x] **pan/tilt command**
+  - [x] figure out some formulas to get deg in and pwm ms out
+  - [x] verify externally by camera that it's correct
+    it's mostly correct
 - [ ] **accurately measure displacement (IMU)**
   - [ ] factor in offset due to switching out MPU6050 with MPU9250
   - [x] measure rotation
