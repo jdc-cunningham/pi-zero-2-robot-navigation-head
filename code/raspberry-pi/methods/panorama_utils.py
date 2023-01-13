@@ -71,19 +71,24 @@ def compare():
   rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
   height, width, channels = rgb_img.shape
   left_x = int(width * 0.3)
+  print(left_x)
   min_red_range = [99, 8, 8]
   max_red_range = [152, 48, 49]
 
   red_pixel_found = False
 
+  # for y in range(0, int(height * 0.85), 1):
+  #   if (
+  #     pixel_in_range(rgb_img[y, left_x], min_red_range, max_red_range)
+  #   ):
+  #     red_pixel_found = True
+  #     print(y)
+
   for y in range(0, int(height * 0.85), 1):
     if (
-      pixel_in_range(rgb_img[y, left_x], min_red_range, max_red_range)
+      pixel_in_range(rgb_img[y, left_x + 300], min_red_range, max_red_range)
     ):
       red_pixel_found = True
       print(y)
-      break
-
-  print(red_pixel_found)
 
 compare()
