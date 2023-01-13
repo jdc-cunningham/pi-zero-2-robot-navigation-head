@@ -20,8 +20,8 @@ def iterate_samples():
   center_sample = cv2.imread(base_path + '/panorama/red-center.jpg')
   rgb_center_sample = cv2.cvtColor(center_sample, cv2.COLOR_BGR2RGB)
 
-  # height, width, channels = rgb_sliver_sample.shape
-  height, width, channels = rgb_center_sample.shape
+  height, width, channels = rgb_sliver_sample.shape
+  # height, width, channels = rgb_center_sample.shape
 
   print(width, height)
 
@@ -38,7 +38,7 @@ def iterate_samples():
       # output to array for JS html/css vis conf of colors
       # print(",".join(str(rgb_sliver_sample[y, x]).split("  ")) + ",")
       # print(",".join(str(rgb_center_sample[y, x]).split("  ")) + ",")
-      r, g, b = rgb_center_sample[y, x]
+      r, g, b = rgb_sliver_sample[y, x]
 
       smallest_r = r if r < smallest_r else smallest_r
       smallest_g = g if g < smallest_g else smallest_g
@@ -51,4 +51,11 @@ def iterate_samples():
   print(smallest_r, smallest_g, smallest_b)
   print(largest_r, largest_g, largest_b)
 
-iterate_samples()
+def compare():
+  rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+  height, width, channels = rgb_img.shape
+  left_x = int(width * 0.3)
+
+  print(left_x)
+
+compare()

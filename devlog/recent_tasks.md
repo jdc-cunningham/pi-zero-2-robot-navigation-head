@@ -6,3 +6,5 @@
 - [ ] find red cross hair center
   - 01/11/2023
     figured out have different red colors, need to find min/max
+  - 01/12/2023
+    found min/max
