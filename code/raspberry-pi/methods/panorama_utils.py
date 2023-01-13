@@ -51,11 +51,39 @@ def iterate_samples():
   print(smallest_r, smallest_g, smallest_b)
   print(largest_r, largest_g, largest_b)
 
+# red color
+def pixel_in_range(pixel_rgb, min_pixel_rgb, max_pixel_rgb):
+  in_range = True
+
+  for pixel in range(0, 2, 1):
+    if (
+      pixel_rgb[pixel] < min_pixel_rgb[pixel] or
+      pixel_rgb[pixel] > max_pixel_rgb[pixel]
+    ):
+      in_range = False
+      break
+
+  return in_range
+      
+  
+
 def compare():
   rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
   height, width, channels = rgb_img.shape
   left_x = int(width * 0.3)
+  min_red_range = [99, 8, 8]
+  max_red_range = [152, 48, 49]
 
-  print(left_x)
+  red_pixel_found = False
+
+  for y in range(0, int(height * 0.85), 1):
+    if (
+      pixel_in_range(rgb_img[y, left_x], min_red_range, max_red_range)
+    ):
+      red_pixel_found = True
+      print(y)
+      break
+
+  print(red_pixel_found)
 
 compare()
