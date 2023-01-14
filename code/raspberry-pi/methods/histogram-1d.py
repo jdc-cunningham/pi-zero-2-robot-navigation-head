@@ -8,7 +8,7 @@ import cv2
 from matplotlib import pyplot as plt
 
 base_path = os.getcwd()
-img = cv2.imread(base_path + '/panorama/last/pan_crop_output_crosshair.jpg', 0) # grayscale, outputs range between 15, 195
+img = cv2.imread(base_path + '/panorama/pan_crop_output.jpg', 0) # grayscale, outputs range between 15, 195
 
 # may have speed gains not using plot to get values from ravel
 

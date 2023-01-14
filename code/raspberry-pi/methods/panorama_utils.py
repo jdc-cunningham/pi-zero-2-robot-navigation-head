@@ -105,20 +105,20 @@ def get_intersection(slope_info_1, slope_info_2):
   x_sum = 0
 
   if (slope_info_2[1] < 0):
-    b_sum = slope_info_1[1] + slope_info_2[1]
+    b_sum = slope_info_1[1] + (-1 * slope_info_2[1])
   else:
     b_sum = slope_info_1[1] - slope_info_2[1]
 
   if (slope_info_1[0] < 0):
-    x_sum = slope_info_2[0] + slope_info_1[0]
+    x_sum = slope_info_2[0] + (-1 * slope_info_1[0])
   else:
     x_sum = slope_info_2[0] - slope_info_1[0]
 
   x = int(b_sum / x_sum)
 
-  return [x, (slope_info_1[0] * x) + slope_info_1[1]]
+  return [x, int((slope_info_1[0] * x) + slope_info_1[1])]
 
 print(get_intersection(
-  get_slope_intercept_info([1000,-60], [1074,-118]),
-  get_slope_intercept_info([1000,-269], [1074,-204])
+  get_slope_intercept_info([1039,-91], [1109,-146]),
+  get_slope_intercept_info([1039,-241], [1109,-190])
 ))
