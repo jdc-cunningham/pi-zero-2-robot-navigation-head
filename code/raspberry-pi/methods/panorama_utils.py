@@ -91,4 +91,34 @@ def compare():
       red_pixel_found = True
       print(y)
 
-compare()
+# p1, p2 are arrays [x, y]
+# orientation/direction depends on which side of the image (left/right)
+def get_slope_intercept_info(p1, p2):
+  m = (p2[1] - p1[1]) / (p2[0] - p1[0])
+  b = p1[1] - (m * p1[0])
+  return [round(m, 2), int(b)]
+
+# here you're equating two linear equations together
+# ex. -0.78x + 723 = 0.88x - 1147 solving for x
+def get_intersection(slope_info_1, slope_info_2):
+  b_sum = 0
+  x_sum = 0
+
+  if (slope_info_2[1] < 0):
+    b_sum = slope_info_1[1] + slope_info_2[1]
+  else:
+    b_sum = slope_info_1[1] - slope_info_2[1]
+
+  if (slope_info_1[0] < 0):
+    x_sum = slope_info_2[0] + slope_info_1[0]
+  else:
+    x_sum = slope_info_2[0] - slope_info_1[0]
+
+  x = int(b_sum / x_sum)
+
+  return [x, (slope_info_1[0] * x) + slope_info_1[1]]
+
+print(get_intersection(
+  get_slope_intercept_info([1000,-60], [1074,-118]),
+  get_slope_intercept_info([1000,-269], [1074,-204])
+))
