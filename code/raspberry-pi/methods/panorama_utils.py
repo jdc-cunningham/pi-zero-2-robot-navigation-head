@@ -123,4 +123,38 @@ def get_camera_center_px():
       red_pxs.append(pxs)
       print(pxs)
 
-get_camera_center_px()
+# get_camera_center_px()
+
+# points: array of [x, y] arrays where red range was detected
+def verify_line_points(points):
+  x_groups = {}
+
+  for point in points:
+    if (point[0] in x_groups):
+      if (len(x_groups[point[0]]) < 3):
+        x_groups[point[0]].append(point[1])
+    else:
+      x_groups[point[0]] = [point[1]]
+
+  print(x_groups)
+
+  if (len(x_groups) == 2):
+    keys = []
+
+    for x in x_groups:
+      keys.append(x)
+
+    return [
+      [
+        keys[0], int(sum(x_groups[keys[0]]) / len(x_groups[keys[0]]))
+      ],
+      [
+        keys[1], int(sum(x_groups[keys[1]]) / len(x_groups[keys[1]]))
+      ]
+    ]
+  else:
+    return False
+
+print(verify_line_points(
+  [[965, 31], [965, 32], [965, 33], [965, 291], [965, 292], [965, 293]]
+))
