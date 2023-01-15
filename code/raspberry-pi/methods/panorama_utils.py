@@ -108,24 +108,9 @@ def get_intersection(slope_info_1, slope_info_2):
 
   return [x, int((slope_info_1[0] * x) + slope_info_1[1])]
 
-def get_camera_center_px():
-  # iterate top-left to right, horizontally with vertical slices
-  # every 50 pixels from 30% left and 50% max pano img height
-  height, width, channels = img.shape
-  left_x = int(width * 0.3)
-
-  red_pxs = []
-
-  for x in range (left_x, int(width * 0.7), 50):
-    pxs = check_for_red(x)
-
-    if (pxs):
-      red_pxs.append(pxs)
-      print(pxs)
-
-# get_camera_center_px()
-
 # points: array of [x, y] arrays where red range was detected
+# finds and groups pixels by 3 nearest, keeps middle, only 2 points allowed
+# eg. y intercept of two lines
 def get_line_points(points):
   x = points[0][0]
   y_avg_points = []
@@ -156,3 +141,51 @@ def get_line_points(points):
     ]
   else:
     return []
+
+def get_camera_center_px():
+  # iterate top-left to right, horizontally with vertical slices
+  # every 50 pixels from 30% left and 50% max pano img height
+  height, width, channels = img.shape
+  left_x = int(width * 0.3)
+
+  red_pxs = []
+
+  y_intercept_1 = []
+  y_intercept_2 = []
+
+  for x in range (left_x, int(width * 0.7), 50):
+    pxs = check_for_red(x)
+
+    if (pxs and len(pxs) >= 6):
+      red_pxs.append(pxs)
+      
+      y_intercepts = get_line_points(pxs)
+
+      if (len(y_intercepts) == 2):
+        if (len(y_intercept_1) == 0):
+          y_intercept_1 = y_intercepts
+        else:
+          y_intercept_2 = y_intercepts
+          break
+
+
+  if (len(y_intercept_1) > 0 and len(y_intercept_2) > 0):
+    # get slope from line points
+    slope_1 = get_slope_intercept_info(
+      [y_intercept_1[0][0], y_intercept_1[0][1]],
+      [y_intercept_2[0][0], y_intercept_2[0][1]]
+    )
+
+    slope_2 = get_slope_intercept_info(
+      [y_intercept_1[1][0], y_intercept_1[1][1]],
+      [y_intercept_2[1][0], y_intercept_2[1][1]]
+    )
+
+    intersection = get_intersection(slope_1, slope_2)
+
+    print(intersection)
+  else:
+    return [] # failed
+
+
+get_camera_center_px()
