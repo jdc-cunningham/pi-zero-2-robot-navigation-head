@@ -86,6 +86,7 @@ def check_for_red(x):
 def get_slope_intercept_info(p1, p2):
   m = (p2[1] - p1[1]) / (p2[0] - p1[0])
   b = p1[1] - (m * p1[0])
+
   return [round(m, 2), int(b)]
 
 # here you're equating two linear equations together
@@ -115,6 +116,8 @@ def get_line_points(points):
   x = points[0][0]
   y_avg_points = []
   y_set = []
+
+  # print(points)
 
   for point in points:
     y_set_len = len(y_set)
@@ -160,6 +163,8 @@ def get_camera_center_px():
       red_pxs.append(pxs)
       
       y_intercepts = get_line_points(pxs)
+
+      # print(y_intercepts)
 
       if (len(y_intercepts) == 2):
         if (len(y_intercept_1) == 0):
