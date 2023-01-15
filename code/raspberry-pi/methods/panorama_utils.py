@@ -20,7 +20,7 @@ def iterate_samples():
   center_sample = cv2.imread(base_path + '/panorama/green-center.jpg')
   rgb_center_sample = cv2.cvtColor(center_sample, cv2.COLOR_BGR2RGB)
 
-  height, width, channels = rgb_center_sample.shape
+  height, width, channels = rgb_sliver_sample.shape
   # height, width, channels = rgb_center_sample.shape
 
   # print(width, height)
@@ -38,7 +38,7 @@ def iterate_samples():
       # output to array for JS html/css vis conf of colors
       # print(",".join(str(rgb_sliver_sample[y, x]).split("  ")) + ",")
       # print(",".join(str(rgb_center_sample[y, x]).split("  ")) + ",")
-      r, g, b = rgb_center_sample[y, x]
+      r, g, b = rgb_sliver_sample[y, x]
 
       smallest_r = r if r < smallest_r else smallest_r
       smallest_g = g if g < smallest_g else smallest_g
@@ -70,8 +70,8 @@ def check_for_red(x):
   height, width, channels = rgb_img.shape
   min_red_range = [99, 8, 8]
   max_red_range = [152, 48, 49]
-  min_green_range = [4, 95, 0]
-  max_green_range = [66, 165, 53]
+  min_green_range = [16, 146, 17]
+  max_green_range = [89, 211, 82]
 
   min_range = min_green_range
   max_range = max_green_range
@@ -122,7 +122,7 @@ def get_line_points(points):
   y_avg_points = []
   y_set = []
 
-  # print(points)
+  print(points)
 
   for point in points:
     y_set_len = len(y_set)
@@ -197,5 +197,4 @@ def get_camera_center_px():
   else:
     return [] # failed
 
-
-# get_camera_center_px()
+get_camera_center_px()
