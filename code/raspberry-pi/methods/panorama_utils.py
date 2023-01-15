@@ -15,15 +15,15 @@ def peek_crop():
   cv2.imwrite(peek_crop_out_path, crop_img)
 
 def iterate_samples():
-  sliver_sample = cv2.imread(base_path + '/panorama/red-sliver.jpg')
+  sliver_sample = cv2.imread(base_path + '/panorama/green-sliver.jpg')
   rgb_sliver_sample = cv2.cvtColor(sliver_sample, cv2.COLOR_BGR2RGB)
-  center_sample = cv2.imread(base_path + '/panorama/red-center.jpg')
+  center_sample = cv2.imread(base_path + '/panorama/green-center.jpg')
   rgb_center_sample = cv2.cvtColor(center_sample, cv2.COLOR_BGR2RGB)
 
-  height, width, channels = rgb_sliver_sample.shape
+  height, width, channels = rgb_center_sample.shape
   # height, width, channels = rgb_center_sample.shape
 
-  print(width, height)
+  # print(width, height)
 
   smallest_r = 255
   smallest_g = 255
@@ -38,7 +38,7 @@ def iterate_samples():
       # output to array for JS html/css vis conf of colors
       # print(",".join(str(rgb_sliver_sample[y, x]).split("  ")) + ",")
       # print(",".join(str(rgb_center_sample[y, x]).split("  ")) + ",")
-      r, g, b = rgb_sliver_sample[y, x]
+      r, g, b = rgb_center_sample[y, x]
 
       smallest_r = r if r < smallest_r else smallest_r
       smallest_g = g if g < smallest_g else smallest_g
@@ -70,12 +70,17 @@ def check_for_red(x):
   height, width, channels = rgb_img.shape
   min_red_range = [99, 8, 8]
   max_red_range = [152, 48, 49]
+  min_green_range = [4, 95, 0]
+  max_green_range = [66, 165, 53]
+
+  min_range = min_green_range
+  max_range = max_green_range
 
   red_pxs = []
 
   for y in range(0, int(height * 0.5), 1):
     if (
-      pixel_in_range(rgb_img[y, x], min_red_range, max_red_range)
+      pixel_in_range(rgb_img[y, x], min_range, max_range)
     ):
       red_pxs.append([x, y])
 
@@ -193,4 +198,4 @@ def get_camera_center_px():
     return [] # failed
 
 
-get_camera_center_px()
+# get_camera_center_px()
