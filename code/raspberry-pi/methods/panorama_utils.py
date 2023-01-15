@@ -126,35 +126,33 @@ def get_camera_center_px():
 # get_camera_center_px()
 
 # points: array of [x, y] arrays where red range was detected
-def verify_line_points(points):
-  x_groups = {}
+def get_line_points(points):
+  x = points[0][0]
+  y_avg_points = []
+  y_set = []
 
   for point in points:
-    if (point[0] in x_groups):
-      if (len(x_groups[point[0]]) < 3):
-        x_groups[point[0]].append(point[1])
+    y_set_len = len(y_set)
+
+    if (y_set_len == 0):
+      y_set.append(point[1])
     else:
-      x_groups[point[0]] = [point[1]]
+      y_set_last = y_set[y_set_len - 1]
 
-  print(x_groups)
+      if (y_set_last + 1 == point[1]):
+        y_set.append(point[1])
+        y_set_len = len(y_set)
 
-  if (len(x_groups) == 2):
-    keys = []
+        if (y_set_len == 3):
+          y_avg_points.append(y_set[1])
+          y_set = []
+      else:
+        y_set = [point[1]]
 
-    for x in x_groups:
-      keys.append(x)
-
+  if (len(y_avg_points) == 2):
     return [
-      [
-        keys[0], int(sum(x_groups[keys[0]]) / len(x_groups[keys[0]]))
-      ],
-      [
-        keys[1], int(sum(x_groups[keys[1]]) / len(x_groups[keys[1]]))
-      ]
+      [x, y_avg_points[0]],
+      [x, y_avg_points[1]]
     ]
   else:
-    return False
-
-print(verify_line_points(
-  [[965, 31], [965, 32], [965, 33], [965, 291], [965, 292], [965, 293]]
-))
+    return []
