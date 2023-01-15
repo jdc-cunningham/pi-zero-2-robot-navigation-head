@@ -64,32 +64,22 @@ def pixel_in_range(pixel_rgb, min_pixel_rgb, max_pixel_rgb):
       break
 
   return in_range
-      
-  
 
-def compare():
+def check_for_red(x):
   rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
   height, width, channels = rgb_img.shape
-  left_x = int(width * 0.3)
-  print(left_x)
   min_red_range = [99, 8, 8]
   max_red_range = [152, 48, 49]
 
-  red_pixel_found = False
+  red_pxs = []
 
-  # for y in range(0, int(height * 0.85), 1):
-  #   if (
-  #     pixel_in_range(rgb_img[y, left_x], min_red_range, max_red_range)
-  #   ):
-  #     red_pixel_found = True
-  #     print(y)
-
-  for y in range(0, int(height * 0.85), 1):
+  for y in range(0, int(height * 0.5), 1):
     if (
-      pixel_in_range(rgb_img[y, left_x + 300], min_red_range, max_red_range)
+      pixel_in_range(rgb_img[y, x], min_red_range, max_red_range)
     ):
-      red_pixel_found = True
-      print(y)
+      red_pxs.append([x, y])
+
+  return red_pxs
 
 # p1, p2 are arrays [x, y]
 # orientation/direction depends on which side of the image (left/right)
@@ -118,7 +108,19 @@ def get_intersection(slope_info_1, slope_info_2):
 
   return [x, int((slope_info_1[0] * x) + slope_info_1[1])]
 
-print(get_intersection(
-  get_slope_intercept_info([1039,-91], [1109,-146]),
-  get_slope_intercept_info([1039,-241], [1109,-190])
-))
+def get_camera_center_px():
+  # iterate top-left to right, horizontally with vertical slices
+  # every 50 pixels from 30% left and 50% max pano img height
+  height, width, channels = img.shape
+  left_x = int(width * 0.3)
+
+  red_pxs = []
+
+  for x in range (left_x, int(width * 0.7), 50):
+    pxs = check_for_red(x)
+
+    if (pxs):
+      red_pxs.append(pxs)
+      print(pxs)
+
+get_camera_center_px()
