@@ -15,13 +15,13 @@ def peek_crop():
   cv2.imwrite(peek_crop_out_path, crop_img)
 
 def iterate_samples():
-  sliver_sample = cv2.imread(base_path + '/panorama/green-sliver.jpg')
+  sliver_sample = cv2.imread(base_path + '/panorama/white-sliver.jpg')
   rgb_sliver_sample = cv2.cvtColor(sliver_sample, cv2.COLOR_BGR2RGB)
-  center_sample = cv2.imread(base_path + '/panorama/green-center.jpg')
+  center_sample = cv2.imread(base_path + '/panorama/white-center.jpg')
   rgb_center_sample = cv2.cvtColor(center_sample, cv2.COLOR_BGR2RGB)
 
   # height, width, channels = rgb_sliver_sample.shape
-  height, width, channels = rgb_sliver_sample.shape
+  height, width, channels = rgb_center_sample.shape
 
   # print(width, height)
 
@@ -38,7 +38,7 @@ def iterate_samples():
       # output to array for JS html/css vis conf of colors
       # print(",".join(str(rgb_sliver_sample[y, x]).split("  ")) + ",")
       # print(",".join(str(rgb_center_sample[y, x]).split("  ")) + ",")
-      r, g, b = rgb_sliver_sample[y, x]
+      r, g, b = rgb_center_sample[y, x]
 
       smallest_r = r if r < smallest_r else smallest_r
       smallest_g = g if g < smallest_g else smallest_g
@@ -51,7 +51,7 @@ def iterate_samples():
   print(smallest_r, smallest_g, smallest_b)
   print(largest_r, largest_g, largest_b)
 
-iterate_samples()
+# iterate_samples()
 
 # red color
 def pixel_in_range(pixel_rgb, min_pixel_rgb, max_pixel_rgb):
@@ -74,9 +74,11 @@ def check_in_ch_color_range(x):
   max_red_range = [152, 48, 49]
   min_green_range = [21, 147, 20]
   max_green_range = [89, 255, 86]
+  min_white_range = [100, 100, 100]
+  max_white_range = [255, 255, 255]
 
-  min_range = min_green_range
-  max_range = max_green_range
+  min_range = min_white_range
+  max_range = max_white_range
 
   red_pxs = []
 
