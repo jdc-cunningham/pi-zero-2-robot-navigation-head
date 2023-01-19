@@ -98,7 +98,8 @@ def draw_crosshair_line(imgPath, isCopy = False):
   og_img = cv2.imread(imgPath)
   height, width, channels = og_img.shape
   # line_color = (0, 0, 255) # red
-  line_color = (0, 255, 0) # green
+  # line_color = (0, 255, 0) # green
+  line_color = (255, 255, 255) # white
 
   line_thickness = 2
 

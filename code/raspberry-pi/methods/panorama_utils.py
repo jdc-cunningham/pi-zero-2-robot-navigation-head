@@ -20,8 +20,8 @@ def iterate_samples():
   center_sample = cv2.imread(base_path + '/panorama/green-center.jpg')
   rgb_center_sample = cv2.cvtColor(center_sample, cv2.COLOR_BGR2RGB)
 
+  # height, width, channels = rgb_sliver_sample.shape
   height, width, channels = rgb_sliver_sample.shape
-  # height, width, channels = rgb_center_sample.shape
 
   # print(width, height)
 
@@ -51,6 +51,8 @@ def iterate_samples():
   print(smallest_r, smallest_g, smallest_b)
   print(largest_r, largest_g, largest_b)
 
+iterate_samples()
+
 # red color
 def pixel_in_range(pixel_rgb, min_pixel_rgb, max_pixel_rgb):
   in_range = True
@@ -65,13 +67,13 @@ def pixel_in_range(pixel_rgb, min_pixel_rgb, max_pixel_rgb):
 
   return in_range
 
-def check_for_red(x):
+def check_in_ch_color_range(x):
   rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
   height, width, channels = rgb_img.shape
   min_red_range = [99, 8, 8]
   max_red_range = [152, 48, 49]
-  min_green_range = [16, 146, 17]
-  max_green_range = [89, 211, 82]
+  min_green_range = [21, 147, 20]
+  max_green_range = [89, 255, 86]
 
   min_range = min_green_range
   max_range = max_green_range
@@ -140,7 +142,10 @@ def get_line_points(points):
           y_avg_points.append(y_set[1])
           y_set = []
       else:
-        y_set = [point[1]]
+        if (len(y_set) > 0):
+          y_set = [] # reset due to invalid set
+        else:
+          y_set = [point[1]]
 
   if (len(y_avg_points) == 2):
     return [
@@ -162,7 +167,7 @@ def get_camera_center_px():
   y_intercept_2 = []
 
   for x in range (left_x, int(width * 0.7), 50):
-    pxs = check_for_red(x)
+    pxs = check_in_ch_color_range(x)
 
     if (pxs and len(pxs) >= 6):
       red_pxs.append(pxs)
@@ -193,6 +198,7 @@ def get_camera_center_px():
 
     intersection = get_intersection(slope_1, slope_2)
 
+    print('intersection')
     print(intersection)
   else:
     return [] # failed
