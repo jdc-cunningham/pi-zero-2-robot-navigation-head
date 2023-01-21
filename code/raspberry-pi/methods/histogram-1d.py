@@ -15,4 +15,6 @@ img = cv2.imread(base_path + '/panorama/pan_crop_output.jpg', 0) # grayscale, ou
 # https://stackoverflow.com/questions/20128898/get-data-points-from-a-histogram-in-python
 counts, bins, bars = plt.hist(img.ravel(), 256, [0, 256])
 
+print(counts[17])
+
 plt.show()
