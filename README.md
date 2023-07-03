@@ -12,6 +12,10 @@ Active development is being done in the `dev branch` until a full system is buil
 ### Actual
 <img src="./nav-unit-on-2d-robot.JPG" width="500"/>
 
+### Presentation
+
+[video](https://www.youtube.com/watch?v=znNgf1qtHAA&t=7188s)
+
 ### Guts
 <img src="./guts.JPG" width="500"/>
 
