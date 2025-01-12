@@ -2,7 +2,7 @@ import tfmplus as tfmP
 from tfmplus import *
 import time
 
-class Sensor():
+class NarrowSensor():
   def __int__(self):
     self.name = "TFmini-s"
     self.serial_port = "/dev/serial0" # Raspberry Pi normal serial port
