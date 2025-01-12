@@ -1,4 +1,7 @@
 import time
+import sys
+
+sys.path.insert(1, '/home/pi/pi-zero-2-robot-navigation-head/navigation')
 
 class NarrowSensor():
   def __init__(self):
