@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 '''=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
  # Package:   tfmplus
  # Inception: 10 MAR 2021
@@ -350,23 +353,24 @@ def sendCommand( cmnd, param):
 #
 #  Called by either 'printFrame()' or 'printReply()'
 #  Print status condition either 'READY' or error type
+# dumb (JDCC) ... to python 2.7
 def printStatus():
     ''' Print status condition'''
-    print("Status: ", end= '')
-    if( status == TFMP_READY):       print( "READY", end= '')
-    elif( status == TFMP_SERIAL):    print( "SERIAL", end= '')
-    elif( status == TFMP_HEADER):    print( "HEADER", end= '')
-    elif( status == TFMP_CHECKSUM):  print( "CHECKSUM", end= '')
-    elif( status == TFMP_TIMEOUT):   print( "TIMEOUT", end= '')
-    elif( status == TFMP_PASS):      print( "PASS", end= '')
-    elif( status == TFMP_FAIL):      print( "FAIL", end= '')
-    elif( status == TFMP_I2CREAD):   print( "I2C-READ", end= '')
-    elif( status == TFMP_I2CWRITE):  print( "I2C-WRITE", end= '')
-    elif( status == TFMP_I2CLENGTH): print( "I2C-LENGTH", end= '')
-    elif( status == TFMP_WEAK):      print( "Signal weak", end= '')
-    elif( status == TFMP_STRONG):    print( "Signal saturation", end= '')
-    elif( status == TFMP_FLOOD):     print( "Ambient light saturation", end= '')
-    else:                            print( "OTHER", end= '')
+    print("Status: " + ", " + end= '')
+    if( status == TFMP_READY):       print( "READY" + ", " + end= '')
+    elif( status == TFMP_SERIAL):    print( "SERIAL" + ", " + end= '')
+    elif( status == TFMP_HEADER):    print( "HEADER" + ", " + end= '')
+    elif( status == TFMP_CHECKSUM):  print( "CHECKSUM" + ", " + end= '')
+    elif( status == TFMP_TIMEOUT):   print( "TIMEOUT" + ", " + end= '')
+    elif( status == TFMP_PASS):      print( "PASS" + ", " + end= '')
+    elif( status == TFMP_FAIL):      print( "FAIL" + ", " + end= '')
+    elif( status == TFMP_I2CREAD):   print( "I2C-READ" + ", " + end= '')
+    elif( status == TFMP_I2CWRITE):  print( "I2C-WRITE" + ", " + end= '')
+    elif( status == TFMP_I2CLENGTH): print( "I2C-LENGTH" + ", " + end= '')
+    elif( status == TFMP_WEAK):      print( "Signal weak" + ", " + end= '')
+    elif( status == TFMP_STRONG):    print( "Signal saturation" + ", " + end= '')
+    elif( status == TFMP_FLOOD):     print( "Ambient light saturation" + ", " + end= '')
+    else:                            print( "OTHER" + ", " + end= '')
     print()
 #
 #  Print error type and HEX values
