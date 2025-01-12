@@ -18,4 +18,4 @@ class NarrowSensor():
 
   def get_distance(self):
     self.sensor.getData()
-    return self.lidar.dist * 0.39
+    return self.sensor.dist * 0.39
