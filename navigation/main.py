@@ -15,4 +15,4 @@ led.on()
 print(n_sensor.get_distance())
 print(w_sensor.get_distance())
 
-
+led.off()
