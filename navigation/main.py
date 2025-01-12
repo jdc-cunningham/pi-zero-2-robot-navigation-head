@@ -1,8 +1,5 @@
 from servo.servo import Servo
-import tfmplus.tfmplus as tfmP
-from tfmplus.tfmplus import *
 from narrow_angle_sensor.sensor import NarrowSensor
-from VL53L0X.python import VL53L0X
 from wide_angle_sensor.sensor import WideSensor
 
 # servo = Servo()

@@ -1,3 +1,9 @@
+import sys
+
+sys.path.insert(1, '/home/pi/pi-zero-2-robot-navigation-head/navigation')
+
+from VL53L0X.python import VL53L0X
+
 class WideSensor():
   def __init__(self):
     self.sensor = VL53L0X.VL53L0X()

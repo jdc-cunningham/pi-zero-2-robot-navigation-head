@@ -3,6 +3,9 @@ import sys
 
 sys.path.insert(1, '/home/pi/pi-zero-2-robot-navigation-head/navigation')
 
+import tfmplus as tfmP # Import the `tfmplus` module v0.1.0
+from tfmplus import *    # and command and paramter defintions
+
 class NarrowSensor():
   def __init__(self):
     self.name = "TFmini-s"
