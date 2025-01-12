@@ -1,7 +1,7 @@
 import time
 
 class NarrowSensor():
-  def __int__(self):
+  def __init__(self):
     self.name = "TFmini-s"
     self.serial_port = "/dev/serial0" # Raspberry Pi normal serial port
     self.serial_rate = 115200 # TFMini-Plus default baud
