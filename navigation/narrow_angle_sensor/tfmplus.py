@@ -381,10 +381,11 @@ def printFrame():
     printStatus();
     print("Data:")  # no carriage return
     for i in range( TFMP_FRAME_SIZE):
+        print("something")
         #  >>> f"{value:#0{padding}X}"
         # Pad hex number with 0s to length of n characters
-        print(f" {frame[ i]:0{2}X}")
-    print()
+        # print(f" {frame[ i]:0{2}X}")
+    # print()
 #   
 #  Print error type and HEX values of
 #  each byte in the command response frame.
@@ -393,8 +394,9 @@ def printReply():
     printStatus()
     #  Print the Hex value of each byte
     for i in range( TFMP_REPLY_SIZE):
-        print(f" {reply[ i]:0{2}X}")    
-    print()
+        print("something")
+        # print(f" {reply[ i]:0{2}X}")    
+    # print()
 
 #  Definitions that need to be exported
 __all__ = ['GET_FIRMWARE_VERSION', 'TRIGGER_DETECTION', 'SOFT_RESET',
