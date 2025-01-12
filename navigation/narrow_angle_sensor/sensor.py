@@ -1,7 +1,7 @@
 import time
 import sys
 
-sys.path.insert(1, '/home/pi/pi-zero-2-robot-navigation-head/navigation')
+sys.path.insert(1, '/home/pi/pi-zero-2-robot-navigation-head/navigation/narrow_angle_sensor')
 
 import tfmplus as tfmP # Import the `tfmplus` module v0.1.0
 from tfmplus import *    # and command and paramter defintions
