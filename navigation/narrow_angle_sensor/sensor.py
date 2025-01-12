@@ -1,5 +1,3 @@
-import navigation.tfmplus.tfmplus as tfmP
-from navigation.tfmplus.tfmplus import *
 import time
 
 class NarrowSensor():
