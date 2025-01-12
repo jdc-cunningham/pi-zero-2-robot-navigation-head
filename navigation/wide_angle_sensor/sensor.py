@@ -1,5 +1,3 @@
-from python import VL53L0X
-
 class WideSensor():
   def __init__(self):
     self.sensor = VL53L0X.VL53L0X()
