@@ -354,23 +354,24 @@ def sendCommand( cmnd, param):
 #  Called by either 'printFrame()' or 'printReply()'
 #  Print status condition either 'READY' or error type
 # dumb (JDCC) ... to python 2.7
+# remove the no linebreaks
 def printStatus():
     ''' Print status condition'''
-    print("Status: " + ", " + end= '')
-    if( status == TFMP_READY):       print( "READY" + ", " + end= '')
-    elif( status == TFMP_SERIAL):    print( "SERIAL" + ", " + end= '')
-    elif( status == TFMP_HEADER):    print( "HEADER" + ", " + end= '')
-    elif( status == TFMP_CHECKSUM):  print( "CHECKSUM" + ", " + end= '')
-    elif( status == TFMP_TIMEOUT):   print( "TIMEOUT" + ", " + end= '')
-    elif( status == TFMP_PASS):      print( "PASS" + ", " + end= '')
-    elif( status == TFMP_FAIL):      print( "FAIL" + ", " + end= '')
-    elif( status == TFMP_I2CREAD):   print( "I2C-READ" + ", " + end= '')
-    elif( status == TFMP_I2CWRITE):  print( "I2C-WRITE" + ", " + end= '')
-    elif( status == TFMP_I2CLENGTH): print( "I2C-LENGTH" + ", " + end= '')
-    elif( status == TFMP_WEAK):      print( "Signal weak" + ", " + end= '')
-    elif( status == TFMP_STRONG):    print( "Signal saturation" + ", " + end= '')
-    elif( status == TFMP_FLOOD):     print( "Ambient light saturation" + ", " + end= '')
-    else:                            print( "OTHER" + ", " + end= '')
+    print("Status: ")
+    if( status == TFMP_READY):       print( "READY")
+    elif( status == TFMP_SERIAL):    print( "SERIAL")
+    elif( status == TFMP_HEADER):    print( "HEADER")
+    elif( status == TFMP_CHECKSUM):  print( "CHECKSUM")
+    elif( status == TFMP_TIMEOUT):   print( "TIMEOUT")
+    elif( status == TFMP_PASS):      print( "PASS")
+    elif( status == TFMP_FAIL):      print( "FAIL")
+    elif( status == TFMP_I2CREAD):   print( "I2C-READ")
+    elif( status == TFMP_I2CWRITE):  print( "I2C-WRITE")
+    elif( status == TFMP_I2CLENGTH): print( "I2C-LENGTH")
+    elif( status == TFMP_WEAK):      print( "Signal weak")
+    elif( status == TFMP_STRONG):    print( "Signal saturation")
+    elif( status == TFMP_FLOOD):     print( "Ambient light saturation")
+    else:                            print( "OTHER")
     print()
 #
 #  Print error type and HEX values
@@ -378,11 +379,11 @@ def printStatus():
 def printFrame():
     '''Print status and frame data'''
     printStatus();
-    print("Data:", end= '')  # no carriage return
+    print("Data:")  # no carriage return
     for i in range( TFMP_FRAME_SIZE):
         #  >>> f"{value:#0{padding}X}"
         # Pad hex number with 0s to length of n characters
-        print(f" {frame[ i]:0{2}X}", end='')
+        print(f" {frame[ i]:0{2}X}")
     print()
 #   
 #  Print error type and HEX values of
@@ -392,7 +393,7 @@ def printReply():
     printStatus()
     #  Print the Hex value of each byte
     for i in range( TFMP_REPLY_SIZE):
-        print(f" {reply[ i]:0{2}X}", end='')    
+        print(f" {reply[ i]:0{2}X}")    
     print()
 
 #  Definitions that need to be exported
