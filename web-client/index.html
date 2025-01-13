@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <script src="./esp-01-client.js"></script>
+    <script src="./pi-zero-2-client.js"></script>
+    <input id="command" type="string" placeholder="command ex. mf_10">
+    <button id="sendBtn" type="button">Send</button>
+    <script>
+      const cmdInput = document.getElementById('command');
+      const sendBtn = document.getElementById('sendBtn');
+
+      sendBtn.addEventListener('click', () => {
+        if (cmdInput.value.length) {
+          sendMsgToEsp01(cmdInput.value);
+        }
+      });
+    </script>
+</body>
+</html>
