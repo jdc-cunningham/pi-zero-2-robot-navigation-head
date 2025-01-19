@@ -5,7 +5,7 @@ from threading import Thread
 from mpu9250_jmdev.registers import *
 from mpu9250_jmdev.mpu_9250 import MPU9250
 
-class IMU():
+class IMUSensor():
   def __init__(self):
     self.mpu = MPU9250(
       address_ak=AK8963_ADDRESS,
@@ -16,6 +16,8 @@ class IMU():
       afs=AFS_8G,
       mfs=AK8963_BIT_16,
       mode=AK8963_MODE_C100HZ)
+
+    self.sample_rate = 0.05 # 20hz
     self.sample_data = json
 
     self.mpu.configure() # Apply the settings to the registers.
