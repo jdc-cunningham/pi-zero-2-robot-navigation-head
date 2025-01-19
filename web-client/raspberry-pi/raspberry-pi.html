@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twerk Lidar Robot Web Interface</title>
+  <link rel="stylesheet" href="./styles/css-reset.css">
+  <link rel="stylesheet" href="./styles/main.css">
+  <style>
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-bottom: 1px solid #282828;
+    }
+  </style>
+  <script>
+    // global data between scripts
+    let meshTelData = ``;
+  </script>
+  <script src="../misc-test-code/threejs/js/three.js"></script>
+  <script src="../misc-test-code/threejs/js/OrbitControls.js"></script>
+  <script src="../misc-test-code/threejs/js/three.module.js"></script>
+  <script src="../misc-test-code/threejs/js/ConvexHull.js"></script>
+  <script src="../misc-test-code/threejs/js/ConvexGeometry.js"></script>
+  <script src="../misc-test-code/threejs/js/GetCoordinates.js"></script>
+  <script src="../misc-test-code/threejs/js/utils.js"></script>
+  <script src="../misc-test-code/threejs/js/sample-data-blank.js"></script>
+</head>
+<body>
+  <div class="app flex-col">
+    <div class="app__header flex-row">
+      <span class="app__header-left flex-row align-left">
+        <div id="connected-indicator"></div>
+        <div id="connected-indicator-text">Connecting...</div>
+      </span>
+      <span class="app__header-right flex-row align-right">
+        <button type="button" class="red-stop-btn" title="stop moving">Emergency Stop</button>
+      </span>
+    </div>
+    <div class="app__body flex-row">
+      <div class="app__body-left">
+        <h2>Messaging</h2>
+        <div class="app__body-left--tabs flex-row align-left">
+          <button type="button" class="active" id="sent-tab">Sent</button>
+          <button type="button" id="received-tab">Received</button>
+          <button type="button" id="clear-active-tab" title="clear active tab">Clear</button>
+        </div>
+        <div class="app__body-left--tabs-body">
+          <textarea id="sent-msgs-disp"></textarea>
+          <textarea id="received-msgs-disp" class="hidden"></textarea>
+        </div>
+      </div>
+      <div class="app__body-right">
+        <canvas id="threejs-canvas"></canvas>
+      </div>
+    </div>
+    <div id="upside-down-modal" class="hidden">
+      <div class="inner-modal">
+        <h2>Robot is upside down</h2>
+        <button type="button" id="dismiss-upside-down-modal">Dismiss</button>
+      </div>
+    </div>
+  </div>
+  <script src="./scripts/threejs-plotter.js"></script>
+  <script src="./scripts/messaging.js"></script>
+  <script src="./scripts/statuses.js"></script>
+  <script src="./scripts/parseMsgs.js"></script>
+  <script src="./scripts/socket.js"></script>
+</body>
+</html>
