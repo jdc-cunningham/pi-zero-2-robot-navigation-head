@@ -3,7 +3,7 @@ let meshTelUploading = false;
 let socketInterval = null;
 
 const connectToRobot = () => {
-  const socket = new WebSocket('ws://192.168.1.188:80'); // esp01 on robot
+  const socket = new WebSocket('ws://192.168.1.155:5678'); // esp01 on robot
 
   // connection opened, send messages to robot
   socket.addEventListener('open', function (event) {
