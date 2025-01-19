@@ -1,6 +1,6 @@
 import sys
 
-sys.path.insert(1, '/home/pi/pi-zero-2-robot-navigation-head/navigation/wide_angle_sensor')
+sys.path.insert(1, '/home/pi/pi-zero-2-robot-navigation-head/raspberry-pi/wide_angle_sensor')
 
 from VL53L0X.python import VL53L0X
 
