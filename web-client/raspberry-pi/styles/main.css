@@ -14,40 +14,76 @@ h2 {
   font-weight: bold;
 }
 
-.flex {
+
+.app {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.flex-row {
   flex-direction: row;
-}
-
-.flex-row.left {
-  justify-content: flex-start;
-}
-
-.flex-row.right {
-  justify-content: flex-end;
-}
-
-.app {
-  height: 100vh;
+  height: 100%;
   width: 100%;
 }
 
 .app__left {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
   width: 70%;
   height: 100%;
+  border-right: 1px solid #aaa;
+}
+
+.app__left-plot {
+  width: 100%;
+  height: 75%;
+  border-bottom: 1px solid #aaa;
+}
+
+.app__left-telemetry {
+  width: 100%;
+  height: 25%;
 }
 
 .app__right {
   width: 30%;
   height: 100%;
-  border-left: 1px solid #aaa;
+}
+
+.app__right-buttons {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  height: 70%;
+  border-bottom: 1px solid #aaa;
+}
+
+.app__right-commands {
+  position: relative;
+  width: 100%;
+  height: 30%;
+}
+
+.app__right-commands-input {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.app__right-commands-btn {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  border: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: #ccc;
 }

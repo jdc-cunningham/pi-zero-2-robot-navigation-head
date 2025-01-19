@@ -26,14 +26,17 @@
   <script src="./scripts/threejs/utils.js"></script>
 </head>
 <body>
-  <div class="app flex-row">
+  <div class="app">
     <div class="app__left">
       <div class="app__left-plot"></div>
       <div class="app__left-telemetry"></div>
     </div>
     <div class="app__right">
       <div class="app__right-buttons"></div>
-      <div class="app__right-commands"></div>
+      <div class="app__right-commands">
+        <textarea class="app__right-commands-input" placeholder="> send cmd to rpi"></textarea>
+        <button type="button" class="app__right-commands-btn">send</button>
+      </div>
     </div>
   </div>
   <script src="./scripts/threejs-plotter.js"></script>
