@@ -9,3 +9,5 @@ light.off()
 
 motion = Servo()
 motion.boot_center()
+
+motion.pan('right', 60)
