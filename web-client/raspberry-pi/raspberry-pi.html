@@ -8,15 +8,13 @@
   <link rel="stylesheet" href="./styles/css-reset.css">
   <link rel="stylesheet" href="./styles/main.css">
   <style>
-    /* canvas {
+    canvas {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      display: block;
-      border-bottom: 1px solid #282828;
-    } */
+    }
   </style>
   <script src="./scripts/threejs/three.js"></script>
   <script src="./scripts/threejs/OrbitControls.js"></script>
@@ -28,11 +26,18 @@
 <body>
   <div class="app">
     <div class="app__left">
-      <div class="app__left-plot"></div>
+      <div class="app__left-plot">
+        <canvas id="threejs-canvas"></canvas>
+      </div>
       <div class="app__left-telemetry"></div>
     </div>
     <div class="app__right">
-      <div class="app__right-buttons"></div>
+      <div class="app__right-buttons">
+        <div class="app__right-buttons-line">
+          <h2>Status: disconnected</h2>
+          <div class="app__right-buttons-line-connection-status"></div>
+        </div>
+      </div>
       <div class="app__right-commands">
         <textarea class="app__right-commands-input" placeholder="> send cmd to rpi"></textarea>
         <button type="button" class="app__right-commands-btn">send</button>
