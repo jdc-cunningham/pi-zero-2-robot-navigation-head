@@ -15,7 +15,7 @@ const degToRad = (deg) => deg * 0.0174533;
 const plotLine = (sensorX, sensorY, sensorZ) => {
   const points = [];
 
-  points.push(new THREE.Vector3(0.87, 0.63, 6.93)); // wide sensor center
+  points.push(new THREE.Vector3(-0.86, 6.93, 0.63)); // wide sensor center
   points.push(new THREE.Vector3(sensorX, sensorY, sensorZ));
 
   const geometry = new THREE.BufferGeometry().setFromPoints( points );
@@ -28,7 +28,7 @@ const plotLine = (sensorX, sensorY, sensorZ) => {
     false //closed
   );
 
-  const line = new THREE.Line(tubeGeometry, orangeMaterial);
+  const line = new THREE.Line(geometry, orangeMaterial);
 
   scene.add( line );
   renderer.render(scene, camera);
@@ -85,8 +85,8 @@ const sampleFloorSensorScanCoordinateDataPair = {
 
 const sampleFloorSensorScanAngles = [
   [54, [0, 15, 35, 60], [20, 40, 60, 85]],
-  [35, [0, 15, 30, 45, 60], [15, 30, 45, 60, 75]],
-  [15, [0, 20, 40, 60], [20, 40, 60]]
+  // [35, [0, 15, 30, 45, 60], [15, 30, 45, 60, 75]],
+  // [15, [0, 20, 40, 60], [20, 40, 60]]
 ];
 
 const sampleFloorSensorScanDistanecs = [
@@ -108,7 +108,7 @@ const plotSensorBeams = () => {
       console.log(sensorX, sensorZ, sensorY);
 
       // if (!sensorX) plotLine(sensorY, sensorX, sensorZ - 6.93); // due to swapping y-z
-      plotLine(sensorY, sensorX, sensorZ - 6.93); // due to swapping y-z
+      plotLine(-1 * (sensorX + 0.86), sensorY - 6.93, sensorZ); // due to swapping y-z
     });
 
     // left
@@ -117,14 +117,14 @@ const plotSensorBeams = () => {
       const sensorY = getSensorY(tiltAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-l`], "left");
       const sensorZ = getSensorZ(tiltAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-l`], "left");
 
-      // plotLine(-1 * sensorY, sensorX, sensorZ - 6.93);
+      // plotLine(sensorY, sensorX, sensorZ - 6.93);
     });
   });
 }
 
 const threejsPlotChart = () => {
   // https://threejs.org/docs/#manual/en/introduction/Creating-a-scene
-  THREE.Object3D.DefaultUp.set(0, 0, 1); // set Z as vertical axes
+  // THREE.Object3D.DefaultUp.set(0, 0, 1); // set Z as vertical axes
   // 10 z distanece
   const canvasParent = document.querySelector('.app__left-plot');
 
@@ -151,8 +151,8 @@ const threejsPlotChart = () => {
   const gridHelper = new THREE.GridHelper(size, divisions);
   const zVector = new THREE.Vector3(0, 0, 1);
   const yVector = new THREE.Vector3(0, 1, 0);
-  gridHelper.rotateX(Math.PI / 2); // https://stackoverflow.com/a/58554774/2710227
-  gridHelper.lookAt(yVector);
+  // gridHelper.rotateX(Math.PI / 2); // https://stackoverflow.com/a/58554774/2710227
+  // gridHelper.lookAt(yVector);
   scene.add(gridHelper);
 
   controls.update();
@@ -165,7 +165,7 @@ const threejsPlotChart = () => {
   }
 
   // camera
-  camera.position.set( 0, 0, 1 );
+  // camera.position.set( 0, 1, 0 );
   camera.position.z = 30; // zoom out
   // camera.lookAt( 0, 0, 0 );
 
@@ -233,8 +233,8 @@ const threejsPlotChart = () => {
         gltf.asset; // Object
 
         renderer.render( scene, camera );
-        gltfs["basic-robot-model"].handle.scene.rotateX(degToRad(90)); // match blue as Z axis
-        gltfs["basic-robot-model"].handle.scene.rotateY(degToRad(-90)); // match blue as Z axis
+        // gltfs["basic-robot-model"].handle.scene.rotateX(degToRad(90)); // match blue as Z axis
+        // gltfs["basic-robot-model"].handle.scene.rotateY(degToRad(-90)); // match blue as Z axis
         plotSensorBeams();
       },
       // called while loading is progressing
