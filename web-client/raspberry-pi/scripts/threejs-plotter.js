@@ -12,11 +12,11 @@ const renderer = new THREE.WebGLRenderer({ canvas: canvas }); // https://stackov
 
 const degToRad = (deg) => deg * 0.0174533;
 
-const plotLine = (sensorX, sensorY, sensorZ) => {
+const plotLine = (sensor, sensorDistance) => {
   const points = [];
 
-  points.push(new THREE.Vector3(-0.86, 6.93, 0.63)); // wide sensor center
-  points.push(new THREE.Vector3(sensorX, sensorY, sensorZ));
+  points.push(new THREE.Vector3(sensor.x, sensor.y, sensor.z)); // wide sensor center
+  points.push(new THREE.Vector3(sensorDistance.x, sensorDistance.y, sensorDistance.z));
 
   const geometry = new THREE.BufferGeometry().setFromPoints( points );
 
@@ -28,7 +28,7 @@ const plotLine = (sensorX, sensorY, sensorZ) => {
     false //closed
   );
 
-  const line = new THREE.Line(geometry, orangeMaterial);
+  const line = new THREE.Line(tubeGeometry, orangeMaterial);
 
   scene.add( line );
   renderer.render(scene, camera);
@@ -52,39 +52,72 @@ const getSensorZ = (tiltAngle, distance) => {
 }
 
 // const inchesToMeter = inches => inches * 39.3701; // way too big
+// only needed for GLTF import
 const inchesToMeter = inches => inches * 1;
 
+// y is z (SketchUp to ThreeJS)
+// [x, z, y]
+const sampleFloorScanSensorCoordinate = {
+  "54-0-r": [0.86, 6.28, 0.28],
+  "54-15-r": [0.89, 6.28, 0],
+  "54-35-r": [0.84, 6.28, -0.31],
+  "54-60-r": [0.63, 6.28, -0.64],
+  "54-20-l": [0.73, 6.28, 0.51],
+  "54-40-l": [0.52, 6.28, 0.73],
+  "54-60-l": [0.24, 6.28, 0.86],
+  "54-85-l": [-0.15, 6.28, 0.88],
+
+  "35-0-r": [0, 0, 0],
+  "35-15-r": [0, 0, 0],
+  "35-30-r": [0, 0, 0],
+  "35-45-r": [0, 0, 0],
+  "35-60-r": [0, 0, 0],
+  "35-15-l": [0, 0, 0],
+  "35-30-l": [0, 0, 0],
+  "35-45-l": [0, 0, 0],
+  "35-60-l": [0, 0, 0],
+  "35-75-l": [0, 0, 0],
+
+  "15-0-r": [0, 0, 0],
+  "15-20-r": [0, 0, 0],
+  "15-40-r": [0, 0, 0],
+  "15-60-r": [0, 0, 0],
+  "15-20-l": [0, 0, 0],
+  "15-40-l": [0, 0, 0],
+  "15-60-l": [0, 0, 0]
+};
+
 // gltf uses meters
-const sampleFloorSensorScanCoordinateDataPair = {
-  "54-0-r": inchesToMeter(9),
-  "54-15-r": inchesToMeter(8.93),
-  "54-35-r": inchesToMeter(8.78),
-  "54-60-r": inchesToMeter(8.42),
-  "54-20-l": inchesToMeter(9.09),
-  "54-40-l": inchesToMeter(9.05),
-  "54-60-l": inchesToMeter(8.97),
-  "54-85-l": inchesToMeter(8.74),
-  "35-0-r": inchesToMeter(12),
-  "35-15-r": inchesToMeter(11.89),
-  "35-30-r": inchesToMeter(11.31),
-  "35-45-r": inchesToMeter(11.0),
-  "35-60-r": inchesToMeter(10.72),
-  "35-15-l": inchesToMeter(12.56),
-  "35-30-l": inchesToMeter(12.32),
-  "35-45-l": inchesToMeter(11.89),
-  "35-60-l": inchesToMeter(11.54),
-  "35-75-l": inchesToMeter(11.31),
-  "15-0-r": inchesToMeter(26),
-  "15-20-r": inchesToMeter(25.74),
-  "15-40-r": inchesToMeter(22.74),
-  "15-60-r": inchesToMeter(21.06),
-  "15-20-l": inchesToMeter(26.56),
-  "15-40-l": inchesToMeter(25.27),
-  "15-60-l": inchesToMeter(22)
+const sampleFloorScanSensorDistance = {
+  "54-0-r": 9,
+  "54-15-r": 8.93,
+  "54-35-r": 8.78,
+  "54-60-r": 8.42,
+  "54-20-l": 9.09,
+  "54-40-l": 9.05,
+  "54-60-l": 8.97,
+  "54-85-l": 8.74,
+  "35-0-r": 12,
+  "35-15-r": 11.89,
+  "35-30-r": 11.31,
+  "35-45-r": 11.0,
+  "35-60-r": 10.72,
+  "35-15-l": 12.56,
+  "35-30-l": 12.32,
+  "35-45-l": 11.89,
+  "35-60-l": 11.54,
+  "35-75-l": 11.31,
+  "15-0-r": 26,
+  "15-20-r": 25.74,
+  "15-40-r": 22.74,
+  "15-60-r": 21.06,
+  "15-20-l": 26.56,
+  "15-40-l": 25.27,
+  "15-60-l": 22
 };
 
 const sampleFloorSensorScanAngles = [
-  [54, [0, 15, 35, 60], [20, 40, 60, 85]],
+  // [54, [0, 15, 35, 60], [20, 40, 60, 85]],
   // [35, [0, 15, 30, 45, 60], [15, 30, 45, 60, 75]],
   // [15, [0, 20, 40, 60], [20, 40, 60]]
 ];
@@ -96,6 +129,20 @@ const sampleFloorSensorScanDistanecs = [
 ];
 
 const plotSensorBeams = () => {
+  const sensor = {
+    x: 0,
+    y: 0,
+    z: 0
+  };
+
+  const distance = {
+    x: -1 * 1,
+    y: 1,
+    z: 1
+  };
+
+  plotLine(sensor, distance);
+
   sampleFloorSensorScanAngles.forEach(tiltSampleData => {
     tiltAngle = tiltSampleData[0];
 
@@ -108,7 +155,7 @@ const plotSensorBeams = () => {
       console.log(sensorX, sensorZ, sensorY);
 
       // if (!sensorX) plotLine(sensorY, sensorX, sensorZ - 6.93); // due to swapping y-z
-      plotLine(-1 * (sensorX + 0.86), sensorY - 6.93, sensorZ); // due to swapping y-z
+      // plotLine(-1 * (sensorX + 0.86), sensorY - 6.93, sensorZ); // due to swapping y-z
     });
 
     // left
