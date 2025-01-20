@@ -3,12 +3,13 @@ from narrow_angle_sensor.sensor import NarrowSensor
 from wide_angle_sensor.sensor import WideSensor
 from led.led import Led
 from imu_sensor.imu_sensor import IMUSensor
+from navigation.navigation import Navigation
 
 light = Led()
-light.off()
-
 motion = Servo()
-motion.boot_center()
+wide_angle_sensor = WideSensor()
+navigation = Navigation(motion, wide_angle_sensor)
 
-# motion.pan('left', 85)
-motion.tilt('down', 54)
+light.off()
+motion.boot_center()
+navigation.scan_floor()

@@ -24,4 +24,4 @@ class NarrowSensor():
 
   def get_distance(self):
     self.sensor.getData()
-    return self.sensor.dist * 0.39
+    return round(self.sensor.dist * 0.39, 2)

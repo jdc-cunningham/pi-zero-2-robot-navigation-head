@@ -1,10 +1,14 @@
+import time
+
 # units are inches and degrees
 
 class Navigation():
-  def __init__(self):
+  def __init__(self, motion, wide_angle_sensor):
     self.robot_length = 14
     self.robot_width = 7.75
     self.robot_height = 9
+    self.motion = motion
+    self.sensor = wide_angle_sensor
 
     # pan/tilt servo is centered in the beginning of floor scan
     # tilt looks all the way down maximum
@@ -18,8 +22,47 @@ class Navigation():
       [15, [20, 40, 60], [20, 40, 60]]
     ]
 
+    self.flat_floor_data_sample = [
+      [[8.93, 8.78, 8.42], [9.09, 9.05, 8.97, 8.74]],
+      [[11.89, 11.31, 11.0, 10.72], [12.56, 12.32, 11.89, 11.54, 11.31]],
+      [[25.74, 22.74, 21.06], [26.56, 25.27, 22.0]]
+    ]
+
+    self.floor_scan_values = []
+
   def scan_floor(self):
-    print('start')
+    self.motion.boot_center()
+
+    for tilt_id, tilt_sample in enumerate(self.floor_scan_positions):
+      tilt_angle = tilt_sample[0]
+      right_angles = tilt_sample[1]
+      left_angles = tilt_sample[2]
+
+      self.motion.tilt("down", tilt_angle)
+      time.sleep(1) # wait for vibration to stop
+
+      self.floor_scan_values.append([
+        [], # right
+        []  # left
+      ])
+
+      for right_angle in right_angles:
+        self.motion.pan("right", right_angle)
+        time.sleep(1)
+        self.floor_scan_values[tilt_id][0].append(self.sensor.get_distance())
+
+      self.motion.pan_center()
+      time.sleep(1)
+
+      for left_angle in left_angles:
+        self.motion.pan("left", left_angle)
+        time.sleep(1)
+        self.floor_scan_values[tilt_id][1].append(self.sensor.get_distance())
+
+    self.motion.boot_center()
+    time.sleep(1)
+
+    print(self.floor_scan_values)
 
   def start(self):
     print('start')
