@@ -35,13 +35,13 @@ const plotLine = (sensorX, sensorY, sensorZ) => {
 }
 
 const getSensorX = (sweepAngle, sensorDistance, direction = "") => {
-  const multipler = direction ? -1 : 1;
+  const multipler = 1;
   const distanceRadians = degreesToRadians(Math.abs(parseFloat(sweepAngle)));
-  return parseFloat((sensorDistance * Math.cos(distanceRadians)).toFixed(2)) * multipler;
+  return parseFloat((sensorDistance * Math.sin(distanceRadians)).toFixed(2)) * multipler;
 }
 
-const getSensorY = (tiltAngle, sensorDistance) => {
-  const floorAngle = tiltAngle;
+const getSensorY = (sweepAngle, sensorDistance) => {
+  const floorAngle = sweepAngle;
   const distanceRadians = degreesToRadians(Math.abs(parseFloat(floorAngle)));
   return parseFloat(((sensorDistance * Math.sin(distanceRadians))).toFixed(2));
 }
@@ -51,70 +51,74 @@ const getSensorZ = (tiltAngle, distance) => {
   return parseFloat((distance * Math.sin(distanceRadians)).toFixed(2));
 }
 
-// const inchToMeter = inches => inches * 39.3701; // way too big
-const inchToMeter = inches => inches * 1;
+// const inchesToMeter = inches => inches * 39.3701; // way too big
+const inchesToMeter = inches => inches * 1;
 
 // gltf uses meters
 const sampleFloorSensorScanCoordinateDataPair = {
-  "54-15-r": inchToMeter(8.93),
-  "54-35-r": inchToMeter(8.78),
-  "54-60-r": inchToMeter(8.42),
-  "54-20-l": inchToMeter(9.09),
-  "54-40-l": inchToMeter(9.05),
-  "54-60-l": inchToMeter(8.97),
-  "54-85-l": inchToMeter(8.74),
-  "35-15-r": inchToMeter(11.89),
-  "35-30-r": inchToMeter(11.31),
-  "35-45-r": inchToMeter(11.0),
-  "35-60-r": inchToMeter(10.72),
-  "35-15-l": inchToMeter(12.56),
-  "35-30-l": inchToMeter(12.32),
-  "35-45-l": inchToMeter(11.89),
-  "35-60-l": inchToMeter(11.54),
-  "35-75-l": inchToMeter(11.31),
-  "15-20-r": inchToMeter(25.74),
-  "15-40-r": inchToMeter(22.74),
-  "15-60-r": inchToMeter(21.06),
-  "15-20-l": inchToMeter(26.56),
-  "15-40-l": inchToMeter(25.27),
-  "15-60-l": inchToMeter(22)
+  "54-0-r": inchesToMeter(9),
+  "54-15-r": inchesToMeter(8.93),
+  "54-35-r": inchesToMeter(8.78),
+  "54-60-r": inchesToMeter(8.42),
+  "54-20-l": inchesToMeter(9.09),
+  "54-40-l": inchesToMeter(9.05),
+  "54-60-l": inchesToMeter(8.97),
+  "54-85-l": inchesToMeter(8.74),
+  "35-0-r": inchesToMeter(12),
+  "35-15-r": inchesToMeter(11.89),
+  "35-30-r": inchesToMeter(11.31),
+  "35-45-r": inchesToMeter(11.0),
+  "35-60-r": inchesToMeter(10.72),
+  "35-15-l": inchesToMeter(12.56),
+  "35-30-l": inchesToMeter(12.32),
+  "35-45-l": inchesToMeter(11.89),
+  "35-60-l": inchesToMeter(11.54),
+  "35-75-l": inchesToMeter(11.31),
+  "15-0-r": inchesToMeter(26),
+  "15-20-r": inchesToMeter(25.74),
+  "15-40-r": inchesToMeter(22.74),
+  "15-60-r": inchesToMeter(21.06),
+  "15-20-l": inchesToMeter(26.56),
+  "15-40-l": inchesToMeter(25.27),
+  "15-60-l": inchesToMeter(22)
 };
 
 const sampleFloorSensorScanAngles = [
-  [54, [15, 35, 60], [20, 40, 60, 85]],
-  [35, [15, 30, 45, 60], [15, 30, 45, 60, 75]],
-  [15, [20, 40, 60], [20, 40, 60]]
+  [54, [0, 15, 35, 60], [20, 40, 60, 85]],
+  [35, [0, 15, 30, 45, 60], [15, 30, 45, 60, 75]],
+  [15, [0, 20, 40, 60], [20, 40, 60]]
 ];
 
 const sampleFloorSensorScanDistanecs = [
-  [[8.93, 8.78, 8.42], [9.09, 9.05, 8.97, 8.74]],
-  [[11.89, 11.31, 11.0, 10.72], [12.56, 12.32, 11.89, 11.54, 11.31]],
-  [[25.74, 22.74, 21.06], [26.56, 25.27, 22.0]]
+  [[9, 8.93, 8.78, 8.42], [9.09, 9.05, 8.97, 8.74]],
+  [[12, 11.89, 11.31, 11.0, 10.72], [12.56, 12.32, 11.89, 11.54, 11.31]],
+  [[26, 25.74, 22.74, 21.06], [26.56, 25.27, 22.0]]
 ];
 
 const plotSensorBeams = () => {
-  sampleFloorSensorScanAngles.forEach(tiltSampleSet => {
-    sampleFloorSensorScanAngles.forEach(tiltSampleData => {
-      tiltAngle = tiltSampleData[0];
+  sampleFloorSensorScanAngles.forEach(tiltSampleData => {
+    tiltAngle = tiltSampleData[0];
 
-      // right
-      tiltSampleData[1].forEach(sweepAngle => {
-        const sensorX = getSensorX(sweepAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-r`]);
-        const sensorY = getSensorY(tiltAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-r`]) - 6.93;
-        const sensorZ = getSensorZ(tiltAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-r`]);
+    // right
+    tiltSampleData[1].forEach(sweepAngle => {
+      const sensorX = getSensorX(sweepAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-r`]);
+      const sensorY = getSensorY(tiltAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-r`]);
+      const sensorZ = getSensorZ(tiltAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-r`]);
 
-        plotLine(sensorX, sensorZ, sensorY); // due to swapping y-z
-      });
+      console.log(sensorX, sensorZ, sensorY);
 
-      // left
-      tiltSampleData[2].forEach(sweepAngle => {
-        const sensorX = getSensorX(sweepAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-l`], "left");
-        const sensorY = getSensorY(tiltAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-l`], "left") - 6.93;
-        const sensorZ = getSensorZ(tiltAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-l`], "left");
+      // if (!sensorX) plotLine(sensorY, sensorX, sensorZ - 6.93); // due to swapping y-z
+      plotLine(sensorY, sensorX, sensorZ - 6.93); // due to swapping y-z
+    });
 
-        plotLine(sensorX, sensorZ, sensorY);
-      });
-    });    
+    // left
+    tiltSampleData[2].forEach(sweepAngle => {
+      const sensorX = getSensorX(sweepAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-l`], "left");
+      const sensorY = getSensorY(tiltAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-l`], "left");
+      const sensorZ = getSensorZ(tiltAngle, sampleFloorSensorScanCoordinateDataPair[`${tiltAngle}-${sweepAngle}-l`], "left");
+
+      // plotLine(-1 * sensorY, sensorX, sensorZ - 6.93);
+    });
   });
 }
 
@@ -126,7 +130,7 @@ const threejsPlotChart = () => {
 
   scene.background = new THREE.Color( 0xffffff );
 
-  renderer.setSize(canvasParent.offsetWidth, canvasParent.offsetWidth); // add false for lower resolution after dividing x/y values
+  renderer.setSize(canvasParent.offsetWidth, canvasParent.offsetHeight); // add false for lower resolution after dividing x/y values
   // renderer.setPixelRatio(window.devicePixelRatio);
   // renderer.setPixelRatio(2); // looks great
   // https://discourse.threejs.org/t/render-looks-blurry-and-pixelated-even-with-antialias-true-why/12381/5
