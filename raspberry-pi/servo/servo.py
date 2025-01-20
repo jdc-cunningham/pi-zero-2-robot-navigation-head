@@ -18,6 +18,7 @@ class Servo:
     if (direction == "right"):
       # these are not proportional to the #### position above, manually dialed in using external reference (compass)
       right_deg_pos = {
+        0: 0,
         15: 125,
         20: 225,
         30: 300,
@@ -31,6 +32,7 @@ class Servo:
       self.pigpio.set_servo_pulsewidth(self.pan_servo_pin, self.pan_servo_center_pos - right_deg_pos[degree])
     else:
       left_deg_pos = {
+        0: 0,
         15: 200,
         20: 250,
         30: 360,
