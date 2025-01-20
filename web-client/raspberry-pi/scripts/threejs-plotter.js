@@ -90,33 +90,33 @@ const sampleFloorScanSensorCoordinate = {
 
 // gltf uses meters
 const sampleFloorScanSensorDistance = {
-  "54-0-r": 9,
+  "54-0-r": 9.2,
   "54-15-r": 8.93,
-  "54-35-r": 8.78,
-  "54-60-r": 8.42,
-  "54-20-l": 9.09,
-  "54-40-l": 9.05,
+  "54-35-r": 9.01,
+  "54-60-r": 8.58,
+  "54-20-l": 9.48,
+  "54-40-l": 9.13,
   "54-60-l": 8.97,
   "54-85-l": 8.74,
 
-  "35-0-r": 12,
-  "35-15-r": 11.89,
-  "35-30-r": 11.31,
-  "35-45-r": 11.0,
-  "35-60-r": 10.72,
-  "35-15-l": 12.56,
-  "35-30-l": 12.32,
-  "35-45-l": 11.89,
-  "35-60-l": 11.54,
-  "35-75-l": 11.31,
+  "35-0-r": 12.13,
+  "35-15-r": 11.97,
+  "35-30-r": 11.54,
+  "35-45-r": 11.15,
+  "35-60-r": 11.84,
+  "35-15-l": 10.93,
+  "35-30-l": 11.36,
+  "35-45-l": 12.89,
+  "35-60-l": 11.74,
+  "35-75-l": 11.12,
 
-  "15-0-r": 26,
-  "15-20-r": 25.74,
-  "15-40-r": 22.74,
-  "15-60-r": 21.06,
-  "15-20-l": 26.56,
-  "15-40-l": 25.27,
-  "15-60-l": 22
+  "15-0-r": 26.29,
+  "15-20-r": 25.27,
+  "15-40-r": 23.63,
+  "15-60-r": 22.15,
+  "15-20-l": 27.11,
+  "15-40-l": 319.41,
+  "15-60-l": 26.75
 };
 
 const sampleFloorSensorScanAngles = [
@@ -126,9 +126,12 @@ const sampleFloorSensorScanAngles = [
 ];
 
 const sampleFloorSensorScanDistanecs = [
-  [[9, 8.93, 8.78, 8.42], [9.09, 9.05, 8.97, 8.74]],
-  [[12, 11.89, 11.31, 11.0, 10.72], [12.56, 12.32, 11.89, 11.54, 11.31]],
-  [[26, 25.74, 22.74, 21.06], [26.56, 25.27, 22.0]]
+  // [[9, 8.93, 8.78, 8.42], [9.09, 9.05, 8.97, 8.74]],
+  // [[12, 11.89, 11.31, 11.0, 10.72], [12.56, 12.32, 11.89, 11.54, 11.31]],
+  // [[26, 25.74, 22.74, 21.06], [26.56, 25.27, 22.0]]
+  [[9.2, 8.93, 9.01, 8.58], [9.48, 9.13, 8.97, 8.74]],
+  [[12.13, 11.97, 11.54, 11.15, 10.84], [11.93, 12.36, 11.89, 11.74, 11.12]],
+  [[26.29, 25.27, 23.63, 22.15], [27.11, 319.41, 26.75]]
 ];
 
 const plotSensorBeams = () => {
@@ -152,9 +155,15 @@ const plotSensorBeams = () => {
     // right
     tiltSampleData[1].forEach(sweepAngle => {
       const distanceX = getDistanceX(sweepAngle, sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-r`]);
-      const distanceY = getDistanceY(tiltAngle, sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-r`]);
+      const distanceY = getDistanceY(sweepAngle, sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-r`]);
       const distanceZ = getDistanceZ(tiltAngle, sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-r`]);
       const sensorCoordinate = sampleFloorScanSensorCoordinate[`${tiltAngle}-${sweepAngle}-r`];
+
+      if (sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-r`] !== 25.27) return;
+
+      // 8.34, 22.94, 6.54 -> 8.34, 6.54, 22.94 
+      console.log(sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-r`]);
+      console.log(distanceX, distanceY, distanceZ);
 
       plotLine(
         {
@@ -164,8 +173,8 @@ const plotSensorBeams = () => {
         },
         {
           x: -1 * distanceX,
-          y: sensorCoordinate[1] - distanceY, // sensor is above horizon
-          z: distanceZ
+          y: distanceZ - sensorCoordinate[1], // sensor is above horizon
+          z: distanceY
         }
       );
     });
