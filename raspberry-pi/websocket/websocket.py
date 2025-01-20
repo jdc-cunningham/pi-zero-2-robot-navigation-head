@@ -5,12 +5,17 @@ class Websocket():
   def __init__(self):
     self.socket = False
 
+    self.start()
+
   async def check_command(self, msg, socket):
+    print(msg)
     await socket.send("str")
 
   async def receive(self, websocket):
     while True:
       msg = await websocket.recv()
+      print("received")
+      print(msg)
       await self.check_command(msg, websocket)
       await asyncio.sleep(0.1)
 
