@@ -14,9 +14,6 @@ class Servo:
     self.pigpio.set_servo_pulsewidth(self.tilt_servo_pin, self.tilt_servo_center_pos)
     self.pigpio.set_servo_pulsewidth(self.pan_servo_pin, self.pan_servo_center_pos)
 
-  def pan_center(self):
-    self.pigpio.set_servo_pulsewidth(self.pan_servo_pin, self.pan_servo_center_pos)
-
   def pan(self, direction, degree):
     if (direction == "right"):
       # these are not proportional to the #### position above, manually dialed in using external reference (compass)
@@ -32,6 +29,32 @@ class Servo:
       }
 
       self.pigpio.set_servo_pulsewidth(self.pan_servo_pin, self.pan_servo_center_pos - right_deg_pos[degree])
+    else:
+      left_deg_pos = {
+        15: 200,
+        20: 250,
+        30: 360,
+        40: 450,
+        45: 500,
+        60: 650,
+        75: 800,
+        85: 900
+      }
 
-  def tilt_center(self):
+      self.pigpio.set_servo_pulsewidth(self.pan_servo_pin, self.pan_servo_center_pos + left_deg_pos[degree])
+
+  def pan_center(self):
+    self.pigpio.set_servo_pulsewidth(self.pan_servo_pin, self.pan_servo_center_pos)
+
+  def tilt(self, direction, degree):
+    tilt_deg_pos = {
+      15: 50,
+      35: 275,
+      54: 400
+    }
+
+    if (direction == "down"):
+      self.pigpio.set_servo_pulsewidth(self.tilt_servo_pin, self.tilt_servo_center_pos - tilt_deg_pos[degree])
+
+  def tilt_center(self, degree):
     self.pigpio.set_servo_pulsewidth(self.tilt_servo_pin, self.tilt_servo_center_pos)
