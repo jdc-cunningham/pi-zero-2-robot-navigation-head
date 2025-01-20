@@ -115,13 +115,13 @@ const sampleFloorScanSensorDistance = {
   "15-40-r": 23.63,
   "15-60-r": 22.15,
   "15-20-l": 27.11,
-  "15-40-l": 319.41,
+  "15-40-l": 27.11, // 319.41 outlier example, pretty much nothing measured/infinite, cap to largest value in set
   "15-60-l": 26.75
 };
 
 const sampleFloorSensorScanAngles = [
-  // [54, [0, 15, 35, 60], [20, 40, 60, 85]],
-  // [35, [0, 15, 30, 45, 60], [15, 30, 45, 60, 75]],
+  [54, [0, 15, 35, 60], [20, 40, 60, 85]],
+  [35, [0, 15, 30, 45, 60], [15, 30, 45, 60, 75]],
   [15, [0, 20, 40, 60], [20, 40, 60]]
 ];
 
@@ -159,12 +159,6 @@ const plotSensorBeams = () => {
       const distanceZ = getDistanceZ(tiltAngle, sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-r`]);
       const sensorCoordinate = sampleFloorScanSensorCoordinate[`${tiltAngle}-${sweepAngle}-r`];
 
-      if (sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-r`] !== 25.27) return;
-
-      // 8.34, 22.94, 6.54 -> 8.34, 6.54, 22.94 
-      console.log(sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-r`]);
-      console.log(distanceX, distanceY, distanceZ);
-
       plotLine(
         {
           x: -1 * sensorCoordinate[0],
@@ -182,22 +176,22 @@ const plotSensorBeams = () => {
     // left
     tiltSampleData[2].forEach(sweepAngle => {
       const distanceX = getDistanceX(sweepAngle, sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-l`], "left");
-      const distanceY = getDistanceY(tiltAngle, sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-l`], "left");
+      const distanceY = getDistanceY(sweepAngle, sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-l`], "left");
       const distanceZ = getDistanceZ(tiltAngle, sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-l`], "left");
       const sensorCoordinate = sampleFloorScanSensorCoordinate[`${tiltAngle}-${sweepAngle}-l`];
 
-      // plotLine(
-      //   {
-      //     x: sensorCoordinate[0],
-      //     y: sensorCoordinate[1],
-      //     z: sensorCoordinate[2]
-      //   },
-      //   {
-      //     x: distanceX,
-      //     y: sensorCoordinate[1] - distanceY, // sensor is above horizon
-      //     z: distanceZ
-      //   }
-      // );
+      plotLine(
+        {
+          x: sensorCoordinate[0],
+          y: sensorCoordinate[1],
+          z: sensorCoordinate[2]
+        },
+        {
+          x: distanceX,
+          y: distanceZ - sensorCoordinate[1], // sensor is above horizon
+          z: distanceY
+        }
+      );
     });
   });
 }
