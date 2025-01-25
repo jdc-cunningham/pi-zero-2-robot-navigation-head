@@ -32,6 +32,7 @@ class Navigation():
 
   def scan_floor(self):
     self.motion.boot_center()
+    time.sleep(2)
 
     for tilt_id, tilt_sample in enumerate(self.floor_scan_positions):
       tilt_angle = tilt_sample[0]
@@ -52,7 +53,7 @@ class Navigation():
         self.floor_scan_values[tilt_id][0].append(self.sensor.get_distance())
 
       self.motion.pan_center()
-      time.sleep(1)
+      time.sleep(2)
 
       for left_angle in left_angles:
         self.motion.pan("left", left_angle)

@@ -135,20 +135,6 @@ const sampleFloorSensorScanDistanecs = [
 ];
 
 const plotSensorBeams = () => {
-  const sensor = {
-    x: -1 * 0.86,
-    y: 0,
-    z: 0.28
-  };
-
-  const distance = {
-    x: -1 * 0.86,
-    y: 6.29,
-    z: 0.24
-  };
-
-  plotLine(sensor, distance);
-
   sampleFloorSensorScanAngles.forEach(tiltSampleData => {
     tiltAngle = tiltSampleData[0];
 
