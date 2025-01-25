@@ -63,10 +63,12 @@ Object.keys(all_data).forEach((key, index) => {
         if (index == 0) printSet[index2][index3][index4] = [];
         printSet[index2][index3][index4].push(sensor);
         
-        if (sensor > largestVal && sensor < 100) {
+        if (sensor > largestVal && sensor < 300) {
         	largestVal = sensor;
         }
       });
+      
+      largestVal = 0;
     });
   });
 });
