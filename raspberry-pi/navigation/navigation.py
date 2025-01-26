@@ -1,9 +1,11 @@
 import time
+import math
 
 # units are inches and degrees
 
 class Navigation():
-  def __init__(self, motion, wide_angle_sensor, narrow_angle_sensor):
+  def __init__(self, motion, wide_angle_sensor, narrow_angle_sensor, socket):
+    self.socket = socket
     self.robot_length = 14
     self.robot_width = 7.75
     self.robot_height = 9
@@ -16,6 +18,8 @@ class Navigation():
     self.narrow_sensor = narrow_angle_sensor
     self.imu_rotation_offset = 2.78 # z-axis (forward)
     self.wide_sensor_y_offest = 0.58 # z-axis
+    self.floor_scan_values = []
+    self.floor_scan_set = {} # time: data
 
     # pan/tilt servo is centered in the beginning of floor scan
     # tilt looks all the way down maximum
@@ -24,9 +28,27 @@ class Navigation():
     # [down angle, [right angle, ra2, ..., max], [left angle, la2, ..., max]]
     # 18" straight ahead is clear level for overhead
 
-    self.floor_scan_values = []
+    self.floor_scan_positions = [
+      [54, [0, 15, 35, 60], [20, 40, 60, 85]],
+      [35, [0, 15, 30, 45, 60], [15, 30, 45, 60, 75]],
+      [15, [0, 20, 40, 60], [20, 40, 60]]
+    ]
+
+    '''
+    these commands were manually dialed in based on my robot
+
+    turning
+    rc_085_085_0895 (turn right 90 deg)
+    rc_100_100_0730 (turn left 90 deg)
+
+    move forward
+    2.75" (rc_085_098_425)
+    11.5" (rc_084_098_1550)
+    18.5" (rc_084_098_2500)
+    '''
 
   def scan_floor(self):
+    print("")
     self.motion.boot_center()
     time.sleep(2)
 
@@ -68,6 +90,18 @@ class Navigation():
     time.sleep(1)
 
     print(self.floor_scan_values)
+    print("")
+
+  # 360
+  def full_floor_scan(self):
+    for x in range(0, 4):
+      self.scan_floor()
+      self.socket.send("rc_085_085_0900")
+      self.floor_scan_set[math.floor(time.time())] = self.floor_scan_values
+      self.floor_scan_values = []
+
+    print(self.floor_scan_values)
+    print("")
 
   def start(self):
     print('start')
