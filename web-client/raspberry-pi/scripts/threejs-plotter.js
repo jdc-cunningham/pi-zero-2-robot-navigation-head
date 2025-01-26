@@ -271,6 +271,19 @@ const threejsPlotChart = () => {
     scene.add(mesh);
   }
 
+  // 54 refers to degree down from horizon sensor is looking
+  const plot54Plane = () => {
+
+  }
+
+  const plot35Plane = () => {
+
+  }
+  
+  const plot15Plane = () => {
+
+  }
+
   renderer.render(scene, camera);
 
   // referencing my Twerk Lidar Robot project
@@ -300,7 +313,8 @@ const threejsPlotChart = () => {
         renderer.render( scene, camera );
         // gltfs["basic-robot-model"].handle.scene.rotateX(degToRad(90)); // match blue as Z axis
         // gltfs["basic-robot-model"].handle.scene.rotateY(degToRad(-90)); // match blue as Z axis
-        plotSensorBeams();
+        // plotSensorBeams();
+
       },
       // called while loading is progressing
       function ( xhr ) {
