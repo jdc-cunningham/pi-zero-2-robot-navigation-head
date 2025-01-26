@@ -52,10 +52,9 @@ class Navigation():
         self.motion.pan("right", right_angle)
         time.sleep(1)
 
-        if (tilt_angle == 15):
-          self.floor_scan_values[tilt_id][0].append(self.narrow_sensor.get_distance())
-        else:
-          self.floor_scan_values[tilt_id][0].append(self.wide_sensor.get_distance())
+        sensor_distance = self.narrow_sensor.get_distance() if tilt_angle == 15 else self.wide_sensor.get_distance()
+
+        self.floor_scan_values[tilt_id][0].append(sensor_distance)
 
       self.motion.pan_center()
       time.sleep(2)
@@ -64,10 +63,9 @@ class Navigation():
         self.motion.pan("left", left_angle)
         time.sleep(1)
 
-        if (tilt_angle == 15):
-          self.floor_scan_values[tilt_id][0].append(self.narrow_sensor.get_distance())
-        else:
-          self.floor_scan_values[tilt_id][0].append(self.wide_sensor.get_distance())
+        sensor_distance = self.narrow_sensor.get_distance() if tilt_angle == 15 else self.wide_sensor.get_distance()
+
+        self.floor_scan_values[tilt_id][1].append(sensor_distance)
 
     self.motion.boot_center()
     time.sleep(1)
