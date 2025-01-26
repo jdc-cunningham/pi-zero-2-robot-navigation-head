@@ -7,6 +7,10 @@ class Navigation():
     self.robot_length = 14
     self.robot_width = 7.75
     self.robot_height = 9
+    self.robot_rotation_width = 20.23
+    # imu which is the designed pan/tilt center
+    # all sensors aligned except camera (upside down) due to ribbon cable
+    self.sensor_height = 7.13
     self.motion = motion
     self.wide_sensor = wide_angle_sensor
     self.narrow_sensor = narrow_angle_sensor
@@ -17,17 +21,6 @@ class Navigation():
     # next tilt angle, repeat
     # [down angle, [right angle, ra2, ..., max], [left angle, la2, ..., max]]
     # 18" straight ahead is clear level for overhead
-    self.floor_scan_positions = [
-      [54, [0, 15, 35, 60], [20, 40, 60, 85]],
-      [35, [0, 15, 30, 45, 60], [15, 30, 45, 60, 75]],
-      [15, [0, 20, 40, 60], [20, 40, 60]]
-    ]
-
-    self.flat_floor_data_sample = [
-      [[9.5, 8.93, 8.78, 8.42], [9.09, 9.05, 8.97, 8.74]],
-      [[12.5, 11.89, 11.31, 11.0, 10.72], [12.56, 12.32, 11.89, 11.54, 11.31]],
-      [[27, 25.74, 22.74, 21.06], [26.56, 25.27, 22.0]]
-    ]
 
     self.floor_scan_values = []
 
