@@ -14,6 +14,8 @@ class Navigation():
     self.motion = motion
     self.wide_sensor = wide_angle_sensor
     self.narrow_sensor = narrow_angle_sensor
+    self.imu_rotation_offset = 2.78 # z-axis (forward)
+    self.wide_sensor_y_offest = 0.58 # z-axis
 
     # pan/tilt servo is centered in the beginning of floor scan
     # tilt looks all the way down maximum
