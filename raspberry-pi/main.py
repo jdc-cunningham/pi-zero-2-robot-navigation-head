@@ -9,8 +9,9 @@ from navigation.navigation import Navigation
 # socket = Websocket()
 light = Led()
 motion = Servo()
+narrow_angle_sensor = NarrowSensor()
 wide_angle_sensor = WideSensor()
-navigation = Navigation(motion, wide_angle_sensor)
+navigation = Navigation(motion, wide_angle_sensor, narrow_angle_sensor)
 
 light.off()
 motion.boot_center()

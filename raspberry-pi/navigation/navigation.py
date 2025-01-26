@@ -3,12 +3,13 @@ import time
 # units are inches and degrees
 
 class Navigation():
-  def __init__(self, motion, wide_angle_sensor):
+  def __init__(self, motion, wide_angle_sensor, narrow_angle_sensor):
     self.robot_length = 14
     self.robot_width = 7.75
     self.robot_height = 9
     self.motion = motion
-    self.sensor = wide_angle_sensor
+    self.wide_sensor = wide_angle_sensor
+    self.narrow_sensor = narrow_angle_sensor
 
     # pan/tilt servo is centered in the beginning of floor scan
     # tilt looks all the way down maximum
@@ -50,7 +51,11 @@ class Navigation():
       for right_angle in right_angles:
         self.motion.pan("right", right_angle)
         time.sleep(1)
-        self.floor_scan_values[tilt_id][0].append(self.sensor.get_distance())
+
+        if (tilt_angle == 15):
+          self.floor_scan_values[tilt_id][0].append(self.narrow_sensor.get_distance())
+        else:
+          self.floor_scan_values[tilt_id][0].append(self.wide_sensor.get_distance())
 
       self.motion.pan_center()
       time.sleep(2)
@@ -58,7 +63,11 @@ class Navigation():
       for left_angle in left_angles:
         self.motion.pan("left", left_angle)
         time.sleep(1)
-        self.floor_scan_values[tilt_id][1].append(self.sensor.get_distance())
+
+        if (tilt_angle == 15):
+          self.floor_scan_values[tilt_id][0].append(self.narrow_sensor.get_distance())
+        else:
+          self.floor_scan_values[tilt_id][0].append(self.wide_sensor.get_distance())
 
     self.motion.boot_center()
     time.sleep(1)
