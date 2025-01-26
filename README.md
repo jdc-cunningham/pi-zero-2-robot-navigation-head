@@ -1,5 +1,9 @@
 ### About
 
+What is it?
+
+A camera, ToF ranging, inertial sensor set on a gimbal that wireless controls a body via websocket.
+
 Previously called: Floating Navigation Sensor Assembly (FNSA)
 
 This is a crude SLAM navigation unit that can get attached to another robot. In the case below a basic 2 servo buggy with a websocket for control.
