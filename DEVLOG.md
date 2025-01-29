@@ -59,6 +59,10 @@ This is what I've had in a sketch program for a bit
 
 <img src="./devlog-media/drawing-01282025.JPG"/>
 
+8:59 PM
+
+Yeah I think I just gotta accept that I can't code (more) after work
+
 ### 01/27/2025
 
 6:45 PM
