@@ -1,3 +1,58 @@
+### 01/28/2025
+
+8:03 PM
+
+poor ass reporting for duty
+
+gonna try and feel like I achieved something, I donated plasma today so there is this gauze thing around my elbow annoying to type with
+
+I did eat more and drink less caffeine I feel less miserable today headache wise
+
+8:07 PM
+
+I've got a movie on in the background, not smart
+
+8:17 PM
+
+gonna pause this movie
+
+8:31 PM
+
+I need a way to plot these scan planes at any angle/orientation
+
+I should use the ploting library to see the stuff too that would help
+
+8:33 PM
+
+Okay yeah that could be a quick goal, plot a square in mat plot lib
+
+this is great
+https://stackoverflow.com/questions/13013781/how-to-draw-a-rectangle-over-a-specific-region-in-a-matplotlib-graph
+
+pretty much what will happen is the scan, plot full open space or partial, move forward (IMU) do i again, if turning track that
+
+8:38 PM
+
+I have to get the min/max values per sensor scan too
+
+8:42 PM
+
+I'm struggling... I'm fat as shit too damn, like I lift and have muscles but my gut, sucks sitting on your as 90%
+
+I do a non-stop 5K run but it's only 1 day 
+
+Yeah... I just feel shitty damn
+
+8:48 PM
+
+Let me try and get those min max values just screwing around with a fiddle
+
+This stuff is not hard I'm just drained after my 8 hr desk job... I'm not sure if it's the salt but I had a nightmare too so woke up like 2.5 hrs into sleep, slept the rest of the 4 hrs till getting up at 7:30 AM
+
+8:50 PM
+
+fuhhhhh I failed I'll just do nothing I guess
+
 ### 01/27/2025
 
 6:45 PM
@@ -13,4 +68,3 @@ But anyway it is a struggle for me to have motivation after work to do stuff/hav
 What I wanted to do right now is to plot the mesh parts in python (no visual) just purely coordinate math.
 
 I can double check it via SketchUp or even ThreeJS plotting but I'm talking about generating a map/collision detection in 2D.
-
