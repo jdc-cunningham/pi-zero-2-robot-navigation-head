@@ -53,6 +53,12 @@ This stuff is not hard I'm just drained after my 8 hr desk job... I'm not sure i
 
 fuhhhhh I failed I'll just do nothing I guess
 
+8:54 PM
+
+This is what I've had in a sketch program for a bit
+
+<img src="./devlog-media/drawing-01282025.JPG"/>
+
 ### 01/27/2025
 
 6:45 PM
