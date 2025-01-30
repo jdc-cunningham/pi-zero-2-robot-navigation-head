@@ -31,6 +31,12 @@ Aye there we go... I think I'll use classes for the scan planes because I can us
 
 <img src="./devlog-media/basic-plot-01292025.JPG"/>
 
+8:15 PM
+
+Alright before I start watching tv/eating food, let me do a rotation real quick, let me make sure it's asymmetric not a square
+
+
+
 ### 01/28/2025
 
 8:03 PM
