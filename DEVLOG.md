@@ -1,3 +1,15 @@
+### 01/29/2025
+
+6:44 PM
+
+I did a 5K run I feel like I have energy right now let's see
+
+- plot square
+- rotate coordinates 90 degrees and plot
+
+6:50 PM
+I'm gonna start working on cameras again, I want to make a new UI
+
 ### 01/28/2025
 
 8:03 PM
