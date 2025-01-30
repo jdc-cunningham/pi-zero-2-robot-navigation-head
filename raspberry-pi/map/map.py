@@ -37,4 +37,6 @@ class Map():
     current_axis = plot.gca()
 
     for scan in self.scans:
-      current_axis.add_patch(Rectangle((scan.x_offset, scan.y_offset), scan.width, scan.height, facecolor="blue"))
+      current_axis.add_patch(Rectangle((scan["x_offset"], scan["y_offset"]), scan["width"], scan["distance"], facecolor="blue"))
+
+    plot.show()

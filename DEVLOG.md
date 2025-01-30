@@ -10,6 +10,27 @@ I did a 5K run I feel like I have energy right now let's see
 6:50 PM
 I'm gonna start working on cameras again, I want to make a new UI
 
+7:20 PM
+
+Damn I got distracted, I'm looking to buy another c-mount lens lol the 2.8-12mm one in particular that'd be a nice zoom lens between 15mm to 66mm roughly full frame
+
+Aside from that I want to get a full frame adapter and try out random manual lenses and... build a new auto zoom f-stop thing that's cleaner than the ML-hatcam. I'm looking forward to this coming summer if my life stays on the trajectory it's going right now financially
+
+7:31 PM
+
+ehh... I don't think it's worth it, the lens appears to have a 3MP resolving power... should just go for the adapter
+
+I'm curious why there's no sample images out there though I may get it just for that
+
+7:35 PM
+Oh yeah I am trying to do this plot just ran into an admin issue with pip on windows
+
+7:38 PM
+
+Aye there we go... I think I'll use classes for the scan planes because I can use dot notation/looks prettier
+
+<img src="./devlog-media/basic-plot-01292025.JPG"/>
+
 ### 01/28/2025
 
 8:03 PM
