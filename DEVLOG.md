@@ -42,6 +42,8 @@ It's coming to me now, I realized I can do what a simulation is ha... plot and a
 
 I am going to drive less (UE) so I have more time to work on projects
 
+---
+
 ### 01/29/2025
 
 6:44 PM
@@ -79,7 +81,7 @@ Aye there we go... I think I'll use classes for the scan planes because I can us
 
 Alright before I start watching tv/eating food, let me do a rotation real quick, let me make sure it's asymmetric not a square
 
-
+---
 
 ### 01/28/2025
 
@@ -145,6 +147,8 @@ This is what I've had in a sketch program for a bit
 8:59 PM
 
 Yeah I think I just gotta accept that I can't code (more) after work
+
+---
 
 ### 01/27/2025
 
