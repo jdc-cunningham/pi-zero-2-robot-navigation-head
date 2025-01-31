@@ -1,3 +1,31 @@
+### 01/30/2025
+
+7:18 PM
+
+I got a couple beers in me... let's try to make this happen
+
+Gonna rotate a plane baby, back to 5th grade
+
+7:24 PM
+
+Here we've got the plane but rotated, using SketchUp to know what it should look like
+
+<img src="./devlog-media/rotate-plane-01302025.JPG"/>
+
+7:29 PM
+
+Damn it stop looking at social media
+
+I stopped looking at 1, but I still have 2 more (img sharing site and YouTube)
+
+Can't always be grinding for sure
+
+7:30 PM
+
+This is tricky because the X,Y offset/coordinate is based on the robot's trajectory via the IMU displacement
+
+
+
 ### 01/29/2025
 
 6:44 PM

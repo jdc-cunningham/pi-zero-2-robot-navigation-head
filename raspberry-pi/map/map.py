@@ -11,11 +11,20 @@ class Map():
     self.scans = [
     ]
 
+  def get_plane_vertices(self, plane):
+    return [
+      [plane.x_offset,  plane.y_offset],
+      [plane.x_offset, plane.y_offset + plane.distance],
+      [plane.x_offset + plane.width, plane.y_offset],
+      [plane.x_offset + plane.width, plane.y_offset + plane.distance]
+    ]
+
   # counter-clockwise is positive
   # https://academo.org/demos/rotation-about-point/
   def rotate_plane(self, angle, plane_vertices):
     for plane_vertice in plane_vertices:
       # consider what quadrant the point is in, direction of turning for signage
+      print(plane_vertice)
 
   @dataclass
   class ScanPlane():
