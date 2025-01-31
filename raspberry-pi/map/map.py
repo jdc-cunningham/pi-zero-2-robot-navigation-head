@@ -36,10 +36,10 @@ class Map():
       new_coords.append([
         round(
           (plane_vertice[0] * math.cos(rad)) - (plane_vertice[1] * math.sin(rad))
-        , 2),
+        , 0),
         round(
           (plane_vertice[1] * math.cos(rad)) + (plane_vertice[0] * math.sin(rad))
-        , 2)
+        , 0)
       ])
 
     return new_coords
@@ -51,7 +51,7 @@ class Map():
     y_offset: float
     width: float
     distance: float
-    time: float
+    time: int
 
   # this code is not ran on a headless raspberry pi it is to be ran on the host computer/one with a GUI
   # https://stackoverflow.com/questions/13013781/how-to-draw-a-rectangle-over-a-specific-region-in-a-matplotlib-graph
@@ -63,7 +63,7 @@ class Map():
     plot.ylim(-10, 10)
     current_axis = plot.gca()
 
-    scan_plane = self.ScanPlane(0.0, 1.0, 1.0, 2.0, 3.0, 0.0)
+    scan_plane = self.ScanPlane(0.0, 1.0, 1.0, 2.0, 3.0, 0)
     sp_vertices = self.get_plane_vertices(scan_plane)
     sp_polygon = Polygon(sp_vertices)
     rotated_plane = self.rotate_plane(90, sp_vertices)
