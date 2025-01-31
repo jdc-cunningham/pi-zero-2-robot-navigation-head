@@ -24,7 +24,11 @@ Can't always be grinding for sure
 
 This is tricky because the X,Y offset/coordinate is based on the robot's trajectory via the IMU displacement
 
+8:33 PM
 
+It's off
+
+<img src="./devlog-media/rotated-but-not-right-01302025.JPG"/>
 
 ### 01/29/2025
 
