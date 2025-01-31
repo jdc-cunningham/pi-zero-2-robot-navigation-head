@@ -36,6 +36,12 @@ Wow this is weird... my eyes tell me they're not equal but if you use MS Paint a
 
 Will need to test this more but I at least have the basis of being able to plot scan planes and rotating/translating them as the robot moves
 
+9:02 PM
+
+It's coming to me now, I realized I can do what a simulation is ha... plot and animate over time as if the robot (square) was actually moving
+
+I am going to drive less (UE) so I have more time to work on projects
+
 ### 01/29/2025
 
 6:44 PM
