@@ -53,8 +53,8 @@ class Map():
     distance: float
     time: float
 
-  # https://stackoverflow.com/questions/13013781/how-to-draw-a-rectangle-over-a-specific-region-in-a-matplotlib-graph
   # this code is not ran on a headless raspberry pi it is to be ran on the host computer/one with a GUI
+  # https://stackoverflow.com/questions/13013781/how-to-draw-a-rectangle-over-a-specific-region-in-a-matplotlib-graph
   # https://stackoverflow.com/a/43971350
   # https://stackoverflow.com/a/68532480
   def plot_map(self):
@@ -75,4 +75,5 @@ class Map():
     polygon = Polygon(rotated_plane)
 
     current_axis.add_patch(polygon)
+    plot.gca().set_aspect('equal') # square ar
     plot.show()

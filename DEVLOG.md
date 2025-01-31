@@ -30,6 +30,12 @@ It's off
 
 <img src="./devlog-media/rotated-but-not-right-01302025.JPG"/>
 
+I guess the math is right but the plot window changes the aspect ratio of the plot
+
+Wow this is weird... my eyes tell me they're not equal but if you use MS Paint and crop the vertical rectangle and rotate it left 90 deg it's the same area... that's tripp
+
+Will need to test this more but I at least have the basis of being able to plot scan planes and rotating/translating them as the robot moves
+
 ### 01/29/2025
 
 6:44 PM
