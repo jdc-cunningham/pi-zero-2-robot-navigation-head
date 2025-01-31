@@ -13,7 +13,7 @@ class Map():
     ]
 
   def deg_to_rad(self, deg):
-    return deg * 0.0175
+    return deg * 0.017453
 
   def get_plane_vertices(self, plane):
     return [
@@ -36,10 +36,10 @@ class Map():
       new_coords.append([
         round(
           (plane_vertice[0] * math.cos(rad)) - (plane_vertice[1] * math.sin(rad))
-        , 0),
+        , 2),
         round(
           (plane_vertice[1] * math.cos(rad)) + (plane_vertice[0] * math.sin(rad))
-        , 0)
+        , 2)
       ])
 
     return new_coords
