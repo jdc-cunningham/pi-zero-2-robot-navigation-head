@@ -123,7 +123,19 @@ Yeah I got that wrong because the Y axis (forward/backward) is flipped/I flipped
 
 It's interesting the Y-offset doesn't work how I imagined, it makes the plot radius larger from the origin equally probably because of the rotation
 
+3:02 PM
 
+I need to do some full scan diffing IRL when an object is there to make sure it's working
+
+3:04 PM
+
+Damn these values are super wrong, 40" wide? nah... I could see 20-30" wide
+
+Damn... unfortunately I'll have to reposition the sensor in SketchUp manually again...
+
+3:06 PM
+
+break
 
 ### 02/01/2025
 
