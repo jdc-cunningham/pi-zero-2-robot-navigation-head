@@ -8,8 +8,8 @@ But I have the whole day to build a basic 2D mapping system
 
 These are the tasks right away I can think of:
 
-- [ ] get min/max scan values from full floor scan
-- [ ] plot full scan in 2D
+- [x] get min/max scan values from full floor scan (12:22 PM)
+- [x] plot full scan in 2D (12:22 PM)
 - [ ] track IMU while moving forward, verify how close or assume motion was complete
 - [ ] build basic wall map from the scans
 - [ ] add telemetry to ThreeJS socket eg. "performing scan, moving, etc..."
@@ -63,6 +63,29 @@ Alright time to plot
 I feel so stupid lol how I struggle with this but here it is, plotted a full scan plane for 54 and 35 degrees tilt
 
 <img src="./devlog-media/match-02022025.JPG"/>
+
+12:22 PM
+
+Runtime is a concern since I spend more time programming than actually using the robot, I just turned it on now, I think it has near full charge last time, I'm kind of paranoid about keeping the batteries away from full charge in general on any devices just because that prolongs the battery life (lithium cell membrane or something)
+
+12:24 PM
+
+Okay so right now I'm gonna work on the IMU aspect as it moves forward
+
+Which actually I may skip as I'm expecting it to not be reliable until I do some real filtering (like using all 9 axes together)
+
+So I'll focus on the meat of this project, it needs to be able to:
+
+- do the scan
+- detect obstacle(s)
+- plot
+- move forward
+
+I should be able to do a 360 scan with the code I have now
+
+What's bad is I need to transfer this data to the ThreeJS part and plot it there
+
+
 
 ### 02/01/2025
 

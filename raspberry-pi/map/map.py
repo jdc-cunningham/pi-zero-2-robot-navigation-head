@@ -13,7 +13,7 @@ class Map():
     # right set, then left
     self.full_floor_scan_planes = []
     self.scans = []
-    self.init_floor_scan_planes(int(time.time()))
+    self.init_floor_scan_planes(0, 0, 0, int(time.time()))
   
   @dataclass
   class ScanPlane():
@@ -24,12 +24,12 @@ class Map():
     distance: float
     time: int
 
-  def init_floor_scan_planes(self, time):
+  def init_floor_scan_planes(self, angle, offset_x, offset_y, time):
     # these angles match the tilt angles in navigation.py
-    right_54 = self.ScanPlane(0, 0, 0,    8,     3.84, time)
-    right_35 = self.ScanPlane(0, 0, 3.84, 15.89, 7.04, time)
-    left_54 =  self.ScanPlane(0, 0, 0,    -8,     3.84, time)
-    left_35 =  self.ScanPlane(0, 0, 3.84, -15.89, 7.04, time)
+    right_54 = self.ScanPlane(angle, offset_x, offset_y,        8,     3.84, time)
+    right_35 = self.ScanPlane(angle, offset_x, offset_y + 3.84, 15.89, 7.04, time)
+    left_54 =  self.ScanPlane(angle, offset_x, offset_y,        -8,     3.84, time)
+    left_35 =  self.ScanPlane(angle, offset_x, offset_y + 3.84, -15.89, 7.04, time)
 
     self.full_floor_scan_planes.extend([right_54, right_35, left_54, left_35])
 
