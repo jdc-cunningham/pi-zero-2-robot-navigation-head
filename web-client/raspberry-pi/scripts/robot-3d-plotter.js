@@ -266,20 +266,6 @@ const threejsPlotChart = () => {
     return parseInt(`0x${result}`, 16);
   }
 
-  // plot mesh
-  const plotFourPointsAsPlane = (planePoints) => {
-    let points = [];
-
-    planePoints.forEach((panelPoint) => {
-      points.push(new THREE.Vector3(panelPoint[0], panelPoint[1], panelPoint[2]));
-    });
-
-    material = new THREE.LineBasicMaterial({ color: getRandomHex() });
-    meshGeometry = new THREE.ConvexGeometry( points ); // points = vertices array
-    mesh = new THREE.Mesh(meshGeometry, material);
-    scene.add(mesh);
-  }
-
   renderer.render(scene, camera);
 
   // referencing my Twerk Lidar Robot project

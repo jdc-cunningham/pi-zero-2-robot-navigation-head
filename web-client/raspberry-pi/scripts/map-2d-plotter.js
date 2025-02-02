@@ -1,5 +1,10 @@
+let mapScene;
+
 const init2DMap = () => {
   const scene = new THREE.Scene();
+
+  mapScene = scene;
+
   const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 2000);
   const canvas = document.getElementById("map-2d-canvas");
   const robotCanvas = document.getElementById("robot-3d-canvas");
@@ -23,7 +28,7 @@ const init2DMap = () => {
   controls.enableRotate = false; // disable rotation
   scene.add(axesHelper);
 
-  const size = 100;
+  const size = 1000;
   const divisions = 100;
   const gridHelper = new THREE.GridHelper(size, divisions);
   const zVector = new THREE.Vector3(0, 0, 1);
@@ -41,7 +46,7 @@ const init2DMap = () => {
     renderer.render( scene, camera );
   }
 
-  camera.position.z = 30;
+  camera.position.z = 100;
 
   scene.add(new THREE.AmbientLight(0xdddddd));
 
@@ -51,3 +56,104 @@ const init2DMap = () => {
 }
 
 init2DMap();
+
+const plotFourPointsAsPlane = (planePoints) => {
+  let points = [];
+
+  planePoints.forEach((panelPoint) => {
+    points.push(new THREE.Vector3(panelPoint[0], panelPoint[1], panelPoint[2]));
+  });
+
+  material = new THREE.LineBasicMaterial({ color: "blue" });
+  meshGeometry = new THREE.ConvexGeometry( points ); // points = vertices array
+  mesh = new THREE.Mesh(meshGeometry, material);
+  mapScene.add(mesh);
+}
+
+/*
+*
+* scan plane data example
+* {
+*   angle: float
+*   x_offset: float
+*   y_offset: float
+*   width: float
+*   distance: float
+*   time: int
+* }
+*
+*/
+
+const rotatePlane = (angle, planeVertices) => {
+  const new_coords = [];
+  rad = deg_to_rad(angle)
+
+  planeVertices.forEach(planeVertice => {
+    new_coords.append([
+      round(
+        (plane_vertice[0] * Math.cos(rad)) - (plane_vertice[1] * Math.sin(rad))
+      , 2),
+      round(
+        (plane_vertice[1] * Math.cos(rad)) + (plane_vertice[0] * Math.sin(rad))
+      , 2)
+    ]);
+  });
+
+  return new_coords;
+};
+
+const getPlaneVertices = (plane) => {
+  return [
+    [plane.x_offset,  plane.y_offset],
+    [plane.x_offset + plane.width, plane.y_offset],
+    [plane.x_offset + plane.width, plane.y_offset + plane.distance],
+    [plane.x_offset, plane.y_offset + plane.distance]
+  ];
+};
+
+const scanPlane = (angle, x_offset, y_offset, width, distance, time) => ({
+  angle,
+  x_offset,
+  y_offset,
+  width,
+  distance,
+  time
+});
+
+const fullScanPlanes = (angle, x_offset, y_offset, time) => {
+  plotFourPointsAsPlane(
+    getPlaneVertices(
+      scanPlane(angle, x_offset, y_offset, 8, 3.84, time)
+    )
+  );
+
+  plotFourPointsAsPlane(
+    getPlaneVertices(
+      scanPlane(angle, x_offset, y_offset + 3.84, 15.89, 7.04, time)
+    )
+  );
+
+  plotFourPointsAsPlane(
+    getPlaneVertices(
+      scanPlane(angle, x_offset, y_offset, -8, 3.84, time)
+    )
+  );
+
+  plotFourPointsAsPlane(
+    getPlaneVertices(
+      scanPlane(angle, x_offset, y_offset + 3.84, -15.89, 7.04, time)
+    )
+  );
+};
+
+const plotFullScanPlane = (angle, x_offset, y_offset) => {
+  fullScanPlanes(angle, x_offset, y_offset).forEach(plane => {
+    plotFourPointsAsPlane(plane);
+  });
+};
+
+plotFullScanPlane(0, 0, 0, 0);
+
+const plotSinglePlane = (angle, x_offset, y_offset, width, distance) => {
+
+};
