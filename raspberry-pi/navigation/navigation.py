@@ -1,3 +1,5 @@
+from threading import Thread
+
 import time
 import math
 
@@ -134,5 +136,9 @@ class Navigation():
     print(self.floor_scan_values)
     print("")
 
+  def begin_navigation(self):
+    # while True:
+    self.full_floor_scan()
+
   def start(self):
-    print('nav: start')
+    Thread(target=self.begin_navigation, args=()).start()
