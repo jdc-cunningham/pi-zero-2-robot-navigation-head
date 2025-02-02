@@ -109,11 +109,8 @@ const getPlaneVertices = (angle, plane) => {
 
   if (angle) {
     const rotatedPlaneVertices = rotatePlane(angle, planeVertices);
-    console.log('rotated', rotatedPlaneVertices);
     return rotatedPlaneVertices;
   }
-
-  console.log(planeVertices);
 
   return planeVertices;
 };
@@ -128,41 +125,48 @@ const scanPlane = (angle, x_offset, y_offset, width, distance, time) => ({
 });
 
 const fullScanPlanes = (angle, x_offset, y_offset, time) => {
+  const imu_z = 3.65; // forward
+
   plotFourPointsAsPlane(
     getPlaneVertices(
-      angle, scanPlane(angle, x_offset, y_offset + 3.65, 19.9, 8.78, time)
+      angle, scanPlane(angle, x_offset, y_offset + imu_z, 19.9, 8.78, time)
     )
   );
 
   plotFourPointsAsPlane(
     getPlaneVertices(
-      angle, scanPlane(angle, x_offset, y_offset + 3.675 + 7.03, 15.89, 7.04, time)
+      angle, scanPlane(angle, x_offset, y_offset + imu_z + 8.78, 15.89, 7.04, time)
     )
   );
 
   plotFourPointsAsPlane(
     getPlaneVertices(
-      angle, scanPlane(angle, x_offset, y_offset + 3.65, -19.9, 8.78, time)
+      angle, scanPlane(angle, x_offset, y_offset + imu_z, -19.9, 8.78, time)
     )
   );
 
   plotFourPointsAsPlane(
     getPlaneVertices(
-      angle, scanPlane(angle, x_offset, y_offset + 3.65 + 7.03, -15.89, 7.04, time)
+      angle, scanPlane(angle, x_offset, y_offset + imu_z + 8.78, -15.89, 7.04, time)
     )
   );
 };
 
 const plotFullScanPlane = (angle, x_offset, y_offset) => {
-  fullScanPlanes(angle, x_offset, y_offset).forEach(plane => {
-    plotFourPointsAsPlane(plane);
-  });
+  
 };
 
-fullScanPlanes(0, 0, 0, 0);
-fullScanPlanes(90, 0, 0, 0);
-fullScanPlanes(180, 0, 0, 0);
-fullScanPlanes(270, 0, 0, 0);
+// 360 scan
+// fullScanPlanes(0, 0, 0, 0);
+// fullScanPlanes(90, 0, 0, 0);
+// fullScanPlanes(180, 0, 0, 0);
+// fullScanPlanes(270, 0, 0, 0);
+
+// move forward 15.5", scan 360
+// fullScanPlanes(0, 0, 15.5, 0);
+// fullScanPlanes(90, 15.5, 0, 0);
+// fullScanPlanes(180, 0, -15.5, 0);
+// fullScanPlanes(270, -15.5, 0, 0);
 
 const plotSinglePlane = (angle, x_offset, y_offset, width, distance) => {
 

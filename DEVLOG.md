@@ -119,6 +119,12 @@ Ahh damn I have them backwards
 
 Yeah I got that wrong because the Y axis (forward/backward) is flipped/I flipped it again today
 
+2:53 PM
+
+It's interesting the Y-offset doesn't work how I imagined, it makes the plot radius larger from the origin equally probably because of the rotation
+
+
+
 ### 02/01/2025
 
 7:43 PM
