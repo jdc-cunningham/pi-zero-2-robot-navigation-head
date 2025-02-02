@@ -152,8 +152,6 @@ const plotFullScanPlane = (angle, x_offset, y_offset) => {
   });
 };
 
-plotFullScanPlane(0, 0, 0, 0);
-
 const plotSinglePlane = (angle, x_offset, y_offset, width, distance) => {
 
 };

@@ -69,9 +69,12 @@ h2 {
 }
 
 .app__left-telemetry {
+  display: block;
   width: 100%;
   height: 25%;
   border-top: 1px solid #ccc;
+  padding: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .app__right {

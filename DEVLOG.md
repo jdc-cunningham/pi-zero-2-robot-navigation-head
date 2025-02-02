@@ -91,6 +91,12 @@ Working in ThreeJS now, setting up the simpler 2nd plot view
 
 Ultimately for this video I want to see the robot moving around (sped up) and the ThreeJS web interface on the side showing what the robot is doing (mapping)
 
+1:59 PM
+
+Oh man forgot about this song Fall Down with The Death Set
+
+I've been enjoying Elephant more especially for driving ha 
+
 
 
 ### 02/01/2025

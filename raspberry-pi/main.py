@@ -18,4 +18,4 @@ navigation = Navigation(motion, wide_angle_sensor, narrow_angle_sensor, vehicle_
 light.off()
 motion.boot_center()
 # navigation.scan_floor()
-navigation.full_floor_scan()
+# navigation.full_floor_scan()
