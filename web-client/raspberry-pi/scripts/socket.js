@@ -10,8 +10,14 @@ const updateTelemetryDisplay = (from, msg) => {
 
 const msgRobot = (msg) => {
   if (robotConnected) {
-    updateTelemetryDisplay("client", "send message: " + msg);
+    updateTelemetryDisplay("client", "send: " + msg);
     socket.send(msg);
+  }
+}
+
+const receivedMsg = (msg) => {
+  if (robotConnected) {
+    updateTelemetryDisplay("robot", "recevied: " + msg);
   }
 }
 
