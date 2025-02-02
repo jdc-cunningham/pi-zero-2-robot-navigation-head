@@ -97,7 +97,11 @@ Oh man forgot about this song Fall Down with The Death Set
 
 I've been enjoying Elephant more especially for driving ha 
 
+2:05 PM
 
+Hmm... does it start automatically or should the client tell it to start
+
+Probably client tells it to start
 
 ### 02/01/2025
 

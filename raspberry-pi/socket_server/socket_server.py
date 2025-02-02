@@ -10,6 +10,7 @@ class SocketServer():
 
   def receive(self, websocket):
     for msg in websocket:
+      print(msg)
       self.socket = websocket
 
   def send(self, msg: str):
