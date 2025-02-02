@@ -26,10 +26,10 @@ class Map():
 
   def init_floor_scan_planes(self, angle, offset_x, offset_y, time):
     # these angles match the tilt angles in navigation.py
-    right_54 = self.ScanPlane(angle, offset_x, offset_y,        8,     3.84, time)
-    right_35 = self.ScanPlane(angle, offset_x, offset_y + 3.84, 15.89, 7.04, time)
-    left_54 =  self.ScanPlane(angle, offset_x, offset_y,        -8,     3.84, time)
-    left_35 =  self.ScanPlane(angle, offset_x, offset_y + 3.84, -15.89, 7.04, time)
+    right_54 = self.ScanPlane(angle, offset_x, offset_y,        4.6,  1.69, time)
+    right_35 = self.ScanPlane(angle, offset_x, offset_y + 1.69, 10,   6.35, time)
+    left_54 =  self.ScanPlane(angle, offset_x, offset_y,        -4.6, 1.69, time)
+    left_35 =  self.ScanPlane(angle, offset_x, offset_y + 1.69, -10,  6.35, time)
 
     self.full_floor_scan_planes.extend([right_54, right_35, left_54, left_35])
 

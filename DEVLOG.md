@@ -137,6 +137,18 @@ Damn... unfortunately I'll have to reposition the sensor in SketchUp manually ag
 
 break
 
+5:17 PM
+
+Damn I ate a bunch of food now I feel lazy AF
+
+Need that 2nd wind baby, sucks ass I gotta replot these sensor beams in SketchUp, it's not really hard just tedious
+
+5:35 PM
+
+Alright I replotted/got some new data, 10" max is good
+
+
+
 ### 02/01/2025
 
 7:43 PM
