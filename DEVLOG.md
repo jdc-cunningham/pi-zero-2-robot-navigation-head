@@ -1,3 +1,17 @@
+### 02/01/2025
+
+7:43 PM
+
+Today was kind of a wasted day I had to run a bunch of errands so lost most of the day doing that crap like waiting for 1.5 hrs to get my oil changed.
+
+You know... cuz I like to drive but I don't like working on my car
+
+I will setup the scan plotting at least but I am mentally spent/been binge eating, I think I'll just enjoy this day of the weekend (Saturday)
+
+8:15 PM
+
+I'm side tracked, probably just gonna commit to not doing anything
+
 ### 01/30/2025
 
 7:18 PM
