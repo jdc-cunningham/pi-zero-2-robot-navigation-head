@@ -85,6 +85,12 @@ I should be able to do a 360 scan with the code I have now
 
 What's bad is I need to transfer this data to the ThreeJS part and plot it there
 
+12:55 PM
+
+Working in ThreeJS now, setting up the simpler 2nd plot view
+
+Ultimately for this video I want to see the robot moving around (sped up) and the ThreeJS web interface on the side showing what the robot is doing (mapping)
+
 
 
 ### 02/01/2025

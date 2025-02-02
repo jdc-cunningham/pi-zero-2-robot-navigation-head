@@ -1,14 +1,21 @@
 // this has to be hosted somewhere, in my case a Raspberry Pi Apache Web Server
 // needs CORS
 const baseGlbPath = "http://192.168.1.144/3d-files/";
-const robotGlbFilename = "basic-robot-model.glb";
+const robotGlbFilename = "robot-flipped.glb";
 const loader = new THREE.GLTFLoader();
 const gltfs = {};
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 2000);
 const orangeMaterial = new THREE.LineBasicMaterial({color: 0xffa500});
-const canvas = document.getElementById("threejs-canvas");
+const canvas = document.getElementById("robot-3d-canvas");
+const mapCanvas = document.getElementById("map-2d-canvas");
 const renderer = new THREE.WebGLRenderer({ canvas: canvas }); // https://stackoverflow.com/a/21646450/2710227
+const robotToggleBtn = document.getElementById('robot-toggle');
+
+robotToggleBtn.addEventListener('click', () => {
+  mapCanvas.classList = "hidden";
+  canvas.classList = "";
+});
 
 const degToRad = (deg) => deg * 0.0174533;
 
@@ -231,7 +238,7 @@ const threejsPlotChart = () => {
 
   // camera
   // camera.position.set( 0, 1, 0 );
-  camera.position.z = 30; // zoom out
+  camera.position.y = 30; // zoom out
   // camera.lookAt( 0, 0, 0 );
 
   // line material

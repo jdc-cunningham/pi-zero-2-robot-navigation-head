@@ -29,7 +29,12 @@
   <div class="app">
     <div class="app__left">
       <div class="app__left-plot">
-        <canvas id="threejs-canvas"></canvas>
+        <canvas id="robot-3d-canvas" class="hidden"></canvas>
+        <canvas id="map-2d-canvas"></canvas>
+        <div class="app__left-plot-buttons">
+          <button type="button" id="robot-toggle">Robot</button>
+          <button type="button" id="map-toggle">Map</button>
+        </div>
       </div>
       <div class="app__left-telemetry"></div>
     </div>
@@ -46,7 +51,8 @@
       </div>
     </div>
   </div>
-  <script src="./scripts/threejs-plotter.js"></script>
+  <script src="./scripts/robot-3d-plotter.js"></script>
+  <script src="./scripts/map-2d-plotter.js"></script>
   <script src="./scripts/messaging.js"></script>
   <script src="./scripts/statuses.js"></script>
   <script src="./scripts/parseMsgs.js"></script>
