@@ -2,6 +2,8 @@
 multiple scans to establish avg measurements, min/max
 '''
 
+# these values are bad using narrow angle sensor
+
 black_mat_1 = [
   [[9.17, 9.09, 9.01, 8.66], [9.17, 9.01, 8.78, 8.46]],
   [[11.74, 11.86, 11.66, 11.31, 11.39], [11.82, 11.82, 11.54, 11.31, 11.08]],

@@ -1,3 +1,47 @@
+### 02/02/2025
+
+10:22 AM
+
+Alright back on, I wish I could say I slept well but I did not
+
+But I have the whole day to build a basic 2D mapping system
+
+These are the tasks right away I can think of:
+
+- [ ] get min/max scan values from full floor scan
+- [ ] plot full scan in 2D
+- [ ] track IMU while moving forward, verify how close or assume motion was complete
+- [ ] build basic wall map from the scans
+- [ ] add telemetry to ThreeJS socket eg. "performing scan, moving, etc..."
+
+I think that's a good start, ideally you would have a 2D wireframe map where you can drop points for the robot to go to
+
+10:42 AM
+
+I'm distracted, got my coffee let's go
+
+I wish I didn't drop this robot head before, the battery holder snapped off so it's just hanging/rubs against the sides of the gimbal mount thing
+
+It's too much work to rebuild it, it was a PITA to solder all the parst together and keep the wires short
+
+To be one with the Kornholio one must engage the Kornholio (my Korn focus playlist)
+
+11:17 AM
+
+Yeah so both my wooden floor data has over 300 on the far scans (bounced off into infinity), I'll use the carpet scans then for max values
+
+https://jsfiddle.net/eh47y368/
+
+That's the min max error check code
+
+I'll use the resulting values as caps/checks for flat scans to determine if there's an object there
+
+11:22 AM
+
+break
+
+
+
 ### 02/01/2025
 
 7:43 PM
