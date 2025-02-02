@@ -7,13 +7,13 @@ from navigation.navigation import Navigation
 from socket_server.socket_server import SocketServer
 from socket_client.socket_client import SocketClient
 
-web_ui_socket = SocketServer()
 vehicle_socket = SocketClient()
 light = Led()
 motion = Servo()
 narrow_angle_sensor = NarrowSensor()
 wide_angle_sensor = WideSensor()
 navigation = Navigation(motion, wide_angle_sensor, narrow_angle_sensor, vehicle_socket)
+web_ui_socket = SocketServer(navigation)
 
 light.off()
 motion.boot_center()

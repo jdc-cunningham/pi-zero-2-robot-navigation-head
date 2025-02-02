@@ -3,15 +3,21 @@ from websockets.sync.server import serve
 
 # for Web Interface
 class SocketServer():
-  def __init__(self):
+  def __init__(self, navigation):
     self.socket = None
+    self.navigation = navigation
 
     self.start()
 
+  def parse_msg(self, msg):
+    if (msg == "start"):
+      self.navigation.start()
+
   def receive(self, websocket):
     for msg in websocket:
-      print(msg)
       self.socket = websocket
+
+      self.parse_msg(msg)
 
   def send(self, msg: str):
     if (not self.socket):

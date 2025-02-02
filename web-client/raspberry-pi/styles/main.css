@@ -74,7 +74,8 @@ h2 {
   height: 25%;
   border-top: 1px solid #ccc;
   padding: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.35rem;
+  overflow: hidden auto;
 }
 
 .app__right {
@@ -105,7 +106,7 @@ h2 {
   height: 100%;
   border: 0;
   padding: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.35rem;
 }
 
 .app__right-commands-btn {

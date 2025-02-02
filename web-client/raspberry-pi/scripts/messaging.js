@@ -3,6 +3,6 @@ const sendCmdBtn = document.querySelector(".app__right-commands-btn");
 
 sendCmdBtn.addEventListener('click', () => {
   if (robotConnected) {
-    msgRobot(cmdInp);
+    msgRobot(cmdInp.value);
   }
 });

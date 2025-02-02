@@ -5,11 +5,12 @@ let socket;
 const telemetryDisplay = document.querySelector('.app__left-telemetry');
 
 const updateTelemetryDisplay = (from, msg) => {
-  telemetryDisplay.innerText = `${from}:${msg}` + '\n' + telemetryDisplay.innerText;
+  telemetryDisplay.innerText = `${from}: ${msg}` + '\n' + telemetryDisplay.innerText;
 }
 
 const msgRobot = (msg) => {
   if (robotConnected) {
+    updateTelemetryDisplay("client", "send message: " + msg);
     socket.send(msg);
   }
 }
