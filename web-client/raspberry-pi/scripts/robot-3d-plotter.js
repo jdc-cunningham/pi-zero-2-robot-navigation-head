@@ -157,16 +157,18 @@ const plotSensorBeams = () => {
       const distanceZ = getDistanceZ(tiltAngle, sampleFloorScanSensorDistance[`${tiltAngle}-${sweepAngle}-r`]);
       const sensorCoordinate = sampleFloorScanSensorCoordinate[`${tiltAngle}-${sweepAngle}-r`];
 
+      // z -1 * is to flip the forward direction
+
       plotLine(
         {
           x: -1 * sensorCoordinate[0],
           y: sensorCoordinate[1],
-          z: sensorCoordinate[2]
+          z: -1 * sensorCoordinate[2]
         },
         {
           x: -1 * distanceX,
           y: distanceZ - sensorCoordinate[1], // sensor is above horizon
-          z: distanceY
+          z: -1 * distanceY
         }
       );
     });
@@ -182,12 +184,12 @@ const plotSensorBeams = () => {
         {
           x: sensorCoordinate[0],
           y: sensorCoordinate[1],
-          z: sensorCoordinate[2]
+          z: -1 * sensorCoordinate[2]
         },
         {
           x: distanceX,
           y: distanceZ - sensorCoordinate[1], // sensor is above horizon
-          z: distanceY
+          z: -1 * distanceY
         }
       );
     });
@@ -278,19 +280,6 @@ const threejsPlotChart = () => {
     scene.add(mesh);
   }
 
-  // 54 refers to degree down from horizon sensor is looking
-  const plot54Plane = () => {
-
-  }
-
-  const plot35Plane = () => {
-
-  }
-  
-  const plot15Plane = () => {
-
-  }
-
   renderer.render(scene, camera);
 
   // referencing my Twerk Lidar Robot project
@@ -318,10 +307,14 @@ const threejsPlotChart = () => {
         gltf.asset; // Object
 
         renderer.render( scene, camera );
+        // to animate the robot, import parts individually and move eg. rotate the wheels
+        // this code imported the robot whole however
+
         // gltfs["basic-robot-model"].handle.scene.rotateX(degToRad(90)); // match blue as Z axis
         // gltfs["basic-robot-model"].handle.scene.rotateY(degToRad(-90)); // match blue as Z axis
-        // plotSensorBeams();
 
+        // not suing this since need to update hardcoded mapped data above
+        // plotSensorBeams();
       },
       // called while loading is progressing
       function ( xhr ) {
