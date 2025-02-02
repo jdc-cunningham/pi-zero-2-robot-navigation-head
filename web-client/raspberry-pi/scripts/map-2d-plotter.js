@@ -123,25 +123,25 @@ const scanPlane = (angle, x_offset, y_offset, width, distance, time) => ({
 const fullScanPlanes = (angle, x_offset, y_offset, time) => {
   plotFourPointsAsPlane(
     getPlaneVertices(
-      scanPlane(angle, x_offset, y_offset, 8, 3.84, time)
+      scanPlane(angle, x_offset, y_offset + 3.65, 19.9, 8.78, time)
     )
   );
 
   plotFourPointsAsPlane(
     getPlaneVertices(
-      scanPlane(angle, x_offset, y_offset + 3.84, 15.89, 7.04, time)
+      scanPlane(angle, x_offset, y_offset + 3.675 + 7.03, 15.89, 7.04, time)
     )
   );
 
   plotFourPointsAsPlane(
     getPlaneVertices(
-      scanPlane(angle, x_offset, y_offset, -8, 3.84, time)
+      scanPlane(angle, x_offset, y_offset + 3.65, -19.9, 8.78, time)
     )
   );
 
   plotFourPointsAsPlane(
     getPlaneVertices(
-      scanPlane(angle, x_offset, y_offset + 3.84, -15.89, 7.04, time)
+      scanPlane(angle, x_offset, y_offset + 3.65 + 7.03, -15.89, 7.04, time)
     )
   );
 };
@@ -151,6 +151,8 @@ const plotFullScanPlane = (angle, x_offset, y_offset) => {
     plotFourPointsAsPlane(plane);
   });
 };
+
+fullScanPlanes(0, 0, 0, 0);
 
 const plotSinglePlane = (angle, x_offset, y_offset, width, distance) => {
 

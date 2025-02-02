@@ -103,6 +103,22 @@ Hmm... does it start automatically or should the client tell it to start
 
 Probably client tells it to start
 
+2:25 PM
+
+I'm at the cusp, the precipice of this basic self navigation process
+
+I have not done a "what if something is in the way" scenario yet
+
+I also have not plotted four planes yet
+
+When the robot rotates what are the angles/offsets?
+
+Ahh damn I have them backwards
+
+2:32 PM
+
+Yeah I got that wrong because the Y axis (forward/backward) is flipped/I flipped it again today
+
 ### 02/01/2025
 
 7:43 PM
