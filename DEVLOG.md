@@ -40,7 +40,29 @@ I'll use the resulting values as caps/checks for flat scans to determine if ther
 
 break
 
+11:58 AM
 
+The error rate with the wood values is too high
+
+I either drop that data set or just stick with the first two scans
+
+I think I should keep it and just stick with the two scan levels, that'll save scan time too
+
+https://jsfiddle.net/eh47y368/3/
+
+This means the farthest the robot can go at a time is 10.87" pretty weak
+
+With vision it could be better, I actually want to map the pixels to depth even if the data is bad (not a lot of distance point clouds)
+
+This is where visual inertial odometry comes in too but that's advanced for me
+
+Alright time to plot
+
+12:20 PM
+
+I feel so stupid lol how I struggle with this but here it is, plotted a full scan plane for 54 and 35 degrees tilt
+
+<img src="./devlog-media/match-02022025.JPG"/>
 
 ### 02/01/2025
 

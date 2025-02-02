@@ -4,13 +4,34 @@ from matplotlib.patches import Polygon
 
 import matplotlib.pyplot as plot
 import math
+import time
 
 class Map():
   def __init__(self):
     self.robot_pos = [0, 0]
 
-    self.scans = [
-    ]
+    # right set, then left
+    self.full_floor_scan_planes = []
+    self.scans = []
+    self.init_floor_scan_planes(int(time.time()))
+  
+  @dataclass
+  class ScanPlane():
+    angle: float
+    x_offset: float
+    y_offset: float
+    width: float
+    distance: float
+    time: int
+
+  def init_floor_scan_planes(self, time):
+    # these angles match the tilt angles in navigation.py
+    right_54 = self.ScanPlane(0, 0, 0,    8,     3.84, time)
+    right_35 = self.ScanPlane(0, 0, 3.84, 15.89, 7.04, time)
+    left_54 =  self.ScanPlane(0, 0, 0,    -8,     3.84, time)
+    left_35 =  self.ScanPlane(0, 0, 3.84, -15.89, 7.04, time)
+
+    self.full_floor_scan_planes.extend([right_54, right_35, left_54, left_35])
 
   def deg_to_rad(self, deg):
     return deg * 0.017453
@@ -44,36 +65,31 @@ class Map():
 
     return new_coords
 
-  @dataclass
-  class ScanPlane():
-    angle: float
-    x_offset: float
-    y_offset: float
-    width: float
-    distance: float
-    time: int
-
   # this code is not ran on a headless raspberry pi it is to be ran on the host computer/one with a GUI
   # https://stackoverflow.com/questions/13013781/how-to-draw-a-rectangle-over-a-specific-region-in-a-matplotlib-graph
   # https://stackoverflow.com/a/43971350
   # https://stackoverflow.com/a/68532480
   def plot_map(self):
     plot.figure()
-    plot.xlim(-10, 10)
-    plot.ylim(-10, 10)
+    plot.xlim(-50, 50)
+    plot.ylim(-50, 50)
+    plot.gca().set_aspect('equal') # square ar
+
     current_axis = plot.gca()
 
-    scan_plane = self.ScanPlane(0.0, 1.0, 1.0, 2.0, 3.0, 0)
-    sp_vertices = self.get_plane_vertices(scan_plane)
-    sp_polygon = Polygon(sp_vertices)
-    rotated_plane = self.rotate_plane(90, sp_vertices)
+    # scan_plane = self.ScanPlane(0.0, 1.0, 1.0, 2.0, 3.0, 0)
+    # sp_vertices = self.get_plane_vertices(scan_plane)
+    # sp_polygon = Polygon(sp_vertices)
+    # rotated_plane = self.rotate_plane(90, sp_vertices)
+    # current_axis.add_patch(sp_polygon)
+    # polygon = Polygon(rotated_plane)
 
-    current_axis.add_patch(sp_polygon)
+    # current_axis.add_patch(polygon)
 
-    print(rotated_plane)
+    for scan_plane in self.full_floor_scan_planes:
+      print(scan_plane)
+      sp_vertices = self.get_plane_vertices(scan_plane)
+      sp_polygon = Polygon(sp_vertices)
+      current_axis.add_patch(sp_polygon)
 
-    polygon = Polygon(rotated_plane)
-
-    current_axis.add_patch(polygon)
-    plot.gca().set_aspect('equal') # square ar
     plot.show()
