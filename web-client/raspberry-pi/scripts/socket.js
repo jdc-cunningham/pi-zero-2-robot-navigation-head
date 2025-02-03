@@ -21,7 +21,11 @@ const parseMsg = (msg) => {
   console.log(msgData);
 
   if (msgData?.type == "scan_data") {
-    plotFullScanPlane(msgData)
+    plotFullScanPlane(msgData?.msg)
+  }
+
+  if (msgData?.type == "telemetry") {
+    updateTelemetryDisplay("robot", "received: " + msgData?.msg);
   }
 }
 

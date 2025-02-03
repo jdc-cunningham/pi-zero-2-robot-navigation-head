@@ -43,45 +43,45 @@ class Navigation():
     ]
 
     self.scan_min_vals = {
-      "54_0_r": 9.13,
-      "54_15_r": 9.09,
-      "54_35_r": 8.74,
-      "54_60_r": 8.42,
-      "54_20_l": 9.2,
-      "54_40_l": 9.24,
-      "54_60_l": 9.09,
-      "54_85_l": 9.25,
-      "35_0_r": 12.05,
-      "35_15_r": 11.66,
-      "35_30_r": 11.23,
-      "35_45_r": 10.8,
-      "35_60_r": 10.53,
-      "35_15_l": 12.21,
-      "35_30_l": 12.29,
-      "35_45_l": 12.29,
+      "54_0_r": 9.0,
+      "54_15_r": 9.0,
+      "54_35_r": 8.5,
+      "54_60_r": 8.0,
+      "54_20_l": 9.0,
+      "54_40_l": 9.0,
+      "54_60_l": 9.0,
+      "54_85_l": 8.0,
+      "35_0_r": 12.0,
+      "35_15_r": 11.5,
+      "35_30_r": 11.0,
+      "35_45_r": 10.5,
+      "35_60_r": 10.5,
+      "35_15_l": 12.0,
+      "35_30_l": 12.0,
+      "35_45_l": 11.5,
       "35_60_l": 11.5,
-      "35_75_l": 11.54  
+      "35_75_l": 11.0
     }
 
     self.scan_max_vals = {
-      "54_0_r": 9.55,
-      "54_15_r": 9.52,
-      "54_35_r": 9.2,
-      "54_60_r": 8.74,
-      "54_20_l": 9.71,
-      "54_40_l": 9.63,
-      "54_60_l": 9.24,
-      "54_85_l": 8.97,
-      "35_0_r": 12.71,
-      "35_15_r": 12.44,
-      "35_30_r": 12.05,
-      "35_45_r": 11.51,
-      "35_60_r": 11.12,
-      "35_15_l": 12.71,
-      "35_30_l": 12.83,
-      "35_45_l": 12.56,
+      "54_0_r": 10,
+      "54_15_r": 9.5,
+      "54_35_r": 9.5,
+      "54_60_r": 9,
+      "54_20_l": 10,
+      "54_40_l": 10,
+      "54_60_l": 9.5,
+      "54_85_l": 9.5,
+      "35_0_r": 13,
+      "35_15_r": 13,
+      "35_30_r": 12.5,
+      "35_45_r": 12,
+      "35_60_r": 11.5,
+      "35_15_l": 13,
+      "35_30_l": 13,
+      "35_45_l": 13,
       "35_60_l": 12.5,
-      "35_75_l": 11.74  
+      "35_75_l": 12.0  
     }
 
     '''
@@ -107,6 +107,8 @@ class Navigation():
     return False
 
   def scan_floor(self, scan_dir):
+    self.client_send_msg("telemetry", "scanning floor")
+
     self.floor_scan_values = []
     scan_time = int(time.time())
     print("")
@@ -175,9 +177,15 @@ class Navigation():
       "y_offset": self.y_offset
     }
 
-    self.web_ui_socket.send(json.dumps(self.floor_scan_set[scan_time]))
+    self.client_send_msg("scan_data", self.floor_scan_set[scan_time])
 
     print("")
+
+  def client_send_msg(self, msg_type, msg):
+    self.web_ui_socket.send(json.dumps({
+      "type": msg_type,
+      "msg": msg
+    }))
 
   # 360
   def full_floor_scan(self):
@@ -185,13 +193,24 @@ class Navigation():
 
     for x in range(0, 4):
       self.scan_floor(angle)
-      self.vehicle_socket.send("rc_085_085_0900")
       angle += 90
+
+      self.client_send_msg("telemetry", "turning to {}".format(angle))
+      self.vehicle_socket.send("rc_085_085_0900")
+
+    if (angle == 360):
+      angle = 0
+
+  def move_forward(self, distance):
+    self.client_send_msg("telemetry", "moving forward {} inches".format(distance))
+    self.vehicle_socket.send("rc_084_098_1400")
 
   def begin_navigation(self):
     # while True:
     if (self.first_scan):
       self.full_floor_scan()
+      self.move_forward(10)
+      self.self.scan_floor(0)
     else:
       print("think")
 

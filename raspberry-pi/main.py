@@ -25,6 +25,4 @@ class SelfNav():
     # navigation.scan_floor()
     # navigation.full_floor_scan()
 
-    self.navigation.start()
-
 SelfNav()

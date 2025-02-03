@@ -187,6 +187,14 @@ So now I need to send this data to the web UI and then keep going
 
 I'm gonna get the command to move forward 10"
 
+8:01 PM
+
+Ugh... the min/max values keep changing/fluctuating
+
+I'm trying to dial them in so a flat scan says there's no obstacles
+
+
+
 ---
 
 ### 02/01/2025
