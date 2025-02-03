@@ -147,6 +147,24 @@ Need that 2nd wind baby, sucks ass I gotta replot these sensor beams in SketchUp
 
 Alright I replotted/got some new data, 10" max is good
 
+5:46 PM
+
+I'm slowing down it sucks
+
+So did update the scan pattern and distance to move forward
+
+While it's moving forward the wide angle sensor will scan to make sure it doesn't run into something
+
+The scan pattern has a gap as you can see below
+
+<img src="./devlog-media/gap-02022025.JPG"/>
+
+Alright I need to test the scan obstacle detected
+
+It uses the mins determined earlier today to see if something is in the way of a plot.
+
+It's unfortunate how simplistic it is (if something si detected, avoid that section entirely)
+
 
 
 ### 02/01/2025

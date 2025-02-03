@@ -21,7 +21,10 @@ class Navigation():
     self.imu_rotation_offset = 2.78 # z-axis (forward)
     self.wide_sensor_y_offest = 0.58 # z-axis
     self.floor_scan_values = []
-    self.floor_scan_set = {} # time: data
+
+    # time: data
+    # data includes left_obstacle, right_obstacle
+    self.floor_scan_set = {}
 
     # pan/tilt servo is centered in the beginning of floor scan
     # tilt looks all the way down maximum
@@ -33,24 +36,49 @@ class Navigation():
     self.floor_scan_positions = [
       [54, [0, 15, 35, 60], [20, 40, 60, 85]],
       [35, [0, 15, 30, 45, 60], [15, 30, 45, 60, 75]],
-      # [15, [0, 20, 40, 60], [20, 40, 60]]
     ]
 
-    self.floor_scan_clear_sample_avg = [
-      [
-        [[9.46, 9.35, 9.11, 8.72], [9.6, 9.62, 9.37, 9.03]],
-        [[12.57, 12.21, 11.83, 11.35, 10.93], [12.61, 12.73, 12.55, 12.2, 11.76]],
-        # [[33.52, 31.88, 27.97, 26.4], [32.16, 31.43, 26]]
-      ]
-    ]
+    self.scan_min_vals = {
+      "54_0_r": 9.13,
+      "54_15_r": 9.09,
+      "54_35_r": 8.74,
+      "54_60_r": 8.42,
+      "54_20_l": 9.2,
+      "54_40_l": 9.2,
+      "54_60_l": 9.09,
+      "54_85_l": 8.85,
+      "35_0_r": 12.05,
+      "35_15_r": 11.66,
+      "35_30_r": 11.23,
+      "35_45_r": 10.8,
+      "35_60_r": 10.53,
+      "35_15_l": 12.21,
+      "35_30_l": 12.21,
+      "35_45_l": 12.21,
+      "35_60_l": 11.97,
+      "35_75_l": 11.54  
+    }
 
-    self.floor_scan_clear_sample_error = [
-      [
-        [[1, 1, 1.5, 2], [1, 1.5, 1.5, 1.5]],
-        [[1.5, 2, 2.5, 3, 3], [1, 1.5, 1.5, 1.5, 2]],
-        # [[5, 9, 13, 15], [7, 9, 12]]
-      ]
-    ]
+    self.scan_max_vals = {
+      "54_0_r": 9.55,
+      "54_15_r": 9.55,
+      "54_35_r": 9.55,
+      "54_60_r": 9.55,
+      "54_20_l": 9.71,
+      "54_40_l": 9.71,
+      "54_60_l": 9.71,
+      "54_85_l": 9.71,
+      "35_0_r": 12.71,
+      "35_15_r": 12.71,
+      "35_30_r": 12.71,
+      "35_45_r": 12.71,
+      "35_60_r": 12.71,
+      "35_15_l": 12.71,
+      "35_30_l": 12.83,
+      "35_45_l": 12.83,
+      "35_60_l": 12.83,
+      "35_75_l": 12.83  
+    }
 
     '''
     these commands were manually dialed in based on my robot
@@ -65,10 +93,21 @@ class Navigation():
     18.5" (rc_084_098_2500)
     '''
 
+  def check_scan_clear(self, key, scan_value):
+    if (scan_value >= + self.scan_min_vals[key] and scan_value <= self.scan_max_vals[key]):
+      return True
+
+    return False
+
   def scan_floor(self):
+    self.floor_scan_values = []
+    scan_time = int(time.time())
     print("")
     self.motion.boot_center()
     time.sleep(2)
+
+    right_obstacle = False
+    left_obstacle = False
 
     for tilt_id, tilt_sample in enumerate(self.floor_scan_positions):
       tilt_angle = tilt_sample[0]
@@ -92,6 +131,10 @@ class Navigation():
         # sensor_distance = self.narrow_sensor.get_distance() if tilt_angle == 15 else self.wide_sensor.get_distance()
         sensor_distance = self.wide_sensor.get_distance()
 
+        if (not self.check_scan_clear("{}_{}_r".format(tilt_angle, right_angle), sensor_distance)):
+          right_obstacle = True
+          break
+
         if (largest_right < sensor_distance and sensor_distance < 300):
           largest_right = sensor_distance
 
@@ -102,6 +145,7 @@ class Navigation():
 
       self.motion.pan_center()
       time.sleep(2)
+
       largest_left = 0
 
       for left_angle in left_angles:
@@ -110,6 +154,10 @@ class Navigation():
 
         # sensor_distance = self.narrow_sensor.get_distance() if tilt_angle == 15 else self.wide_sensor.get_distance()
         sensor_distance = self.wide_sensor.get_distance()
+
+        if (not self.check_scan_clear("{}_{}_l".format(tilt_angle, left_angle), sensor_distance)):
+          left_obstacle = True
+          break
 
         if (largest_left < sensor_distance and sensor_distance < 300):
           largest_left = sensor_distance
@@ -125,13 +173,18 @@ class Navigation():
     print(self.floor_scan_values)
     print("")
 
+    self.floor_scan_set[scan_time] = {
+      "left_obstacle": left_obstacle,
+      "right_obstacle": right_obstacle,
+      "scan_data": self.floor_scan_values  
+    }
+
   # 360
   def full_floor_scan(self):
     for x in range(0, 4):
       self.scan_floor()
       self.socket.send("rc_085_085_0900")
       self.floor_scan_set[math.floor(time.time())] = self.floor_scan_values
-      self.floor_scan_values = []
 
     print(self.floor_scan_values)
     print("")
