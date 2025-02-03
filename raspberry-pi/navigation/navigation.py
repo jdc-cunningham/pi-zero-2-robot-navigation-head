@@ -92,7 +92,9 @@ class Navigation():
     rc_100_100_0730 (turn left 90 deg)
 
     move forward
+    sensor is 3.64 inches ahead of wheel axle
     2.75" (rc_085_098_425)
+    6.36" (rc_084_098_0850)
     10.0" (rc_084_098_1400)
     11.5" (rc_084_098_1550)
     18.5" (rc_084_098_2500)
@@ -198,19 +200,18 @@ class Navigation():
       self.client_send_msg("telemetry", "turning to {}".format(angle))
       self.vehicle_socket.send("rc_085_085_0900")
 
-    if (angle == 360):
-      angle = 0
-
   def move_forward(self, distance):
+    self.y_offset += distance
     self.client_send_msg("telemetry", "moving forward {} inches".format(distance))
-    self.vehicle_socket.send("rc_084_098_1400")
+    time.sleep(1)
+    self.vehicle_socket.send("rc_084_098_0850")
 
   def begin_navigation(self):
     # while True:
     if (self.first_scan):
       self.full_floor_scan()
-      self.move_forward(10)
-      self.self.scan_floor(0)
+      self.move_forward(6.36)
+      self.scan_floor(0)
     else:
       print("think")
 
