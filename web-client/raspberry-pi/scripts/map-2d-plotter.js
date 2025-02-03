@@ -57,14 +57,14 @@ const init2DMap = () => {
 
 init2DMap();
 
-const plotFourPointsAsPlane = (planePoints) => {
+const plotFourPointsAsPlane = (planePoints, color = "blue") => {
   let points = [];
 
   planePoints.forEach((panelPoint) => {
     points.push(new THREE.Vector3(panelPoint[0], panelPoint[1], panelPoint[2]));
   });
 
-  material = new THREE.LineBasicMaterial({ color: "blue" });
+  material = new THREE.LineBasicMaterial({ color });
   meshGeometry = new THREE.ConvexGeometry( points ); // points = vertices array
   mesh = new THREE.Mesh(meshGeometry, material);
   mapScene.add(mesh);
@@ -124,31 +124,35 @@ const scanPlane = (angle, x_offset, y_offset, width, distance, time) => ({
   time
 });
 
-const fullScanPlanes = (angle, x_offset, y_offset, time) => {
+const fullScanPlanes = (angle, x_offset, y_offset, time, left_obstacle, right_obstacle) => {
   const imu_z = 0.58; // forward
 
   plotFourPointsAsPlane(
     getPlaneVertices(
       angle, scanPlane(angle, x_offset, y_offset + imu_z,        4.6, 1.69, time)
-    )
+    ),
+    right_obstacle ? "red" : "blue"
   );
 
   plotFourPointsAsPlane(
     getPlaneVertices(
       angle, scanPlane(angle, x_offset, y_offset + imu_z + 1.69, 10, 6.35, time)
-    )
+    ),
+    right_obstacle ? "red" : "blue"
   );
 
   plotFourPointsAsPlane(
     getPlaneVertices(
       angle, scanPlane(angle, x_offset, y_offset + imu_z,        -4.6, 1.69, time)
-    )
+    ),
+    left_obstacle ? "red" : "blue"
   );
 
   plotFourPointsAsPlane(
     getPlaneVertices(
       angle, scanPlane(angle, x_offset, y_offset + imu_z + 1.69, -10, 6.35, time)
-    )
+    ),
+    left_obstacle ? "red" : "blue"
   );
 };
 

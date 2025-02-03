@@ -18,6 +18,8 @@ const msgRobot = (msg) => {
 const parseMsg = (msg) => {
   const msgData = JSON.parse(msg);
 
+  console.log(msgData);
+
   if (msgData?.type == "scan_data") {
     plotFullScanPlane(msgData)
   }
