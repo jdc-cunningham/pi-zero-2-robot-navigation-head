@@ -175,6 +175,18 @@ I did a test and it generally works (throw a box) although it did fail with a ta
 
 So that's where the vision would help as the vision would see the un-uniform color (black carpet vs. blue tape)
 
+6:55 PM
+
+https://jsfiddle.net/eh47y368/5/
+
+This is the rework of the min/max values, it was not done right before
+
+6:58 PM
+
+So now I need to send this data to the web UI and then keep going
+
+I'm gonna get the command to move forward 10"
+
 ---
 
 ### 02/01/2025

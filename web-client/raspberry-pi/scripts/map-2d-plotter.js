@@ -157,16 +157,16 @@ const plotFullScanPlane = (angle, x_offset, y_offset) => {
 };
 
 // 360 scan
-fullScanPlanes(0, 0, 0, 0);
-fullScanPlanes(90, 0, 0, 0);
-fullScanPlanes(180, 0, 0, 0);
-fullScanPlanes(270, 0, 0, 0);
+// fullScanPlanes(0, 0, 0, 0);
+// fullScanPlanes(90, 0, 0, 0);
+// fullScanPlanes(180, 0, 0, 0);
+// fullScanPlanes(270, 0, 0, 0);
 
 // move forward 20", scan 360
-fullScanPlanes(0, 0, 20, 0);
-fullScanPlanes(90, 20, 0, 0);
-fullScanPlanes(180, 0, -20, 0);
-fullScanPlanes(270, -20, 0, 0);
+// fullScanPlanes(0, 0, 20, 0);
+// fullScanPlanes(90, 20, 0, 0);
+// fullScanPlanes(180, 0, -20, 0);
+// fullScanPlanes(270, -20, 0, 0);
 
 const plotSinglePlane = (angle, x_offset, y_offset, width, distance) => {
 

@@ -21,6 +21,7 @@ class Navigation():
     self.imu_rotation_offset = 2.78 # z-axis (forward)
     self.wide_sensor_y_offest = 0.58 # z-axis
     self.floor_scan_values = []
+    self.first_scan = True
 
     # time: data
     # data includes left_obstacle, right_obstacle
@@ -89,6 +90,7 @@ class Navigation():
 
     move forward
     2.75" (rc_085_098_425)
+    10.0" (rc_084_098_1400)
     11.5" (rc_084_098_1550)
     18.5" (rc_084_098_2500)
     '''
@@ -128,7 +130,6 @@ class Navigation():
         self.motion.pan("right", right_angle)
         time.sleep(1)
 
-        # sensor_distance = self.narrow_sensor.get_distance() if tilt_angle == 15 else self.wide_sensor.get_distance()
         sensor_distance = self.wide_sensor.get_distance()
 
         if (not self.check_scan_clear("{}_{}_r".format(tilt_angle, right_angle), sensor_distance)):
@@ -147,7 +148,6 @@ class Navigation():
         self.motion.pan("left", left_angle)
         time.sleep(1)
 
-        # sensor_distance = self.narrow_sensor.get_distance() if tilt_angle == 15 else self.wide_sensor.get_distance()
         sensor_distance = self.wide_sensor.get_distance()
 
         if (not self.check_scan_clear("{}_{}_l".format(tilt_angle, left_angle), sensor_distance)):
@@ -166,6 +166,8 @@ class Navigation():
       "scan_data": self.floor_scan_values  
     }
 
+    self.socket.send(self.floor_scan_set[scan_time])
+
     print(self.floor_scan_set)
     print("")
 
@@ -174,14 +176,16 @@ class Navigation():
     for x in range(0, 4):
       self.scan_floor()
       self.socket.send("rc_085_085_0900")
-      self.floor_scan_set[math.floor(time.time())] = self.floor_scan_values
 
     print(self.floor_scan_values)
     print("")
 
   def begin_navigation(self):
     # while True:
-    self.full_floor_scan()
+    if (self.first_scan):
+      self.full_floor_scan
+    else:
+      print("think")
 
   def start(self):
     Thread(target=self.begin_navigation, args=()).start()
