@@ -28,6 +28,7 @@ const parseMsg = (msg) => {
 const receivedMsg = (msg) => {
   if (robotConnected) {
     updateTelemetryDisplay("robot", "received: " + msg);
+    parseMsg(msg);
   }
 }
 
