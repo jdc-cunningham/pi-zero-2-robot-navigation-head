@@ -50,7 +50,7 @@ class Navigation():
       "54_20_l": 9.2,
       "54_40_l": 9.24,
       "54_60_l": 9.09,
-      "54_85_l": 8.85,
+      "54_85_l": 9.25,
       "35_0_r": 12.05,
       "35_15_r": 11.66,
       "35_30_r": 11.23,
@@ -59,7 +59,7 @@ class Navigation():
       "35_15_l": 12.21,
       "35_30_l": 12.29,
       "35_45_l": 12.29,
-      "35_60_l": 12.21,
+      "35_60_l": 11.5,
       "35_75_l": 11.54  
     }
 
@@ -80,7 +80,7 @@ class Navigation():
       "35_15_l": 12.71,
       "35_30_l": 12.83,
       "35_45_l": 12.56,
-      "35_60_l": 12.17,
+      "35_60_l": 12.5,
       "35_75_l": 11.74  
     }
 
@@ -101,6 +101,8 @@ class Navigation():
   def check_scan_clear(self, key, scan_value):
     if (scan_value >= + self.scan_min_vals[key] and scan_value <= self.scan_max_vals[key]):
       return True
+
+    print("{}-{}".format(self.scan_min_vals[key], self.scan_max_vals[key]))
 
     return False
 
@@ -175,7 +177,6 @@ class Navigation():
 
     self.web_ui_socket.send(json.dumps(self.floor_scan_set[scan_time]))
 
-    print(self.floor_scan_set)
     print("")
 
   # 360
@@ -186,9 +187,6 @@ class Navigation():
       self.scan_floor(angle)
       self.vehicle_socket.send("rc_085_085_0900")
       angle += 90
-
-    print(self.floor_scan_values)
-    print("")
 
   def begin_navigation(self):
     # while True:
