@@ -15,9 +15,17 @@ const msgRobot = (msg) => {
   }
 }
 
+const parseMsg = (msg) => {
+  const msgData = JSON.parse(msg);
+
+  if (msgData?.type == "scan_data") {
+    plotFullScanPlane(msgData)
+  }
+}
+
 const receivedMsg = (msg) => {
   if (robotConnected) {
-    updateTelemetryDisplay("robot", "recevied: " + msg);
+    updateTelemetryDisplay("robot", "received: " + msg);
   }
 }
 

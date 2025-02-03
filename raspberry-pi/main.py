@@ -7,15 +7,24 @@ from navigation.navigation import Navigation
 from socket_server.socket_server import SocketServer
 from socket_client.socket_client import SocketClient
 
-vehicle_socket = SocketClient()
-light = Led()
-motion = Servo()
-narrow_angle_sensor = NarrowSensor()
-wide_angle_sensor = WideSensor()
-navigation = Navigation(motion, wide_angle_sensor, narrow_angle_sensor, vehicle_socket)
-web_ui_socket = SocketServer(navigation)
+class SelfNav():
+  def __init__(self):
+    self.vehicle_socket = SocketClient()
+    self.light = Led()
+    self.motion = Servo()
+    self.narrow_angle_sensor = NarrowSensor()
+    self.wide_angle_sensor = WideSensor()
+    self.pi_socket = SocketServer(self)
+    self.navigation = Navigation(self.motion, self.wide_angle_sensor, self.narrow_angle_sensor, self.vehicle_socket, self.pi_socket)
 
-light.off()
-motion.boot_center()
-navigation.scan_floor()
-# navigation.full_floor_scan()
+    self.start()
+  
+  def start(self):
+    self.light.off()
+    self.motion.boot_center()
+    # navigation.scan_floor()
+    # navigation.full_floor_scan()
+
+    self.navigation.start()
+
+SelfNav()

@@ -152,8 +152,17 @@ const fullScanPlanes = (angle, x_offset, y_offset, time) => {
   );
 };
 
-const plotFullScanPlane = (angle, x_offset, y_offset) => {
-  
+const plotFullScanPlane = (data) => {
+  const {
+    direction,
+    left_obstacle,
+    right_obstacle,
+    scan_time,
+    x_offset,
+    y_offset
+  } = msgData;
+
+  fullScanPlanes(angle, x_offset, y_offset, scan_time);
 };
 
 // 360 scan

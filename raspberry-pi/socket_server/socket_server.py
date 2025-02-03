@@ -3,15 +3,15 @@ from websockets.sync.server import serve
 
 # for Web Interface
 class SocketServer():
-  def __init__(self, navigation):
+  def __init__(self, main):
     self.socket = None
-    self.navigation = navigation
+    self.main = main # circular dep fix
 
     self.start()
 
   def parse_msg(self, msg):
     if (msg == "start"):
-      self.navigation.start()
+      self.main.navigation.start()
 
   def receive(self, websocket):
     for msg in websocket:

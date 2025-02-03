@@ -1,13 +1,14 @@
 from threading import Thread
 
 import time
-import math
+import json
 
 # units are inches and degrees
 
 class Navigation():
-  def __init__(self, motion, wide_angle_sensor, narrow_angle_sensor, socket):
-    self.socket = socket
+  def __init__(self, motion, wide_angle_sensor, narrow_angle_sensor, vehicle_socket, web_ui_socket):
+    self.vehicle_socket = vehicle_socket
+    self.web_ui_socket = web_ui_socket
     self.robot_length = 14
     self.robot_width = 7.75
     self.robot_height = 9
@@ -22,6 +23,8 @@ class Navigation():
     self.wide_sensor_y_offest = 0.58 # z-axis
     self.floor_scan_values = []
     self.first_scan = True
+    self.x_offset = 0 # left or right
+    self.y_offset = 0 # up or down
 
     # time: data
     # data includes left_obstacle, right_obstacle
@@ -45,7 +48,7 @@ class Navigation():
       "54_35_r": 8.74,
       "54_60_r": 8.42,
       "54_20_l": 9.2,
-      "54_40_l": 9.36,
+      "54_40_l": 9.32,
       "54_60_l": 9.09,
       "54_85_l": 8.85,
       "35_0_r": 12.05,
@@ -101,7 +104,7 @@ class Navigation():
 
     return False
 
-  def scan_floor(self):
+  def scan_floor(self, scan_dir):
     self.floor_scan_values = []
     scan_time = int(time.time())
     print("")
@@ -133,7 +136,7 @@ class Navigation():
         sensor_distance = self.wide_sensor.get_distance()
 
         if (not self.check_scan_clear("{}_{}_r".format(tilt_angle, right_angle), sensor_distance)):
-          print("right obstacle")
+          print("right obstacle, {}_{} {}".format(tilt_angle, right_angle, sensor_distance))
           right_obstacle = True
           break
 
@@ -151,7 +154,7 @@ class Navigation():
         sensor_distance = self.wide_sensor.get_distance()
 
         if (not self.check_scan_clear("{}_{}_l".format(tilt_angle, left_angle), sensor_distance)):
-          print("left obstacle")
+          print("left obstacle, {}_{} {}".format(tilt_angle, left_angle, sensor_distance))
           left_obstacle = True
           break
 
@@ -161,21 +164,28 @@ class Navigation():
     time.sleep(1)
 
     self.floor_scan_set[scan_time] = {
+      "type": "scan_data",
+      "direction": scan_dir,
       "left_obstacle": left_obstacle,
       "right_obstacle": right_obstacle,
-      "scan_data": self.floor_scan_values  
+      "scan_time": scan_time,
+      "x_offset": self.x_offset,
+      "y_offset": self.y_offset
     }
 
-    self.socket.send(self.floor_scan_set[scan_time])
+    self.web_ui_socket.send(json.dumps(self.floor_scan_set[scan_time]))
 
     print(self.floor_scan_set)
     print("")
 
   # 360
   def full_floor_scan(self):
+    angle = 0
+
     for x in range(0, 4):
-      self.scan_floor()
-      self.socket.send("rc_085_085_0900")
+      self.scan_floor(angle)
+      self.vehicle_socket.send("rc_085_085_0900")
+      angle += 90
 
     print(self.floor_scan_values)
     print("")
@@ -183,7 +193,7 @@ class Navigation():
   def begin_navigation(self):
     # while True:
     if (self.first_scan):
-      self.full_floor_scan
+      self.full_floor_scan()
     else:
       print("think")
 
