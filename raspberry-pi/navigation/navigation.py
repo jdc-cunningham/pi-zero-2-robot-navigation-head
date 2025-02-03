@@ -44,7 +44,7 @@ class Navigation():
       "54_35_r": 8.74,
       "54_60_r": 8.42,
       "54_20_l": 9.2,
-      "54_40_l": 9.2,
+      "54_40_l": 9.36,
       "54_60_l": 9.09,
       "54_85_l": 8.85,
       "35_0_r": 12.05,
@@ -53,31 +53,31 @@ class Navigation():
       "35_45_r": 10.8,
       "35_60_r": 10.53,
       "35_15_l": 12.21,
-      "35_30_l": 12.21,
-      "35_45_l": 12.21,
+      "35_30_l": 12.29,
+      "35_45_l": 12.29,
       "35_60_l": 11.97,
       "35_75_l": 11.54  
     }
 
     self.scan_max_vals = {
       "54_0_r": 9.55,
-      "54_15_r": 9.55,
-      "54_35_r": 9.55,
-      "54_60_r": 9.55,
+      "54_15_r": 9.52,
+      "54_35_r": 9.2,
+      "54_60_r": 8.74,
       "54_20_l": 9.71,
-      "54_40_l": 9.71,
-      "54_60_l": 9.71,
-      "54_85_l": 9.71,
+      "54_40_l": 9.63,
+      "54_60_l": 9.24,
+      "54_85_l": 8.97,
       "35_0_r": 12.71,
-      "35_15_r": 12.71,
-      "35_30_r": 12.71,
-      "35_45_r": 12.71,
-      "35_60_r": 12.71,
+      "35_15_r": 12.44,
+      "35_30_r": 12.05,
+      "35_45_r": 11.51,
+      "35_60_r": 11.12,
       "35_15_l": 12.71,
       "35_30_l": 12.83,
-      "35_45_l": 12.83,
-      "35_60_l": 12.83,
-      "35_75_l": 12.83  
+      "35_45_l": 12.56,
+      "35_60_l": 12.17,
+      "35_75_l": 11.74  
     }
 
     '''
@@ -132,14 +132,9 @@ class Navigation():
         sensor_distance = self.wide_sensor.get_distance()
 
         if (not self.check_scan_clear("{}_{}_r".format(tilt_angle, right_angle), sensor_distance)):
+          print("right obstacle")
           right_obstacle = True
           break
-
-        if (largest_right < sensor_distance and sensor_distance < 300):
-          largest_right = sensor_distance
-
-        if (sensor_distance > 300):
-          sensor_distance = largest_right
 
         self.floor_scan_values[tilt_id][0].append(sensor_distance)
 
@@ -156,28 +151,23 @@ class Navigation():
         sensor_distance = self.wide_sensor.get_distance()
 
         if (not self.check_scan_clear("{}_{}_l".format(tilt_angle, left_angle), sensor_distance)):
+          print("left obstacle")
           left_obstacle = True
           break
-
-        if (largest_left < sensor_distance and sensor_distance < 300):
-          largest_left = sensor_distance
-
-        if (sensor_distance > 300):
-          sensor_distance = largest_left
 
         self.floor_scan_values[tilt_id][1].append(sensor_distance)
 
     self.motion.boot_center()
     time.sleep(1)
 
-    print(self.floor_scan_values)
-    print("")
-
     self.floor_scan_set[scan_time] = {
       "left_obstacle": left_obstacle,
       "right_obstacle": right_obstacle,
       "scan_data": self.floor_scan_values  
     }
+
+    print(self.floor_scan_set)
+    print("")
 
   # 360
   def full_floor_scan(self):

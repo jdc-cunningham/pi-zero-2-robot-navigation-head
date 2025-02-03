@@ -17,5 +17,5 @@ web_ui_socket = SocketServer(navigation)
 
 light.off()
 motion.boot_center()
-# navigation.scan_floor()
+navigation.scan_floor()
 # navigation.full_floor_scan()
