@@ -165,7 +165,17 @@ It uses the mins determined earlier today to see if something is in the way of a
 
 It's unfortunate how simplistic it is (if something si detected, avoid that section entirely)
 
+6:34 PM
 
+So the idea now is if the obstacle detection detects right/left, that plot will be red
+
+Also since the first step is so small if any of the two scans per side fails, that whole side is considered bad
+
+I did a test and it generally works (throw a box) although it did fail with a tape roll (largely empty except ring shape)
+
+So that's where the vision would help as the vision would see the un-uniform color (black carpet vs. blue tape)
+
+---
 
 ### 02/01/2025
 
