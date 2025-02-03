@@ -95,6 +95,7 @@ class Navigation():
     sensor is 3.64 inches ahead of wheel axle
     2.75" (rc_085_098_425)
     6.36" (rc_084_098_0850)
+    8.00" (rc_084_098_1050)
     10.0" (rc_084_098_1400)
     11.5" (rc_084_098_1550)
     18.5" (rc_084_098_2500)
@@ -204,13 +205,13 @@ class Navigation():
     self.y_offset += distance
     self.client_send_msg("telemetry", "moving forward {} inches".format(distance))
     time.sleep(1)
-    self.vehicle_socket.send("rc_084_098_0850")
+    self.vehicle_socket.send("rc_084_098_1050")
 
   def begin_navigation(self):
     # while True:
     if (self.first_scan):
       self.full_floor_scan()
-      self.move_forward(6.36)
+      self.move_forward(8)
       self.scan_floor(0)
     else:
       print("think")
