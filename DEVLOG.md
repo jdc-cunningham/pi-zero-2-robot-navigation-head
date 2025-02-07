@@ -34,6 +34,12 @@ I think if either half is blocked it's fine to assume this whole section is bad 
 
 I'll work on a basic mapping algorithm
 
+11:27 PM
+
+Oh... I had an idea on how to make a mapping/grid thing, I can use a CSV file (for a UI) and fill in obstacles by value eg. 0 or X then loop over them
+
+That would be a search pattern equivalent for the robot doing it on the ground
+
 ### 02/02/2025
 
 10:22 AM
