@@ -1,3 +1,39 @@
+### 02/06/2025
+
+7:59 PM
+
+Damn I feel tired
+I think I know what it is, I gotta eat.
+I drink coffee/caffeine (not a lot like 3 cups) and I eat 3 packages of peanuts (270 cal ones) and then have a large meal at night.
+But when I get home at like 6PM I'm tired af
+Gonna start eating some meat, I've been lifting almost everyday and running too trying to get cut af
+
+Anyway I'm just gonna do some brainless work right now, I have some freelance work to do so I won't be able to do much this week
+
+I'm gonna calibrate the flat floor, the measurement is so bad of the wide angle sensor
+
+8:11 PM
+
+It's crazy my security cam wrote 30GB into a log file because another pi went down which it was pinging to check if it was on the network
+
+The security cam stopped working since it was out of space used 32/32GB
+
+8:21 PM
+
+Still distracted
+
+8:59 PM
+
+Scanning random stuff
+
+wire cutter half right, box of screws competely right
+
+I think if either half is blocked it's fine to assume this whole section is bad since the robot is the full width, can't turn that much
+
+9:19 PM
+
+I'll work on a basic mapping algorithm
+
 ### 02/02/2025
 
 10:22 AM
