@@ -210,8 +210,8 @@ class Navigation():
   def begin_navigation(self):
     # while True:
     if (self.first_scan):
-      self.full_floor_scan()
-      self.move_forward(8)
+      # self.full_floor_scan()
+      # self.move_forward(8)
       self.scan_floor(0)
     else:
       print("think")

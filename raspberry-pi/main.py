@@ -22,7 +22,7 @@ class SelfNav():
   def start(self):
     self.light.off()
     self.motion.boot_center()
-    # navigation.scan_floor()
+    # self.navigation.scan_floor(0)
     # navigation.full_floor_scan()
 
 SelfNav()
