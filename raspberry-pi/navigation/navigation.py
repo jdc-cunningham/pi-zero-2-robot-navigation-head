@@ -42,46 +42,25 @@ class Navigation():
       [35, [0, 15, 30, 45, 60], [15, 30, 45, 60, 75]],
     ]
 
-    self.scan_min_vals = {
-      "54_0_r": 9.0,
-      "54_15_r": 9.9,
-      "54_35_r": 8.75,
-      "54_60_r": 8.25,
-      "54_20_l": 9.25,
-      "54_40_l": 9.0,
-      "54_60_l": 9.0,
-      "54_85_l": 8.75,
-      "35_0_r": 11.75,
-      "35_15_r": 11.5,
-      "35_30_r": 11.0,
-      "35_45_r": 10.5,
-      "35_60_r": 10.25,
-      "35_15_l": 12.25,
-      "35_30_l": 12.25,
-      "35_45_l": 12.0,
-      "35_60_l": 11.75,
-      "35_75_l": 11.5
-    }
-
-    self.scan_max_vals = {
-      "54_0_r": 10,
-      "54_15_r": 10.9,
-      "54_35_r": 9.75,
-      "54_60_r": 9.25,
-      "54_20_l": 10.25,
-      "54_40_l": 10,
-      "54_60_l": 10,
-      "54_85_l": 9.75,
-      "35_0_r": 12.75,
-      "35_15_r": 12.5,
-      "35_30_r": 12,
-      "35_45_r": 11.5,
-      "35_60_r": 11.25,
-      "35_15_l": 13.25,
-      "35_30_l": 13.25,
-      "35_45_l": 13,
-      "35_60_l": 12.75,
-      "35_75_l": 12.5
+    self.scan_min_max_vals = {
+      "54_0_r":  [9.0, 9.5],
+      "54_15_r": [9.0, 9.5],
+      "54_35_r": [8.75, 9.25],
+      "54_60_r": [8.25, 8.75],
+      "54_20_l": [9.25, 9.75],
+      "54_40_l": [9.0, 9.5],
+      "54_60_l": [9.0, 9.5],
+      "54_85_l": [8.75, 9.25],
+      "35_0_r":  [11.75, 12.25],
+      "35_15_r": [11.5, 12.0],
+      "35_30_r": [11.0, 11.5],
+      "35_45_r": [10.5, 11],
+      "35_60_r": [10.25, 10.75],
+      "35_15_l": [12.25, 12.75],
+      "35_30_l": [12.25, 12.75],
+      "35_45_l": [12.0, 12.5],
+      "35_60_l": [11.75, 12.25],
+      "35_75_l": [11.5, 12]
     }
 
     '''
@@ -102,10 +81,8 @@ class Navigation():
     '''
 
   def check_scan_clear(self, key, scan_value):
-    if (scan_value >= + self.scan_min_vals[key] and scan_value <= self.scan_max_vals[key]):
+    if (scan_value >= + self.scan_min_max_vals[key][0] and scan_value <= self.scan_min_max_vals[key][1]):
       return True
-
-    print("{}-{}".format(self.scan_min_vals[key], self.scan_max_vals[key]))
 
     return False
 
@@ -114,7 +91,6 @@ class Navigation():
 
     self.floor_scan_values = []
     scan_time = int(time.time())
-    print("")
     self.motion.boot_center()
     time.sleep(2)
 
@@ -141,10 +117,8 @@ class Navigation():
         time.sleep(1)
 
         sensor_distance = self.wide_sensor.get_distance()
-        print("right {}_{} {}".format(tilt_angle, right_angle, sensor_distance))
 
         if (not self.check_scan_clear("{}_{}_r".format(tilt_angle, right_angle), sensor_distance)):
-          print("right obstacle")
           right_obstacle = True
           break
 
@@ -160,10 +134,8 @@ class Navigation():
         time.sleep(1)
 
         sensor_distance = self.wide_sensor.get_distance()
-        print("left obstacle, {}_{} {}".format(tilt_angle, left_angle, sensor_distance))
 
         if (not self.check_scan_clear("{}_{}_l".format(tilt_angle, left_angle), sensor_distance)):
-          print("left obstacle")
           left_obstacle = True
           break
 
@@ -183,8 +155,6 @@ class Navigation():
     }
 
     self.client_send_msg("scan_data", self.floor_scan_set[scan_time])
-
-    print("")
 
   def client_send_msg(self, msg_type, msg):
     self.web_ui_socket.send(json.dumps({
