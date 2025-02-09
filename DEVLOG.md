@@ -12,7 +12,15 @@ It takes I believe 30 seconds to do a full scan, let me time one real quick
 
 I have not addressed the problem of the robot not driving straight too, it needs a control loop against the IMU
 
+9:34 PM
 
+Okay yeah so a full floor scan takes 36 seconds
+
+If the floor is clear the robot moves 8" forward and scans 20" wide so a coverage of 160" squared
+
+Let's say it's scanning 34" x 50" so it would take about 11 scans or 6.6 minutes to cover like 3 square feet
+
+Anyway I gotta make sure the robot moves straight so I'll switch over to the IMU control loop that's a small chunk of code I could get done
 
 ### 02/06/2025
 
