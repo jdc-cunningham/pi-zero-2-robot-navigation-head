@@ -43,24 +43,24 @@ class Navigation():
     ]
 
     self.scan_min_max_vals = {
-      "54_0_r":  [9.0, 9.5],
-      "54_15_r": [9.0, 9.5],
+      "54_0_r":  [9.0, 10.0],
+      "54_15_r": [9.0, 10.0],
       "54_35_r": [8.75, 9.25],
-      "54_60_r": [8.25, 8.75],
-      "54_20_l": [9.25, 9.75],
-      "54_40_l": [9.0, 9.5],
-      "54_60_l": [9.0, 9.5],
+      "54_60_r": [8.25, 9.0],
+      "54_20_l": [9.25, 10.0],
+      "54_40_l": [9.0, 10.0],
+      "54_60_l": [9.0, 10.0],
       "54_85_l": [8.75, 9.25],
-      "35_0_r":  [11.75, 12.25],
-      "35_15_r": [11.5, 12.0],
-      "35_30_r": [11.0, 11.5],
-      "35_45_r": [10.5, 11],
-      "35_60_r": [10.25, 10.75],
-      "35_15_l": [12.25, 12.75],
-      "35_30_l": [12.25, 12.75],
-      "35_45_l": [12.0, 12.5],
-      "35_60_l": [11.75, 12.25],
-      "35_75_l": [11.5, 12]
+      "35_0_r":  [11.75, 13.5],
+      "35_15_r": [11.5, 13.0],
+      "35_30_r": [11.0, 12.5],
+      "35_45_r": [10.5, 12.0],
+      "35_60_r": [10.25, 11.5],
+      "35_15_l": [12.25, 13.5],
+      "35_30_l": [12.25, 13.5],
+      "35_45_l": [12.0, 13.5],
+      "35_60_l": [11.75, 13.0],
+      "35_75_l": [11.5, 12.5]
     }
 
     '''
@@ -119,6 +119,7 @@ class Navigation():
         sensor_distance = self.wide_sensor.get_distance()
 
         if (not self.check_scan_clear("{}_{}_r".format(tilt_angle, right_angle), sensor_distance)):
+          print("obstacle {}_{}_r {}".format(tilt_angle, right_angle, sensor_distance))
           right_obstacle = True
           break
 
@@ -136,6 +137,7 @@ class Navigation():
         sensor_distance = self.wide_sensor.get_distance()
 
         if (not self.check_scan_clear("{}_{}_l".format(tilt_angle, left_angle), sensor_distance)):
+          print("obstacle {}_{}_l {}".format(tilt_angle, left_angle, sensor_distance))
           left_obstacle = True
           break
 
