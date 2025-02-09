@@ -1,3 +1,19 @@
+### 02/08/2025
+
+9:01 PM
+
+Somewhat unfortunately I have been doing some freelance work on the weekend so not doing much here
+
+The robot needs a goal right, it's to produce a map, keep going around
+
+But once it's done mapping it has no purpose
+
+It takes I believe 30 seconds to do a full scan, let me time one real quick
+
+I have not addressed the problem of the robot not driving straight too, it needs a control loop against the IMU
+
+
+
 ### 02/06/2025
 
 7:59 PM
