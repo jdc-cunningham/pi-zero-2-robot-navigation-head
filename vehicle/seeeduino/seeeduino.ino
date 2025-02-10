@@ -1,10 +1,12 @@
 #include "esp-01.h"
 #include "motion.h"
+#include "imu.h"
 
 void setup()
 {
   Serial.begin(115200);
   setupEspSerial();
+  setupIMU();
   setupServos();
 }
 
@@ -13,12 +15,14 @@ void setup()
 // the commands come from esp-01.h
 void loop()
 {
-  checkMessages();
+  // Serial.println("loop");
+  Serial.println(getAccelX());
+  // checkMessages();
 
-  if (motionCommand)
-  {
-    parseMotionCommand(motionCommand);
-  }
+  // if (motionCommand)
+  // {
+  //   parseMotionCommand(motionCommand);
+  // }
 
   delay(50);
 }
