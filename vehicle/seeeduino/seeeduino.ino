@@ -50,7 +50,7 @@ void sampleImu()
 
   imu_x_avg = imu_samples_avg();
 
-  if (imu_x_samples.size() == 100 && !centerImuAvg)
+  if (imu_x_samples.size() == 10 && !centerImuAvg)
   {
     centerImuAvg = imu_x_avg;
   }
@@ -84,7 +84,7 @@ void sampleGyro()
 // the commands come from esp-01.h
 void loop()
 {
-  if (motionCommand && elapsedTimeMs % 10 == 0)
+  if (motionCommand && elapsedTimeMs % 100 == 0)
   {
     sampleImu();
   }
@@ -98,13 +98,9 @@ void loop()
     parseMotionCommand(motionCommand, turnTo, stop);
   }
 
-  elapsedTimeMs += 1;
-
-  if (elapsedTimeMs == 11) {
-    elapsedTimeMs = 0;
-  }
+  elapsedTimeMs += 10;
 
   Serial.println(elapsedTimeMs);
 
-  delay(1);
+  delay(10);
 }
