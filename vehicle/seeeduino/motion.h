@@ -26,12 +26,9 @@ void stopMoving()
   rightServo.servo.write(rightServo.stopPos);
 }
 
-// advanced preformed string
-// rc_ls_90_10_rs_90_10
-// translates to: raw command, left servo 90 deg 10 ms, rs 90 deg 10 ms
-// rc_090_090_0100
-// translates to: raw command, left servo to 90 deg, right servo to 90 deg both for 100ms long
-void rawCommand(String command)
+// rc_084_098_1400 (move 10" forward)
+// translates to: raw command, left servo to 84 deg, right servo to 98 deg both for 1400ms long
+void rawCommand(String command, String turnTo, bool stop)
 {
   // not how this will work just putting this in here for video demo
   if (motionInProgress) return;
@@ -40,17 +37,35 @@ void rawCommand(String command)
   int rs_deg = command.substring(7, 10).toInt();
   int stop_delay = command.substring(11, 15).toInt();
 
-  leftServo.servo.write(ls_deg);
-  rightServo.servo.write(rs_deg);
-  delay(stop_delay);
-  stopMoving();
+  String amount = String(ls_deg) + "," + String(rs_deg);
+  // Serial.println(turnTo + " ");
+
+  if (turnTo == "left")
+  {
+    ls_deg = 90;
+    rs_deg = 100;
+  }
+
+  if (turnTo == "right")
+  {
+    ls_deg = 80;
+    rs_deg = 90;
+  }
+
+  // leftServo.servo.write(ls_deg);
+  // rightServo.servo.write(rs_deg);
+
+  if (stop)
+  {
+    stopMoving();
+  }
 }
 
 // ex. mf_010 for move forward 10 inches
-void parseMotionCommand(String motionCommand)
+void parseMotionCommand(String motionCommand, String turnTo, bool stop)
 {
   if (motionCommand.indexOf("rc_") == 0)
   {
-    rawCommand(motionCommand);
+    rawCommand(motionCommand, turnTo, stop);
   }
 }

@@ -1,3 +1,23 @@
+### 02/10/2025
+
+7:26 PM
+
+I'd like to move past this IMU bit here even though I didn't spend too much time on it
+
+What sucks about programming it is I have to have a wire attached, but I just need to know the direction then try out some loops based on the requested motion duration
+
+7:46 PM
+
+Alright dman I'm terrible at c++ also this language is ugly as hell hot take (all the typing)
+
+I added a basic averaging function, I'm running the loop slow right now so I can comprehend it before I run it at 100hz full speed
+
+So turning right the values go... positive
+
+Turning left they go more negative
+
+what's nice is the errors seem to be in the range of 100 while sitting still eg. -8000.00 to -8100.00
+
 ### 02/08/2025
 
 9:01 PM

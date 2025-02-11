@@ -19,8 +19,6 @@ void setupIMU()
 
   mpu.initialize();
 
-  Serial.println("Testing MPU6050 connection...");
-
   if(mpu.testConnection() ==  false){
     Serial.println("MPU6050 connection failed");
     while(true);
@@ -38,8 +36,14 @@ void setupIMU()
   mpu.setZGyroOffset(0);  //Set your gyro offset for axis Z
 }
 
-String getAccelX()
+int getAccelX()
 {
   mpu.getAcceleration(&ax, &ay, &az);
-  return String(ax);
+  return ax;
+}
+
+double getRotationX()
+{
+  mpu.getRotation(&gx, &gy, &gz);
+  return gx;
 }
