@@ -42,18 +42,16 @@ void rawCommand(String command, String turnTo, bool stop)
 
   if (turnTo == "left")
   {
-    ls_deg = 90;
-    rs_deg = 100;
+    ls_deg = 86;
   }
 
   if (turnTo == "right")
   {
-    ls_deg = 80;
-    rs_deg = 90;
+    rs_deg = 96;
   }
 
-  // leftServo.servo.write(ls_deg);
-  // rightServo.servo.write(rs_deg);
+  leftServo.servo.write(ls_deg);
+  rightServo.servo.write(rs_deg);
 
   if (stop)
   {

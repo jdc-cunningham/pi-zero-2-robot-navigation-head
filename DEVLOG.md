@@ -1,3 +1,19 @@
+### 02/11/2025
+
+8:11 PM
+
+Alright back on, had to donate plasma today and messed around with my surface book 3 briefly, looks like I'll be using that linux surface kernel afterall
+
+My tinfoil hat but nah it has 5.5K stars
+
+Trust is funny, I'm like "oh yeah I trust this company" because everyone knows them... yeah
+
+It doesn't matter, nothing is secure so many ways to get data out
+
+I gotta rework the code to use the gyro, it's still the same concept of try to stay near "0"
+
+
+
 ### 02/10/2025
 
 7:26 PM

@@ -16,16 +16,16 @@ std::vector<int> imu_x_samples;
 String turnTo = "";
 unsigned long elapsedTimeMs = 0;
 bool stop = false;
-int imuThreshold = 20;
+int imuThreshold = 10;
 double imu_x_avg = 0.0;
 int centerImuAvg = 0;
 
 void update_imu_samples(int sample)
 {
-  if (centerImuAvg && imu_x_samples.size() == 10)
-  {
-    imu_x_samples.erase(imu_x_samples.begin());
-  }
+  // if (centerImuAvg && imu_x_samples.size() == 5)
+  // {
+  //   imu_x_samples.erase(imu_x_samples.begin());
+  // }
 
   imu_x_samples.push_back(sample);
 }
@@ -46,11 +46,14 @@ void sampleImu()
   int imu_x_now = getRotationX();
 
   // Serial.println(imu_x_now);
-  update_imu_samples(imu_x_now);
+  if (!centerImuAvg)
+  {
+    update_imu_samples(imu_x_now);
+  }
 
   imu_x_avg = imu_samples_avg();
 
-  if (imu_x_samples.size() == 10 && !centerImuAvg)
+  if (imu_x_samples.size() == 100 && !centerImuAvg)
   {
     centerImuAvg = imu_x_avg;
   }
@@ -60,10 +63,7 @@ void sampleImu()
     return;
   }
 
-  if (imu_x_avg > centerImuAvg - imuThreshold && imu_x_avg < centerImuAvg + imuThreshold)
-  {
-    turnTo = "center";
-  } else if (imu_x_avg > centerImuAvg)
+  if (imu_x_now + centerImuAvg > 0)
   {
     turnTo = "left";
   } else
@@ -71,7 +71,7 @@ void sampleImu()
     turnTo = "right";
   }
 
-  Serial.println(turnTo + " " + imu_x_avg);
+  // Serial.println(turnTo + " " + imu_x_now + " " + centerImuAvg);
 }
 
 void sampleGyro()
@@ -84,23 +84,29 @@ void sampleGyro()
 // the commands come from esp-01.h
 void loop()
 {
-  if (motionCommand && elapsedTimeMs % 100 == 0)
+  if (!centerImuAvg)
   {
     sampleImu();
   }
-  
+
+  if (elapsedTimeMs % 20 == 0)
+  {
+    turnTo = "center";
+  }
+
   // sampleGyro();
 
   // checkMessages();
 
   if (centerImuAvg && motionCommand)
   {
+    sampleImu();
     parseMotionCommand(motionCommand, turnTo, stop);
   }
 
   elapsedTimeMs += 10;
 
-  Serial.println(elapsedTimeMs);
+  // Serial.println(elapsedTimeMs);
 
   delay(10);
 }
