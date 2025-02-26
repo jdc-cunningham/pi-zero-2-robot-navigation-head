@@ -14,12 +14,20 @@ void setup()
 String turnTo = "";
 unsigned long elapsedTimeMs = 0;
 bool stop = false;
+std::vector<int> tailwheelAngleSamples;
+
+// motionCommand = "rc_084_098_1400"
 
 void loop()
 {
-  // elapsedTimeMs += 10;
+  // tailwheelAngle = convertRawAngleToDegrees(ams5600.getRawAngle());
+
+  // if (motionCommand && elapsedTImeMs % 100 == 0)
+  // {
+  //   tailwheelAngleSamples.push_back(taillwheelAngle);
+  // }
 
   // delay(10);
 
-  Serial.println(String(convertRawAngleToDegrees(ams5600.getRawAngle()),DEC));
+  // elapsedTimeMs += 10;
 }
