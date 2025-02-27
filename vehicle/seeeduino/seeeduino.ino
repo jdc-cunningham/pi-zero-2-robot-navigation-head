@@ -1,7 +1,6 @@
 #include "esp-01.h"
-#include "motion.h"
 #include "tail-sensor.h"
-#include <vector>
+#include "motion.h"
 
 void setup()
 {
@@ -11,23 +10,15 @@ void setup()
   setupTailSensor();
 }
 
-String turnTo = "";
 unsigned long elapsedTimeMs = 0;
-bool stop = false;
-std::vector<int> tailwheelAngleSamples;
 
 // motionCommand = "rc_084_098_1400"
 
 void loop()
 {
-  // tailwheelAngle = convertRawAngleToDegrees(ams5600.getRawAngle());
+  // motionCommand comes from esp-01.h
+  parseMotionCommand(motionCommand, elapsedTimeMs);
+  delay(10);
 
-  // if (motionCommand && elapsedTImeMs % 100 == 0)
-  // {
-  //   tailwheelAngleSamples.push_back(taillwheelAngle);
-  // }
-
-  // delay(10);
-
-  // elapsedTimeMs += 10;
+  elapsedTimeMs += 10;
 }

@@ -1,4 +1,5 @@
 #include <Servo.h>
+#include <vector>
 
 // continuous rotation servos
 struct servo {
@@ -9,8 +10,15 @@ struct servo {
 
 servo leftServo = servo{0, 90};
 servo rightServo = servo{3, 90};
-
 bool motionInProgress = false;
+unsigned long motionStartTime = 0;
+int motionStopTime = 0;
+int ls_deg = 0;
+int rs_deg = 0;
+int stop_delay = 0;
+std::vector<int> twCenterRange = [356, 358];
+
+std::vector<int> tailwheelAngleSamples;
 
 void setupServos()
 {
@@ -20,50 +28,62 @@ void setupServos()
 
 void stopMoving()
 {
-  if (motionInProgress) return;
-
   leftServo.servo.write(leftServo.stopPos);
   rightServo.servo.write(rightServo.stopPos);
+
+  motionInProgress = false;
+  motionCommand = "";
 }
 
 // rc_084_098_1400 (move 10" forward)
 // translates to: raw command, left servo to 84 deg, right servo to 98 deg both for 1400ms long
-void rawCommand(String command, String turnTo, bool stop)
+void rawCommand(String command, unsigned long elapsedTime)
 {
-  // not how this will work just putting this in here for video demo
-  if (motionInProgress) return;
-
-  int ls_deg = command.substring(3, 6).toInt();
-  int rs_deg = command.substring(7, 10).toInt();
-  int stop_delay = command.substring(11, 15).toInt();
-
-  String amount = String(ls_deg) + "," + String(rs_deg);
-  // Serial.println(turnTo + " ");
-
-  if (turnTo == "left")
+  if (!motionInProgress)
   {
-    ls_deg = 86;
+    ls_deg = command.substring(3, 6).toInt();
+    rs_deg = command.substring(7, 10).toInt();
+    stop_delay = command.substring(11, 15).toInt();
+    motionStartTime = elapsedTime;
+    motionStopTime = stop_delay;
+    motionInProgress = true;
+  } else {
+    if (elapsedTime % 100 == 0)
+    {
+      tailwheelAngleSamples.push_back(convertRawAngleToDegrees(ams5600.getRawAngle()));
+    }
   }
 
-  if (turnTo == "right")
+  if (motionInProgress)
   {
-    rs_deg = 96;
-  }
-
-  leftServo.servo.write(ls_deg);
-  rightServo.servo.write(rs_deg);
-
-  if (stop)
-  {
-    stopMoving();
+    leftServo.servo.write(ls_deg);
+    rightServo.servo.write(rs_deg);
   }
 }
 
 // ex. mf_010 for move forward 10 inches
-void parseMotionCommand(String motionCommand, String turnTo, bool stop)
+void parseMotionCommand(String motionCommand, unsigned long elapsedTime)
 {
   if (motionCommand.indexOf("rc_") == 0)
   {
-    rawCommand(motionCommand, turnTo, stop);
+    rawCommand(motionCommand, elapsedTime);
+  }
+
+  if (motionInProgress)
+  {
+    Serial.println(String(elapsedTime) + " " + String(motionStartTime) + " " + String(motionStopTime));
+
+    if ((elapsedTime - motionStartTime) > motionStopTime)
+    {
+      stopMoving();
+
+      Serial.println("stopped moving");
+      Serial.println(String(tailwheelAngleSamples.size()));
+
+      for (int i = 0; i < tailwheelAngleSamples.size(); i++)
+      {
+        Serial.println(String(tailwheelAngleSamples[i]));
+      }
+    }
   }
 }
