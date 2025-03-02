@@ -16,7 +16,8 @@ int motionStopTime = 0;
 int ls_deg = 0;
 int rs_deg = 0;
 int stop_delay = 0;
-std::vector<int> twCenterRange = [356, 358];
+int tailwheelCenterAngle = 214; // left decreases, right increases
+int steeringCorrectionDelay = 100; // ms
 
 std::vector<int> tailwheelAngleSamples;
 
@@ -35,6 +36,23 @@ void stopMoving()
   motionCommand = "";
 }
 
+// based on straight command servo angles
+void slightRight()
+{
+  ls_deg = 83;
+}
+
+void slightLeft()
+{
+  rs_deg = 99;
+}
+
+void goStraight()
+{
+  ls_deg = 84;
+  rs_deg = 98;
+}
+
 // rc_084_098_1400 (move 10" forward)
 // translates to: raw command, left servo to 84 deg, right servo to 98 deg both for 1400ms long
 void rawCommand(String command, unsigned long elapsedTime)
@@ -47,10 +65,23 @@ void rawCommand(String command, unsigned long elapsedTime)
     motionStartTime = elapsedTime;
     motionStopTime = stop_delay;
     motionInProgress = true;
-  } else {
-    if (elapsedTime % 100 == 0)
+  }
+
+  // use tailwheel feedback to go straight
+  if (command == "rc_084_098_1400")
+  {
+    // the delay is for the tailwheel to straighten itself out
+    if (elapsedTime - motionStartTime >= steeringCorrectionDelay)
     {
-      tailwheelAngleSamples.push_back(convertRawAngleToDegrees(ams5600.getRawAngle()));
+      int tailwheelAngle = int(convertRawAngleToDegrees(ams5600.getRawAngle()));
+
+      if (tailwheelAngle < tailwheelCenterAngle) {
+        slightRight();
+      } else if (tailwheelAngle > tailwheelCenterAngle) {
+        slightLeft();
+      } else {
+        goStraight();
+      }
     }
   }
 
@@ -71,19 +102,9 @@ void parseMotionCommand(String motionCommand, unsigned long elapsedTime)
 
   if (motionInProgress)
   {
-    Serial.println(String(elapsedTime) + " " + String(motionStartTime) + " " + String(motionStopTime));
-
     if ((elapsedTime - motionStartTime) > motionStopTime)
     {
       stopMoving();
-
-      Serial.println("stopped moving");
-      Serial.println(String(tailwheelAngleSamples.size()));
-
-      for (int i = 0; i < tailwheelAngleSamples.size(); i++)
-      {
-        Serial.println(String(tailwheelAngleSamples[i]));
-      }
     }
   }
 }

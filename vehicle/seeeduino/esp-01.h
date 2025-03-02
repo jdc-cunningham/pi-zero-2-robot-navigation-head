@@ -1,7 +1,7 @@
 #define ESPSERIAL Serial1
 
 String curEspMsg = "";
-String motionCommand = "rc_084_098_1400";
+String motionCommand = "";
 
 void setupEspSerial()
 {

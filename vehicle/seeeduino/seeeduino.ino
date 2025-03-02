@@ -8,11 +8,10 @@ void setup()
   setupEspSerial();
   setupServos();
   setupTailSensor();
+  Serial.println("run");
 }
 
 unsigned long elapsedTimeMs = 0;
-
-// motionCommand = "rc_084_098_1400"
 
 void loop()
 {
