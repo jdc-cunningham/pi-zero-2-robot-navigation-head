@@ -34,7 +34,7 @@ void checkMessages()
     // espMsg.replace("", "");
   }
 
-  if (espMsg)
+  if (espMsg != "")
   {
     motionCommand = espMsg;
     clearEspSerial();

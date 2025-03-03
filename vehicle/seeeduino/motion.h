@@ -16,7 +16,7 @@ int motionStopTime = 0;
 int ls_deg = 0;
 int rs_deg = 0;
 int stop_delay = 0;
-int tailwheelCenterAngle = 214; // left decreases, right increases
+int tailwheelCenterAngle = 219; // left decreases, right increases
 int steeringCorrectionDelay = 100; // ms
 
 std::vector<int> tailwheelAngleSamples;
@@ -40,10 +40,12 @@ void stopMoving()
 void slightRight()
 {
   ls_deg = 83;
+  rs_deg = 97;
 }
 
 void slightLeft()
 {
+  ls_deg = 85;
   rs_deg = 99;
 }
 
@@ -66,9 +68,18 @@ void rawCommand(String command, unsigned long elapsedTime)
     motionStopTime = stop_delay;
     motionInProgress = true;
   }
+}
+
+// ex. mf_010 for move forward 10 inches
+void parseMotionCommand(String motionCommand, unsigned long elapsedTime)
+{
+  if (motionCommand.indexOf("rc_") == 0)
+  {
+    rawCommand(motionCommand, elapsedTime);
+  }
 
   // use tailwheel feedback to go straight
-  if (command.indexOf("rc_084_098_") == 0)
+  if (motionCommand.indexOf("rc_084_098_") == 0)
   {
     // the delay is for the tailwheel to straighten itself out
     if (elapsedTime - motionStartTime >= steeringCorrectionDelay)
@@ -77,6 +88,12 @@ void rawCommand(String command, unsigned long elapsedTime)
 
       if (tailwheelAngle < tailwheelCenterAngle) {
         slightRight();
+
+        // fix turn to right bias
+        if (elapsedTime % 3 == 0)
+        {
+          goStraight();
+        }
       } else if (tailwheelAngle > tailwheelCenterAngle) {
         slightLeft();
       } else {
@@ -89,19 +106,7 @@ void rawCommand(String command, unsigned long elapsedTime)
   {
     leftServo.servo.write(ls_deg);
     rightServo.servo.write(rs_deg);
-  }
-}
 
-// ex. mf_010 for move forward 10 inches
-void parseMotionCommand(String motionCommand, unsigned long elapsedTime)
-{
-  if (motionCommand.indexOf("rc_") == 0)
-  {
-    rawCommand(motionCommand, elapsedTime);
-  }
-
-  if (motionInProgress)
-  {
     if ((elapsedTime - motionStartTime) > motionStopTime)
     {
       stopMoving();

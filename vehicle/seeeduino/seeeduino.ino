@@ -15,5 +15,4 @@ void loop()
   // motionCommand comes from esp-01.h
   checkMessages();
   parseMotionCommand(motionCommand, millis());
-  delay(10);
 }
