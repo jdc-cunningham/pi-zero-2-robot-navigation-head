@@ -68,7 +68,7 @@ void rawCommand(String command, unsigned long elapsedTime)
   }
 
   // use tailwheel feedback to go straight
-  if (command == "rc_084_098_1400")
+  if (command.indexOf("rc_084_098_") == 0)
   {
     // the delay is for the tailwheel to straighten itself out
     if (elapsedTime - motionStartTime >= steeringCorrectionDelay)
